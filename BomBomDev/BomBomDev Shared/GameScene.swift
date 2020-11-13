@@ -47,9 +47,11 @@ class GameScene: SKScene {
         // Called before each frame is rendered
     }
     
-    func touched(node: SKNode) {
-        if let action = buttonActions[node] {
-            action()
+    func touched(at loc: CGPoint) {
+        for node in nodes(at: loc) {
+            if let action = buttonActions[node] {
+                action()
+            }
         }
     }
 }
@@ -66,9 +68,7 @@ extension GameScene {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
             let loc = touch.location(in: self)
-            if let target = self.nodes(at: loc).first {
-                touched(node: target)
-            }
+            touched(at: loc)
         }
     }
     
@@ -88,9 +88,7 @@ extension GameScene {
     
     override func mouseUp(with event: NSEvent) {
         let loc = event.location(in: self)
-        if let target = self.nodes(at: loc).first {
-            touched(node: target)
-        }
+        touched(at: loc)
     }
 }
 #endif
