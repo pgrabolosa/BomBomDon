@@ -51,6 +51,7 @@ class GameScene: SKScene {
         for node in nodes(at: loc) {
             if let action = buttonActions[node] {
                 action()
+                break
             }
         }
     }
