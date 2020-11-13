@@ -41,6 +41,22 @@ class ExpBoutiqueScene : SKScene {
     override func didMove(to view: SKView) {
         // initial setup
         
+        var o_conveyors = [SKSpriteNode]()
+        self.enumerateChildNodes(withName: "//conveyor_O/O_*") { (node, stop) in
+            o_conveyors.append(node as! SKSpriteNode)
+        }
+        o_conveyors.sort { $0.name ?? "" < $1.name ?? "" }
+        
+        var ab_conveyors = [SKSpriteNode]()
+        self.enumerateChildNodes(withName: "//conveyor_AB/AB_*") { (node, stop) in
+            ab_conveyors.append(node as! SKSpriteNode)
+        }
+        ab_conveyors.sort { $0.name ?? "" < $1.name ?? "" }
+        
+        print(o_conveyors)
+        print(ab_conveyors)
+                
+        /*
         drawerSprite = SKShapeNode(rectOf: CGSize(width: 200, height: self.frame.height - 50))
         drawerSprite.fillColor = .clear
         drawerSprite.strokeColor = .black
@@ -64,6 +80,7 @@ class ExpBoutiqueScene : SKScene {
                 position.y += 50 + 20
             }
         }
+         */
     }
     
     override func update(_ currentTime: TimeInterval) {
