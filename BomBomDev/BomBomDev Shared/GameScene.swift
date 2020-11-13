@@ -21,7 +21,8 @@ class GameScene: SKScene {
     
     // called when first showing in a view
     override func didMove(to view: SKView) {
-        addChild(makeButton(at: .zero, color: .red, title: "Exp-Boutique", action: { self.load(ExpBoutiqueScene.newScene()) }))
+        addChild(makeButton(at: CGPoint(x: 0, y: -100), color: .red, title: "Exp-Boutique", action: { self.load(ExpBoutiqueScene.newScene()) }))
+        addChild(makeButton(at: CGPoint(x: 0, y: 100), color: .blue, title: "Exp-Credits", action: { self.load(CreditsScene.newScene()) }))
     }
 
     func makeButton(at pos: CGPoint, color: SKColor, title: String, action: (()->Void)? = nil) -> SKNode {
