@@ -14,16 +14,16 @@ class GameViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let scene = GameScene.newGameScene()
+        let scene = GameScene.newScene()
         
         // Present the scene
         let skView = self.view as! SKView
         skView.presentScene(scene)
         
-        skView.ignoresSiblingOrder = true
+        skView.ignoresSiblingOrder = true // optimisation
         
-        skView.showsFPS = true
-        skView.showsNodeCount = true
+        skView.showsFPS = false
+        skView.showsNodeCount = false
     }
 
 }
