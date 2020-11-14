@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C187677255F63E400C4AC1F /* PepolesPopper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C187675255F63E400C4AC1F /* PepolesPopper.swift */; };
+		0C187678255F63E400C4AC1F /* PepolesPopper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C187675255F63E400C4AC1F /* PepolesPopper.swift */; };
+		0C187679255F63E400C4AC1F /* PepolesPopper.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0C187676255F63E400C4AC1F /* PepolesPopper.sks */; };
+		0C18767A255F63E400C4AC1F /* PepolesPopper.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0C187676255F63E400C4AC1F /* PepolesPopper.sks */; };
 		8F522BB4255F234000C58B5E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F522BB3255F234000C58B5E /* AppDelegate.swift */; };
 		8F522BB6255F234000C58B5E /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F522BB5255F234000C58B5E /* GameViewController.swift */; };
 		8F522BB9255F234000C58B5E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F522BB7255F234000C58B5E /* Main.storyboard */; };
@@ -33,6 +37,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C187675255F63E400C4AC1F /* PepolesPopper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PepolesPopper.swift; sourceTree = "<group>"; };
+		0C187676255F63E400C4AC1F /* PepolesPopper.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PepolesPopper.sks; sourceTree = "<group>"; };
 		8F522BA9255F233F00C58B5E /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		8F522BAA255F233F00C58B5E /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		8F522BAB255F234000C58B5E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -73,6 +79,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0C187674255F63E400C4AC1F /* Pepoles */ = {
+			isa = PBXGroup;
+			children = (
+				0C187675255F63E400C4AC1F /* PepolesPopper.swift */,
+				0C187676255F63E400C4AC1F /* PepolesPopper.sks */,
+			);
+			path = Pepoles;
+			sourceTree = "<group>";
+		};
 		8F522BA2255F233F00C58B5E = {
 			isa = PBXGroup;
 			children = (
@@ -131,6 +146,7 @@
 		8F522BDF255F239500C58B5E /* Experiments */ = {
 			isa = PBXGroup;
 			children = (
+				0C187674255F63E400C4AC1F /* Pepoles */,
 				8F522BF4255F36C300C58B5E /* Credits */,
 				8F522BE0255F23A100C58B5E /* Boutique */,
 			);
@@ -237,6 +253,7 @@
 				8F522BCF255F234000C58B5E /* GameScene.sks in Resources */,
 				8F522BB9255F234000C58B5E /* Main.storyboard in Resources */,
 				8F522BF6255F36DD00C58B5E /* CreditsScene.sks in Resources */,
+				0C187679255F63E400C4AC1F /* PepolesPopper.sks in Resources */,
 				8F522BBC255F234000C58B5E /* LaunchScreen.storyboard in Resources */,
 				8F522BD3255F234000C58B5E /* Assets.xcassets in Resources */,
 			);
@@ -250,6 +267,7 @@
 				8F522BD0255F234000C58B5E /* GameScene.sks in Resources */,
 				8F522BD4255F234000C58B5E /* Assets.xcassets in Resources */,
 				8F522BEA255F23F000C58B5E /* ExpBoutiqueScene.sks in Resources */,
+				0C18767A255F63E400C4AC1F /* PepolesPopper.sks in Resources */,
 				8F522BF7255F36DD00C58B5E /* CreditsScene.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -265,6 +283,7 @@
 				8F522BF0255F2A4100C58B5E /* SKScene+Extensions.swift in Sources */,
 				8F522BB6255F234000C58B5E /* GameViewController.swift in Sources */,
 				8F522BE2255F23C000C58B5E /* ExpBoutiqueScene.swift in Sources */,
+				0C187677255F63E400C4AC1F /* PepolesPopper.swift in Sources */,
 				8F522BB4255F234000C58B5E /* AppDelegate.swift in Sources */,
 				8F522BFB255F36E700C58B5E /* CreditsScene.swift in Sources */,
 			);
@@ -278,6 +297,7 @@
 				8F522BF1255F2A4100C58B5E /* SKScene+Extensions.swift in Sources */,
 				8F522BC7255F234000C58B5E /* GameViewController.swift in Sources */,
 				8F522BE3255F23C000C58B5E /* ExpBoutiqueScene.swift in Sources */,
+				0C187678255F63E400C4AC1F /* PepolesPopper.swift in Sources */,
 				8F522BC5255F234000C58B5E /* AppDelegate.swift in Sources */,
 				8F522BFC255F36E700C58B5E /* CreditsScene.swift in Sources */,
 			);
