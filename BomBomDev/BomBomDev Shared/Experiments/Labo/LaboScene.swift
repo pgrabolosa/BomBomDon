@@ -76,14 +76,19 @@ class LaboScene : SKScene {
             }
         }
         
-        let config: [(bloodType:BloodType, length:Int, y:Int)] = [
-            (.AB, 2, 4),
-            ( .A, 4, 3),
-            ( .B, 6, 2),
-            ( .O, 8, 1),
+        let config: [(bloodType:BloodType, length:Int, y:Int, targetPosition:CGPoint)] = [
+            (.AB, 2, 4, CGPoint(x: 1920/2 - 500/2 - 250, y: 1080-100)),
+            ( .A, 4, 3, CGPoint(x: 1920/2 - 500/2 - 0, y: 1080-100)),
+            ( .B, 6, 2, CGPoint(x: 1920/2 - 500/2 + 250, y: 1080-100)),
+            ( .O, 8, 1, CGPoint(x: 1920/2 - 500/2 + 500, y: 1080-100)),
         ]
         
-        config.forEach { (blood, length, y) in
+        
+        let targets = SKNode()
+        targets.name = "targets"
+        addChild(targets)
+        
+        config.forEach { (blood, length, y, targetPosition) in
             var conveyor = Conveyor()
             conveyor.segments.append(ConveyorSegment(length: length, orientation: .left, bloodTypeMask: .all))
             let node = conveyor.makeSprites(with: "\(blood)", startingAtX: 13, y: y)
@@ -91,17 +96,16 @@ class LaboScene : SKScene {
             addChild(node)
             
             conveyorRunners[blood]?.conveyor = conveyor
+            
+            // one target per blood type
+            let target = TargetNode.newInstance(at: targetPosition)
+            target.name = "target-\(blood)"
+            targets.addChild(target)
         }
         
         let parcels = SKNode()
         parcels.name = "parcels"
         addChild(parcels)
-        
-        let targets = SKNode()
-        targets.name = "targets"
-        addChild(targets)
-        
-        targets.addChild(TargetNode.newInstance(at: CGPoint(x: 1920/2 - 500/2, y: 1080-100)))
         
         newParcelObserver = NotificationCenter.default.addObserver(forName: .newParcel, object: nil, queue: .main) { (notification) in
             let parcel = notification.object as! Parcel
@@ -165,8 +169,6 @@ class LaboScene : SKScene {
                 ]))
             }
         }
-        
-        
     }
     
     override func keyUp(with event: NSEvent) {
