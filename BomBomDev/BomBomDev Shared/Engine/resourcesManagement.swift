@@ -80,7 +80,9 @@ class Score {
         baseNode.addChild(scoreLabel)
         
         NotificationCenter.default.addObserver(forName: .bagScored, object: nil, queue: .main) { (notification) in
-            guard let type = notification.userInfo?["BloodType"] as? BloodType else { return }
+            guard let type = notification.userInfo?["BloodType"] as? BloodType else {
+                print("Error getting blood type")
+                return }
             
             switch type {
             case .A:
@@ -98,7 +100,6 @@ class Score {
         
         NotificationCenter.default.addObserver(forName: .bagDropped, object: nil, queue: .main) { (notification) in
             self.score -= 200
-            
             self.scoreLabel.text = "\(self.score)"
         }
         parent.addChild(baseNode)
@@ -106,6 +107,6 @@ class Score {
 }
 
 extension Notification.Name {
-    static let bagDropped = Notification.Name(rawValue: "BagScored")
+    static let bagDropped = Notification.Name(rawValue: "BagDropped")
     static let bagScored = Notification.Name(rawValue: "BagScored")
 }

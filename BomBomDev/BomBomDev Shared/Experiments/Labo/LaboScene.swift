@@ -124,6 +124,7 @@ class LaboScene : SKScene {
                 if self.selectedParcel === parcelNode {
                     self.selectedParcel = nil
                 }
+                NotificationCenter.default.post(name: .bagDropped, object: nil)
                 parcelNode.explode()
             }
         }
