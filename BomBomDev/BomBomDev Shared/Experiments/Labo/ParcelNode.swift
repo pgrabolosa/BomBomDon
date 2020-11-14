@@ -17,7 +17,6 @@ class ParcelNode : SKShapeNode {
         shape.zPosition = 5
         shape.position = position
         shape.parcel = parcel
-        shape.run(SKAction.sequence(shape.makeActions()))
         
         shape.observation = NotificationCenter.default.addObserver(forName: .parcelMovedToNewConveyorCell, object: parcel, queue: .main, using: { (notification) in
             if let ox = notification.userInfo?["orientationX"] as? Int,
@@ -36,33 +35,9 @@ class ParcelNode : SKShapeNode {
         return shape
     }
     
+    @available(*, deprecated, message: "Actions are now built live through notifications…")
     func makeActions() -> [SKAction] {
-        return []
-//        guard let parcel = parcel else {
-//            return []
-//        }
-//
-//        let conveyor = parcel.runner.conveyor
-//        var currentOrientation = conveyor.segments.first!.orientation
-//
-//        return conveyor.segments.flatMap { segment -> [SKAction] in
-//            let (dx, dy) = segment.orientation.integerOffset
-//            let offset = CGVector(dx: CGFloat(dx * segment.length) * 100,
-//                                  dy: CGFloat(dy * segment.length) * 100)
-//            let duration = TimeInterval(segment.length) * segment.speed
-//
-//            var actions = [SKAction.move(by: offset, duration: duration)]
-//
-//            if currentOrientation != segment.orientation {
-//                let rotationDuration: TimeInterval = 0.2
-//
-//                actions[0].duration -= rotationDuration
-//                actions.insert(SKAction.rotate(byAngle: (segment.orientation.rotation - currentOrientation.rotation).truncatingRemainder(dividingBy: .pi), duration: rotationDuration), at: 0)
-//                currentOrientation = segment.orientation
-//            }
-//
-//            return actions
-//        }
+        fatalError("Actions are now built live through notifications…")
     }
     
     func explode() {

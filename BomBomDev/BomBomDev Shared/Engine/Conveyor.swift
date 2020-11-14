@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreGraphics
 
 enum Orientation : String, Codable {
     case left, up, right, down
