@@ -50,6 +50,12 @@
 		8F522C5625600EEF00C58B5E /* TargetMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F522C5525600EEF00C58B5E /* TargetMode.swift */; };
 		8F522C5725600EEF00C58B5E /* TargetMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F522C5525600EEF00C58B5E /* TargetMode.swift */; };
 		8F522C6825601ABE00C58B5E /* PeoplePopper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C187675255F63E400C4AC1F /* PeoplePopper.swift */; };
+		8F522C7225601C1B00C58B5E /* street_sounds.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8F522C6F25601C1B00C58B5E /* street_sounds.wav */; };
+		8F522C7325601C1B00C58B5E /* street_sounds.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8F522C6F25601C1B00C58B5E /* street_sounds.wav */; };
+		8F522C8125601D6700C58B5E /* piano-1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8F522C8025601D6700C58B5E /* piano-1.mp3 */; };
+		8F522C8225601D6700C58B5E /* piano-1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8F522C8025601D6700C58B5E /* piano-1.mp3 */; };
+		8F522C8625601DC300C58B5E /* rue paris.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8F522C8525601DC300C58B5E /* rue paris.wav */; };
+		8F522C8725601DC300C58B5E /* rue paris.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8F522C8525601DC300C58B5E /* rue paris.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,6 +89,9 @@
 		8F522C4D25600C7D00C58B5E /* MagicParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MagicParticle.sks; sourceTree = "<group>"; };
 		8F522C4E25600C7D00C58B5E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8F522C5525600EEF00C58B5E /* TargetMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetMode.swift; sourceTree = "<group>"; };
+		8F522C6F25601C1B00C58B5E /* street_sounds.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = street_sounds.wav; sourceTree = "<group>"; };
+		8F522C8025601D6700C58B5E /* piano-1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "piano-1.mp3"; path = "../../../../piano-1.mp3"; sourceTree = "<group>"; };
+		8F522C8525601DC300C58B5E /* rue paris.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "rue paris.wav"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +134,7 @@
 		8F522BA7255F233F00C58B5E /* BomBomDev Shared */ = {
 			isa = PBXGroup;
 			children = (
+				8F522C6D25601C1000C58B5E /* Sounds */,
 				8F522C35255FC51C00C58B5E /* Engine */,
 				8F522BDF255F239500C58B5E /* Experiments */,
 				8F522BA9255F233F00C58B5E /* GameScene.sks */,
@@ -219,6 +229,16 @@
 			path = Engine;
 			sourceTree = "<group>";
 		};
+		8F522C6D25601C1000C58B5E /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				8F522C8525601DC300C58B5E /* rue paris.wav */,
+				8F522C8025601D6700C58B5E /* piano-1.mp3 */,
+				8F522C6F25601C1B00C58B5E /* street_sounds.wav */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -298,10 +318,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				8F522C22255FC0C600C58B5E /* LaboScene.sks in Resources */,
+				8F522C8625601DC300C58B5E /* rue paris.wav in Resources */,
 				8F522C4F25600C7D00C58B5E /* MagicParticle.sks in Resources */,
 				8F522BE9255F23F000C58B5E /* ExpBoutiqueScene.sks in Resources */,
+				8F522C7225601C1B00C58B5E /* street_sounds.wav in Resources */,
 				8F522BCF255F234000C58B5E /* GameScene.sks in Resources */,
 				8F522C5125600C7D00C58B5E /* Assets.xcassets in Resources */,
+				8F522C8125601D6700C58B5E /* piano-1.mp3 in Resources */,
 				8F522BB9255F234000C58B5E /* Main.storyboard in Resources */,
 				8F522BF6255F36DD00C58B5E /* CreditsScene.sks in Resources */,
 				0C187679255F63E400C4AC1F /* PeoplePopper.sks in Resources */,
@@ -316,10 +339,13 @@
 			files = (
 				8F522BCA255F234000C58B5E /* Main.storyboard in Resources */,
 				8F522BD0255F234000C58B5E /* GameScene.sks in Resources */,
+				8F522C7325601C1B00C58B5E /* street_sounds.wav in Resources */,
 				8F522BD4255F234000C58B5E /* Assets.xcassets in Resources */,
 				8F522BEA255F23F000C58B5E /* ExpBoutiqueScene.sks in Resources */,
+				8F522C8225601D6700C58B5E /* piano-1.mp3 in Resources */,
 				8F522C23255FC0C600C58B5E /* LaboScene.sks in Resources */,
 				8F522C5025600C7D00C58B5E /* MagicParticle.sks in Resources */,
+				8F522C8725601DC300C58B5E /* rue paris.wav in Resources */,
 				0C18767A255F63E400C4AC1F /* PeoplePopper.sks in Resources */,
 				8F522C5225600C7D00C58B5E /* Assets.xcassets in Resources */,
 				8F522BF7255F36DD00C58B5E /* CreditsScene.sks in Resources */,
@@ -555,8 +581,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "BomBomDev macOS/BomBomDev_macOS.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = G75DLW32M2;
 				INFOPLIST_FILE = "BomBomDev macOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -576,8 +604,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "BomBomDev macOS/BomBomDev_macOS.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 8BNRNG4PCS;
 				INFOPLIST_FILE = "BomBomDev macOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
