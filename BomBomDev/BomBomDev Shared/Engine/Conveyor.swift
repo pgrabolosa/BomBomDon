@@ -22,6 +22,15 @@ enum Orientation : String, Codable {
                 return ( 0,-1)
         }
     }
+    
+    var rotation: CGFloat {
+        switch self {
+            case .left:  return 0
+            case .up:    return -.pi/2
+            case .right: return .pi/2
+            case .down:  return .pi
+        }
+    }
 }
 
 struct BloodTypeMask: OptionSet, Codable {

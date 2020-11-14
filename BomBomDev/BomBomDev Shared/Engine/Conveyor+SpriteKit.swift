@@ -9,6 +9,8 @@ import SpriteKit
 
 extension Conveyor {
     
+    static let defaultTexture = SKTexture(imageNamed: "conveyor_left")
+    
     func makeSprites(with prefix: String, startingAtX x: Int, y: Int) -> SKNode {
         struct GridConfiguration {
             let itemsWidth = 15
@@ -22,16 +24,15 @@ extension Conveyor {
         }
         let gridConfiguration = GridConfiguration()
         
-        let makeCell = {(x:Int, y:Int) -> SKNode in
-            let shapeNode = SKShapeNode(rectOf: gridConfiguration.itemSize)
-            shapeNode.fillColor = .white
-            shapeNode.strokeColor = .gray
-            shapeNode.name = "\(prefix)-\(x)-\(y)"
+        let makeCell = {(i:Int, x:Int, y:Int, orientation:Orientation) -> SKNode in            
+            let spriteNode = SKSpriteNode(texture: Conveyor.defaultTexture, size: gridConfiguration.itemSize)
+            spriteNode.name = "\(prefix)-\(i)"
+            spriteNode.zRotation = orientation.rotation
             
-            shapeNode.position.x = (CGFloat(x) + 0.5) * shapeNode.frame.width
-            shapeNode.position.y = (CGFloat(y) + 0.5) * shapeNode.frame.height
+            spriteNode.position.x = (CGFloat(x) + 0.5) * spriteNode.frame.width
+            spriteNode.position.y = (CGFloat(y) + 0.5) * spriteNode.frame.height
             
-            return shapeNode
+            return spriteNode
         }
         
         // build the scene grid
@@ -39,18 +40,17 @@ extension Conveyor {
         
         // color
         var loc = (x: x, y: y)
-        gridNode.addChild(makeCell(x, y)) // starting point
+        var cellIndex = 0
         
         for segment in segments {
             let orientation = segment.orientation.integerOffset
             
             for _ in 0..<segment.length {
+                gridNode.addChild(makeCell(cellIndex, loc.x, loc.y, segment.orientation))
+                
+                cellIndex += 1
                 loc.x += orientation.dx
                 loc.y += orientation.dy
-                
-                if 0 <= loc.x && loc.x < gridConfiguration.itemsWidth && 0 <= loc.y && loc.y < gridConfiguration.itemsHeight {
-                    gridNode.addChild(makeCell(loc.x, loc.y))
-                }
             }
         }
         
