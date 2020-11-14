@@ -61,10 +61,32 @@ struct Conveyor : Codable {
     var duration: TimeInterval { TimeInterval(length) * speed }
 }
 
+class Parcel {
+    var runner: ConveyorRunner
+    init(runner:ConveyorRunner) {
+        self.runner = runner
+    }
+    
+    var created = Date()
+    var age: TimeInterval { created.timeIntervalSinceNow }
+    
+    func progression(over conveyor: Conveyor) -> CGFloat {
+        return CGFloat(age / conveyor.duration)
+    }
+}
+
 class ConveyorRunner {
     var conveyor = Conveyor()
+    var transportQueue: [Parcel] = []
     
     func load() {
-        // todo: load some blod and transport it
+        let parcel = Parcel(runner: self)
+        transportQueue.append(parcel)
+        NotificationCenter.default.post(name: .newParcel, object: parcel)
     }
+}
+
+extension Notification.Name {
+    static let newParcel = Notification.Name("newParcel")
+    static let droppedParcel = Notification.Name("droppedParcel")
 }

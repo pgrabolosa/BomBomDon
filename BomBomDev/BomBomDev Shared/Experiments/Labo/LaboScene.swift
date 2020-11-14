@@ -9,6 +9,8 @@ import SpriteKit
 
 class LaboScene : SKScene {
     
+    let runner = ConveyorRunner()
+    
     class func newScene() -> LaboScene {
         guard let scene = SKScene(fileNamed: "LaboScene") as? LaboScene else {
             fatalError("Failed to find LaboScene")
@@ -27,6 +29,13 @@ class LaboScene : SKScene {
         
         let conveyorNode = conveyor.makeSprites(with: "test", startingAtX: 8, y: 1)
         addChild(conveyorNode)
+        
+        runner.conveyor = conveyor
+        
+        run(SKAction.sequence([
+            SKAction.wait(forDuration: 3),
+            SKAction.run { self.runner.load() }
+        ]))
     }
     
     override func update(_ currentTime: TimeInterval) {

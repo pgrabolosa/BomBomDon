@@ -78,6 +78,7 @@ extension Gender {
     var walkingSprites: [SKTexture] {
         return Gender.atlas
             .textureNames
+            .sorted()
             .filter { $0.hasPrefix(self.spritePrefix) }
             .map { Gender.atlas.textureNamed($0) }
     }
@@ -96,7 +97,7 @@ class Person {
         
         sprite = SKSpriteNode(texture: gender.sprite)
         sprite.position = CGPoint(x:x, y:height)
-        
+                
         bloodType = BloodType.allCases.randomElement()!
         sprite.run(SKAction.repeatForever(SKAction.animate(with:gender.walkingSprites, timePerFrame: 0.2)))
         sprite.run(SKAction.sequence([SKAction.move(to: CGPoint(x:x, y:parent.frame.minY), duration: 5),
