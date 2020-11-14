@@ -112,6 +112,9 @@ class LaboScene : SKScene {
         droppedParcelObserver = NotificationCenter.default.addObserver(forName: .droppedParcel, object: nil, queue: .main) { (notification) in
             let parcel = notification.object as? Parcel
             if let parcelNode = parcels.children.first(where: { ($0 as! ParcelNode).parcel === parcel }) as? ParcelNode {
+                if self.selectedParcel === parcelNode {
+                    self.selectedParcel = nil
+                }
                 parcelNode.explode()
             }
         }
@@ -151,7 +154,6 @@ class LaboScene : SKScene {
         // move the selected parcel node to the selected target
         if let node = nodes(at: event.location(in: self)).filter({ $0.parent?.name == "targets" }).first as? TargetNode {
             if let parcelNode = selectedParcel, let parcel = parcelNode.parcel {
-                
                 conveyorRunners.forEach { (_, runner) in runner.remove(parcel) }
                 parcelNode.move(toParent: self) // remove from the parcels to avoid future interactions
                 selectedParcel = nil
