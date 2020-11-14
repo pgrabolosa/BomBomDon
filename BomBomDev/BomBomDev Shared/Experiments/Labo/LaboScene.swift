@@ -274,6 +274,8 @@ class LaboScene : SKScene {
             _ = peopleHandler.increaseBloodRate()
         } else if (event.keyCode == kVK_ANSI_Minus) {
             _ = peopleHandler.increaseMoneyRate()
+        } else if (event.keyCode == kVK_ANSI_T) {
+            conveyorRunners[.O]?.append(ConveyorSegment(length: 4, orientation: .up, bloodTypeMask: .all, speed: 1))
         } else if (event.keyCode == kVK_ANSI_V) {
             generateHandles()
         }

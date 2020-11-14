@@ -1,11 +1,12 @@
 {
   "images" : [
     {
-      "filename" : "tapis_2.png",
+      "filename" : "tapis-v.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "tapis-v@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },

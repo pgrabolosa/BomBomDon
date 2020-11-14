@@ -62,6 +62,8 @@
 		8F8494FC2560250D004E579C /* BloodParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8F8494FA2560250C004E579C /* BloodParticle.sks */; };
 		8F84950B25603592004E579C /* piano-1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8F84950A25603592004E579C /* piano-1.mp3 */; };
 		8F84950C25603592004E579C /* piano-1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8F84950A25603592004E579C /* piano-1.mp3 */; };
+		8FCF7026256094D20075EE68 /* piano-2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8FCF7025256094D20075EE68 /* piano-2.mp3 */; };
+		8FCF7027256094D20075EE68 /* piano-2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8FCF7025256094D20075EE68 /* piano-2.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -101,6 +103,7 @@
 		8F8494EF256021BF004E579C /* MoneyParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MoneyParticle.sks; sourceTree = "<group>"; };
 		8F8494FA2560250C004E579C /* BloodParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BloodParticle.sks; sourceTree = "<group>"; };
 		8F84950A25603592004E579C /* piano-1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano-1.mp3"; sourceTree = "<group>"; };
+		8FCF7025256094D20075EE68 /* piano-2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano-2.mp3"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -246,6 +249,7 @@
 			children = (
 				8F522C8525601DC300C58B5E /* rue paris.wav */,
 				8F84950A25603592004E579C /* piano-1.mp3 */,
+				8FCF7025256094D20075EE68 /* piano-2.mp3 */,
 				8F522C6F25601C1B00C58B5E /* street_sounds.wav */,
 			);
 			path = Sounds;
@@ -344,6 +348,7 @@
 				8F84950B25603592004E579C /* piano-1.mp3 in Resources */,
 				8F522BBC255F234000C58B5E /* LaunchScreen.storyboard in Resources */,
 				8F522BD3255F234000C58B5E /* Assets.xcassets in Resources */,
+				8FCF7026256094D20075EE68 /* piano-2.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,6 +362,7 @@
 				8F522C7325601C1B00C58B5E /* street_sounds.wav in Resources */,
 				8F522BD4255F234000C58B5E /* Assets.xcassets in Resources */,
 				8F522BEA255F23F000C58B5E /* ExpBoutiqueScene.sks in Resources */,
+				8FCF7027256094D20075EE68 /* piano-2.mp3 in Resources */,
 				8F522C23255FC0C600C58B5E /* LaboScene.sks in Resources */,
 				8F522C5025600C7D00C58B5E /* MagicParticle.sks in Resources */,
 				8F8494F1256021BF004E579C /* MoneyParticle.sks in Resources */,
