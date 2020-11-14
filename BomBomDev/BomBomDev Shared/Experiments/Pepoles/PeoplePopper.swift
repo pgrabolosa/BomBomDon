@@ -7,25 +7,25 @@
 
 import SpriteKit
 
-class PepolesPopper : SKScene {
+class PeoplePopper : SKScene {
     
-    private var pepoles : [Pepole] = []
+    private var people : [Person] = []
     private var timer : Timer?
     
-    class func newScene() -> PepolesPopper {
-        guard let scene = SKScene(fileNamed: "PepolesPopper") as? PepolesPopper else {
-            fatalError("Failed to find PepolesPopper")
+    class func newScene() -> PeoplePopper {
+        guard let scene = SKScene(fileNamed: "PeoplePopper") as? PeoplePopper else {
+            fatalError("Failed to find PeoplePopper")
         }
         scene.scaleMode = .aspectFit
     
         scene.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
-               scene.pepoles.append(Pepole(parent: scene))
-           }
+            scene.people.append(Person(parent: scene))
+        }
         return scene
     }
     
     override func didMove(to view: SKView) {
-        pepoles.append(Pepole(parent: self))
+        people.append(Person(parent: self))
     }
     
 }
@@ -76,7 +76,7 @@ enum BloodType{
 }
 
 
-class Pepole {
+class Person {
     
     private let bloodType : BloodType
     private let sprite : SKSpriteNode
@@ -84,9 +84,12 @@ class Pepole {
     init(parent: SKScene) {
         let height = parent.frame.maxY
         let x = CGFloat.random(in: -100...100)
-        self.sprite = SKSpriteNode.init(imageNamed: "Pepole")
+        self.sprite = SKSpriteNode(imageNamed: "walking-down-0")
         self.sprite.position = CGPoint(x:x, y:height)
         self.bloodType = BloodType.random()
+        let atlas = SKTextureAtlas(named: "walking")
+        let frames = atlas.textureNames.map { atlas.textureNamed($0) }
+        self.sprite.run(SKAction.repeatForever(SKAction.animate(with:frames, timePerFrame: 0.2)))
         self.sprite.run(SKAction.sequence([
                                             SKAction.move(to: CGPoint(x:x, y:parent.frame.minY), duration: 5),
                                             SKAction.run{
