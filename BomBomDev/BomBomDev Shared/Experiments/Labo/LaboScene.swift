@@ -20,6 +20,7 @@ class LaboScene : SKScene {
     var droppedParcelObserver: Any?
     var givesBloodObserver: Any?
     var givesMoneyObserver: Any?
+    var resourceDisplay: Any?
     
     var selectedParcel: ParcelNode? {
         didSet {
@@ -46,6 +47,8 @@ class LaboScene : SKScene {
         
         peopleHandler = PeopleHandler(parent: self, x: 1620, w: 200)
         peopleHandler.masterNode.zPosition = 5
+        
+        resourceDisplay = ResourcesManagement(parent: self, x: 10, y: 1000, w: 200, h: 50)
         
         let moneyEmitter = SKEmitterNode(fileNamed: "MoneyParticle")!
         moneyEmitter.particleBirthRate = 0
