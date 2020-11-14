@@ -76,7 +76,7 @@ struct Conveyor : Codable {
         }
         
         return result
-    }
+    }    
 }
 
 
@@ -120,6 +120,8 @@ class Parcel: Agent {
 }
 
 class ConveyorRunner: Agent {
+    var name: String = ""
+    
     var conveyor = Conveyor()
     var transportQueue: [Parcel] = []
     
@@ -133,6 +135,11 @@ class ConveyorRunner: Agent {
         transportQueue.forEach { $0.update(ellapsed) }
     }
     
+    func append(_ segment: ConveyorSegment) {
+        conveyor.segments.append(segment)
+        NotificationCenter.default.post(name: .conveyorShapeDidChange, object: self)
+    }
+    
     func remove(_ parcel: Parcel) {
         if let index = transportQueue.firstIndex(where:{ $0 === parcel }) {
             transportQueue.remove(at:index)
@@ -144,4 +151,5 @@ extension Notification.Name {
     static let newParcel = Notification.Name("newParcel")
     static let parcelMovedToNewCoveyorCell = Notification.Name("parcelMovedToNewCoveyorCell")
     static let droppedParcel = Notification.Name("droppedParcel")
+    static let conveyorShapeDidChange = Notification.Name("conveyorShapeDidChange")
 }

@@ -16,10 +16,7 @@ class LaboScene : SKScene {
         return result
     }()
     
-    var newParcelObserver: Any?
-    var droppedParcelObserver: Any?
-    var givesBloodObserver: Any?
-    var givesMoneyObserver: Any?
+    var observers: [Any] = []
     
     var selectedParcel: ParcelNode? {
         didSet {
@@ -44,6 +41,13 @@ class LaboScene : SKScene {
     
     override func didMove(to view: SKView) {
         
+        let config: [(bloodType:BloodType, length:Int, x:Int, y:Int, targetPosition:CGPoint)] = [
+            (.AB, 2, 13, 4, CGPoint(x: 0, y: 1080-100)),
+            ( .A, 4, 13, 3, CGPoint(x: 0, y: 1080-100)),
+            ( .B, 6, 13, 2, CGPoint(x: 0, y: 1080-100)),
+            ( .O, 8, 13, 1, CGPoint(x: 0, y: 1080-100)),
+        ]
+        
         peopleHandler = PeopleHandler(parent: self, x: 1620, w: 200)
         peopleHandler.masterNode.zPosition = 5
         
@@ -59,13 +63,13 @@ class LaboScene : SKScene {
         bloodEmitter.zPosition = 10
         addChild(bloodEmitter)
         
-        givesMoneyObserver = NotificationCenter.default.addObserver(forName: .givesMoney, object: nil, queue: .main) { (notification) in
+        observers.append(NotificationCenter.default.addObserver(forName: .givesMoney, object: nil, queue: .main) { (notification) in
             moneyEmitter.particleBirthRate += 0.5
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now().advanced(by: .milliseconds(500))) {
                 moneyEmitter.particleBirthRate -= 0.5
             }
-        }
-        givesBloodObserver = NotificationCenter.default.addObserver(forName: .givesBlood, object: nil, queue: .main) { (notification) in
+        })
+        observers.append(NotificationCenter.default.addObserver(forName: .givesBlood, object: nil, queue: .main) { (notification) in
             bloodEmitter.particleBirthRate += 1
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now().advanced(by: .milliseconds(500))) {
                 bloodEmitter.particleBirthRate -= 1
@@ -74,31 +78,37 @@ class LaboScene : SKScene {
                 guard let bloodType = notification.userInfo?["Type"] as? BloodType else { return }
                 self.conveyorRunners[bloodType]?.load(bloodType: bloodType)
             }
-        }
-        
-        let config: [(bloodType:BloodType, length:Int, y:Int, targetPosition:CGPoint)] = [
-            (.AB, 2, 4, CGPoint(x: 0, y: 1080-100)),
-            ( .A, 4, 3, CGPoint(x: 0, y: 1080-100)),
-            ( .B, 6, 2, CGPoint(x: 0, y: 1080-100)),
-            ( .O, 8, 1, CGPoint(x: 0, y: 1080-100)),
-        ]
+        })
+        observers.append(NotificationCenter.default.addObserver(forName: .conveyorShapeDidChange, object: nil, queue: .main) { (notification) in
+            let runner = notification.object as! ConveyorRunner
+            let latestSegment = runner.conveyor.segments.last!
+            
+            // must generate the nodes
+            let configInit = config.first(where: { "\($0.bloodType)" == runner.name })!
+            let nodes = runner.conveyor.makeSpritesForSegment(with: "\(runner.name)", havingStartedAtX: configInit.x, y: configInit.y, segment: latestSegment)
+            
+            if let rootNode = self.childNode(withName: "//conveyor-\(runner.name)") {
+                nodes.forEach { rootNode.addChild($0) }
+            }
+        })
         
         
         let targets = SKNode()
         targets.name = "targets"
         addChild(targets)
         
-        config.forEach { (blood, length, y, targetPosition) in
+        config.forEach { (blood, length, x, y, targetPosition) in
             var conveyor = Conveyor()
             conveyor.segments.append(ConveyorSegment(length: length, orientation: .left, bloodTypeMask: .all))
-            let node = conveyor.makeSprites(with: "\(blood)", startingAtX: 13, y: y)
+            let node = conveyor.makeSprites(with: "\(blood)", startingAtX: x, y: y)
             node.name = "conveyor-\(blood)"
             addChild(node)
             
             conveyorRunners[blood]?.conveyor = conveyor
+            conveyorRunners[blood]?.name = "\(blood)"
             
             // one target per blood type
-            let target = TargetNode.newInstance(at: CGPoint(x: node.children.last!.position.x, y: targetPosition.y), for: blood)
+            let target = TargetNode.newInstance(at: CGPoint(x: node.children.last!.position.x - GridConfiguration.default.itemSize.width, y: targetPosition.y), for: blood)
             target.name = "target-\(blood)"
             targets.addChild(target)
         }
@@ -107,13 +117,13 @@ class LaboScene : SKScene {
         parcels.name = "parcels"
         addChild(parcels)
         
-        newParcelObserver = NotificationCenter.default.addObserver(forName: .newParcel, object: nil, queue: .main) { (notification) in
+        observers.append(NotificationCenter.default.addObserver(forName: .newParcel, object: nil, queue: .main) { (notification) in
             let parcel = notification.object as! Parcel
             let shape = ParcelNode.newInstance(with: parcel, at: self.childNode(withName: "/conveyor-\(parcel.bloodType)")!.children.first!.position)
             parcels.addChild(shape)
-        }
+        })
         
-        droppedParcelObserver = NotificationCenter.default.addObserver(forName: .droppedParcel, object: nil, queue: .main) { (notification) in
+        observers.append(NotificationCenter.default.addObserver(forName: .droppedParcel, object: nil, queue: .main) { (notification) in
             let parcel = notification.object as? Parcel
             if let parcelNode = parcels.children.first(where: { ($0 as! ParcelNode).parcel === parcel }) as? ParcelNode {
                 if self.selectedParcel === parcelNode {
@@ -121,7 +131,7 @@ class LaboScene : SKScene {
                 }
                 parcelNode.explode()
             }
-        }
+        })
     }
     
     var lastUpdate: TimeInterval? = nil
@@ -186,6 +196,9 @@ class LaboScene : SKScene {
             conveyorRunners[.AB]?.load(bloodType: .AB)
         } else if (event.keyCode == kVK_ANSI_O) {
             conveyorRunners[.O]?.load(bloodType: .O)
+        } else if (event.keyCode == kVK_ANSI_V) {
+            // test to append a segment to the O conveyor
+            conveyorRunners[.O]!.append(ConveyorSegment(length: 2, orientation: .up, bloodTypeMask: .all, speed: 1))
         }
     }
     #endif
