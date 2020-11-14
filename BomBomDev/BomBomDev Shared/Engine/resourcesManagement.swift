@@ -56,10 +56,23 @@ class ResourcesManagement {
 }
 
 class Score {
-    private var score: Int
+    private var score: Int {
+        didSet { self.scoreLabel.text = "\(self.score)" }
+    }
+    
     private let scoreLabel: SKLabelNode
     private let scoreSprite: SKSpriteNode
     private let baseNode: SKShapeNode
+    
+    private var configuration = ScoreConfiguration.default
+    
+    struct ScoreConfiguration /*TODO: Codable*/ {
+        static let `default` = ScoreConfiguration()
+        
+        var bagScoredByHand: [BloodType:Int] = [.A: 100, .B: 100, .AB: 50, .O: 200]
+        var bagDropped: Int = -200
+        var badBag: Int = -200
+    }
     
     init(parent: SKNode, x: CGFloat, y:CGFloat, w:CGFloat, h:CGFloat) {
         score = 0
@@ -79,34 +92,28 @@ class Score {
         baseNode.addChild(scoreSprite)
         baseNode.addChild(scoreLabel)
         
+        parent.addChild(baseNode)
+        
         NotificationCenter.default.addObserver(forName: .bagScored, object: nil, queue: .main) { (notification) in
             guard let type = notification.userInfo?["BloodType"] as? BloodType else {
                 print("Error getting blood type")
                 return }
             
-            switch type {
-            case .A:
-                self.score += 100
-            case .B:
-                self.score += 100
-            case .AB:
-                self.score += 50
-            case .O:
-                self.score += 200
-            }
-            
-            self.scoreLabel.text = "\(self.score)"
+            self.score += self.configuration.bagScoredByHand[type] ?? 0
         }
         
         NotificationCenter.default.addObserver(forName: .bagDropped, object: nil, queue: .main) { (notification) in
-            self.score -= 200
-            self.scoreLabel.text = "\(self.score)"
+            self.score += self.configuration.bagDropped
         }
-        parent.addChild(baseNode)
+        
+        NotificationCenter.default.addObserver(forName: .badBag, object: nil, queue: .main) { (notification) in
+            self.score += self.configuration.badBag
+        }
     }
 }
 
 extension Notification.Name {
     static let bagDropped = Notification.Name(rawValue: "BagDropped")
     static let bagScored = Notification.Name(rawValue: "BagScored")
+    static let badBag = Notification.Name(rawValue: "BadBag")
 }

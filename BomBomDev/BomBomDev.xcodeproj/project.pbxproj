@@ -10,8 +10,8 @@
 		0C187677255F63E400C4AC1F /* PeoplePopper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C187675255F63E400C4AC1F /* PeoplePopper.swift */; };
 		0C187679255F63E400C4AC1F /* PeoplePopper.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0C187676255F63E400C4AC1F /* PeoplePopper.sks */; };
 		0C18767A255F63E400C4AC1F /* PeoplePopper.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0C187676255F63E400C4AC1F /* PeoplePopper.sks */; };
-		0CA1122E25603214007F685C /* resourcesManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA1122D25603214007F685C /* resourcesManagement.swift */; };
-		0CA1122F25603214007F685C /* resourcesManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA1122D25603214007F685C /* resourcesManagement.swift */; };
+		0CA1122E25603214007F685C /* ResourcesManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA1122D25603214007F685C /* ResourcesManagement.swift */; };
+		0CA1122F25603214007F685C /* ResourcesManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA1122D25603214007F685C /* ResourcesManagement.swift */; };
 		8F522BB4255F234000C58B5E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F522BB3255F234000C58B5E /* AppDelegate.swift */; };
 		8F522BB6255F234000C58B5E /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F522BB5255F234000C58B5E /* GameViewController.swift */; };
 		8F522BB9255F234000C58B5E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F522BB7255F234000C58B5E /* Main.storyboard */; };
@@ -67,7 +67,7 @@
 /* Begin PBXFileReference section */
 		0C187675255F63E400C4AC1F /* PeoplePopper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeoplePopper.swift; sourceTree = "<group>"; };
 		0C187676255F63E400C4AC1F /* PeoplePopper.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PeoplePopper.sks; sourceTree = "<group>"; };
-		0CA1122D25603214007F685C /* resourcesManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = resourcesManagement.swift; sourceTree = "<group>"; };
+		0CA1122D25603214007F685C /* ResourcesManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourcesManagement.swift; sourceTree = "<group>"; };
 		8F522BA9255F233F00C58B5E /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		8F522BAA255F233F00C58B5E /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		8F522BAB255F234000C58B5E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -236,7 +236,7 @@
 			children = (
 				8F522C36255FC54000C58B5E /* Conveyor.swift */,
 				8F522C3F255FC84600C58B5E /* Conveyor+SpriteKit.swift */,
-				0CA1122D25603214007F685C /* resourcesManagement.swift */,
+				0CA1122D25603214007F685C /* ResourcesManagement.swift */,
 			);
 			path = Engine;
 			sourceTree = "<group>";
@@ -387,7 +387,7 @@
 				8F522BB4255F234000C58B5E /* AppDelegate.swift in Sources */,
 				8F522C27255FC0D100C58B5E /* LaboScene.swift in Sources */,
 				8F522BFB255F36E700C58B5E /* CreditsScene.swift in Sources */,
-				0CA1122E25603214007F685C /* resourcesManagement.swift in Sources */,
+				0CA1122E25603214007F685C /* ResourcesManagement.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -407,7 +407,7 @@
 				8F522BC5255F234000C58B5E /* AppDelegate.swift in Sources */,
 				8F522C28255FC0D100C58B5E /* LaboScene.swift in Sources */,
 				8F522BFC255F36E700C58B5E /* CreditsScene.swift in Sources */,
-				0CA1122F25603214007F685C /* resourcesManagement.swift in Sources */,
+				0CA1122F25603214007F685C /* ResourcesManagement.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

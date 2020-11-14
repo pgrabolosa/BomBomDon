@@ -240,10 +240,9 @@ class LaboScene : SKScene {
                 selectedParcel = nil
                 
                 if (parcel.bloodType == node.bloodType) {
-                    print("TODO: Success! :-)")
                     NotificationCenter.default.post(name: .bagScored, object: nil, userInfo: ["BloodType" : node.bloodType])
                 } else {
-                    print("TODO: Failed! :-)")
+                    NotificationCenter.default.post(name: .badBag, object: nil, userInfo: ["BloodType" : node.bloodType])
                 }
                 
                 parcelNode.removeAllActions()
@@ -276,17 +275,7 @@ class LaboScene : SKScene {
         } else if (event.keyCode == kVK_ANSI_Minus) {
             _ = peopleHandler.increaseMoneyRate()
         } else if (event.keyCode == kVK_ANSI_V) {
-            // test to append a segment to the O conveyor
-            //conveyorRunners[.O]!.append(ConveyorSegment(length: 2, orientation: .up, bloodTypeMask: .all, speed: 1))
-            
-            BloodType.allCases.forEach { bloodType in
-                let loc = locationAfterLastCell(of: bloodType)
-                let shape = SKShapeNode(ellipseOf: CGSize(width: 65, height: 65))
-                shape.fillColor = .green
-                shape.position = loc
-                
-                addChild(shape)
-            }
+            generateHandles()
         }
     }
     #elseif os(iOS)
@@ -313,6 +302,18 @@ class LaboScene : SKScene {
         position.y += CGFloat(orientation.integerOffset.dy) * itemSize.height
         
         return position
+    }
+    
+    /// Ajoute des éléments en fin des tapis/convoyeurs afin de faciliter l'ajout d'éléments
+    func generateHandles() {
+        BloodType.allCases.forEach { bloodType in
+            let loc = locationAfterLastCell(of: bloodType)
+            let shape = SKShapeNode(ellipseOf: CGSize(width: 65, height: 65))
+            shape.fillColor = .green
+            shape.position = loc
+            
+            addChild(shape)
+        }
     }
     
 }
