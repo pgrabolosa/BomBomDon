@@ -41,16 +41,17 @@ class ExpBoutiqueScene : SKScene {
     override func didMove(to view: SKView) {
         // initial setup
         
-        let atlas = SKTextureAtlas(named: "conv")
-        
         var o_conveyors = [SKSpriteNode]()
         self.enumerateChildNodes(withName: "//conveyor_O/O_*") { (node, stop) in
             o_conveyors.append(node as! SKSpriteNode)
         }
         o_conveyors.sort { $0.name ?? "" < $1.name ?? "" }
         
-        o_conveyors.forEach {
-            $0.run(SKAction.repeatForever(SKAction.animate(with: atlas.textureNames.map { atlas.textureNamed($0) }, timePerFrame: 0.2)))
+        let atlas = SKTextureAtlas(named: "conv")
+        atlas.preload {
+            o_conveyors.forEach {
+                $0.run(SKAction.repeatForever(SKAction.animate(with: atlas.textureNames.map { atlas.textureNamed($0) }, timePerFrame: 0.2)))
+            }
         }
         
         var ab_conveyors = [SKSpriteNode]()

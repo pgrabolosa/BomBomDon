@@ -1,11 +1,12 @@
 {
   "images" : [
     {
-      "filename" : "conv03.png",
+      "filename" : "man-2.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "man-02@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
