@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0C187677255F63E400C4AC1F /* PeoplePopper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C187675255F63E400C4AC1F /* PeoplePopper.swift */; };
-		0C187678255F63E400C4AC1F /* PeoplePopper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C187675255F63E400C4AC1F /* PeoplePopper.swift */; };
 		0C187679255F63E400C4AC1F /* PeoplePopper.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0C187676255F63E400C4AC1F /* PeoplePopper.sks */; };
 		0C18767A255F63E400C4AC1F /* PeoplePopper.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0C187676255F63E400C4AC1F /* PeoplePopper.sks */; };
 		8F522BB4255F234000C58B5E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F522BB3255F234000C58B5E /* AppDelegate.swift */; };
@@ -42,6 +41,15 @@
 		8F522C38255FC54000C58B5E /* Conveyor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F522C36255FC54000C58B5E /* Conveyor.swift */; };
 		8F522C40255FC84600C58B5E /* Conveyor+SpriteKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F522C3F255FC84600C58B5E /* Conveyor+SpriteKit.swift */; };
 		8F522C41255FC84600C58B5E /* Conveyor+SpriteKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F522C3F255FC84600C58B5E /* Conveyor+SpriteKit.swift */; };
+		8F522C492560016600C58B5E /* ParcelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F522C482560016600C58B5E /* ParcelNode.swift */; };
+		8F522C4A2560016600C58B5E /* ParcelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F522C482560016600C58B5E /* ParcelNode.swift */; };
+		8F522C4F25600C7D00C58B5E /* MagicParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8F522C4D25600C7D00C58B5E /* MagicParticle.sks */; };
+		8F522C5025600C7D00C58B5E /* MagicParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8F522C4D25600C7D00C58B5E /* MagicParticle.sks */; };
+		8F522C5125600C7D00C58B5E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F522C4E25600C7D00C58B5E /* Assets.xcassets */; };
+		8F522C5225600C7D00C58B5E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F522C4E25600C7D00C58B5E /* Assets.xcassets */; };
+		8F522C5625600EEF00C58B5E /* TargetMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F522C5525600EEF00C58B5E /* TargetMode.swift */; };
+		8F522C5725600EEF00C58B5E /* TargetMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F522C5525600EEF00C58B5E /* TargetMode.swift */; };
+		8F522C6825601ABE00C58B5E /* PeoplePopper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C187675255F63E400C4AC1F /* PeoplePopper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,6 +79,10 @@
 		8F522C26255FC0D100C58B5E /* LaboScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaboScene.swift; sourceTree = "<group>"; };
 		8F522C36255FC54000C58B5E /* Conveyor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conveyor.swift; sourceTree = "<group>"; };
 		8F522C3F255FC84600C58B5E /* Conveyor+SpriteKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Conveyor+SpriteKit.swift"; sourceTree = "<group>"; };
+		8F522C482560016600C58B5E /* ParcelNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParcelNode.swift; sourceTree = "<group>"; };
+		8F522C4D25600C7D00C58B5E /* MagicParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MagicParticle.sks; sourceTree = "<group>"; };
+		8F522C4E25600C7D00C58B5E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8F522C5525600EEF00C58B5E /* TargetMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetMode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,13 +103,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0C187674255F63E400C4AC1F /* Pepoles */ = {
+		0C187674255F63E400C4AC1F /* PeoplePopper */ = {
 			isa = PBXGroup;
 			children = (
 				0C187675255F63E400C4AC1F /* PeoplePopper.swift */,
 				0C187676255F63E400C4AC1F /* PeoplePopper.sks */,
 			);
-			path = Pepoles;
+			path = PeoplePopper;
 			sourceTree = "<group>";
 		};
 		8F522BA2255F233F00C58B5E = {
@@ -160,7 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				8F522C20255FC09800C58B5E /* Labo */,
-				0C187674255F63E400C4AC1F /* Pepoles */,
+				0C187674255F63E400C4AC1F /* PeoplePopper */,
 				8F522BF4255F36C300C58B5E /* Credits */,
 				8F522BE0255F23A100C58B5E /* Boutique */,
 			);
@@ -190,6 +202,10 @@
 			children = (
 				8F522C21255FC0C600C58B5E /* LaboScene.sks */,
 				8F522C26255FC0D100C58B5E /* LaboScene.swift */,
+				8F522C482560016600C58B5E /* ParcelNode.swift */,
+				8F522C4D25600C7D00C58B5E /* MagicParticle.sks */,
+				8F522C4E25600C7D00C58B5E /* Assets.xcassets */,
+				8F522C5525600EEF00C58B5E /* TargetMode.swift */,
 			);
 			path = Labo;
 			sourceTree = "<group>";
@@ -282,8 +298,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				8F522C22255FC0C600C58B5E /* LaboScene.sks in Resources */,
+				8F522C4F25600C7D00C58B5E /* MagicParticle.sks in Resources */,
 				8F522BE9255F23F000C58B5E /* ExpBoutiqueScene.sks in Resources */,
 				8F522BCF255F234000C58B5E /* GameScene.sks in Resources */,
+				8F522C5125600C7D00C58B5E /* Assets.xcassets in Resources */,
 				8F522BB9255F234000C58B5E /* Main.storyboard in Resources */,
 				8F522BF6255F36DD00C58B5E /* CreditsScene.sks in Resources */,
 				0C187679255F63E400C4AC1F /* PeoplePopper.sks in Resources */,
@@ -301,7 +319,9 @@
 				8F522BD4255F234000C58B5E /* Assets.xcassets in Resources */,
 				8F522BEA255F23F000C58B5E /* ExpBoutiqueScene.sks in Resources */,
 				8F522C23255FC0C600C58B5E /* LaboScene.sks in Resources */,
+				8F522C5025600C7D00C58B5E /* MagicParticle.sks in Resources */,
 				0C18767A255F63E400C4AC1F /* PeoplePopper.sks in Resources */,
+				8F522C5225600C7D00C58B5E /* Assets.xcassets in Resources */,
 				8F522BF7255F36DD00C58B5E /* CreditsScene.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -316,9 +336,11 @@
 				8F522BD1255F234000C58B5E /* GameScene.swift in Sources */,
 				8F522BF0255F2A4100C58B5E /* SKScene+Extensions.swift in Sources */,
 				8F522BB6255F234000C58B5E /* GameViewController.swift in Sources */,
+				8F522C492560016600C58B5E /* ParcelNode.swift in Sources */,
 				8F522BE2255F23C000C58B5E /* ExpBoutiqueScene.swift in Sources */,
 				8F522C40255FC84600C58B5E /* Conveyor+SpriteKit.swift in Sources */,
 				8F522C37255FC54000C58B5E /* Conveyor.swift in Sources */,
+				8F522C5625600EEF00C58B5E /* TargetMode.swift in Sources */,
 				0C187677255F63E400C4AC1F /* PeoplePopper.swift in Sources */,
 				8F522BB4255F234000C58B5E /* AppDelegate.swift in Sources */,
 				8F522C27255FC0D100C58B5E /* LaboScene.swift in Sources */,
@@ -333,10 +355,12 @@
 				8F522BD2255F234000C58B5E /* GameScene.swift in Sources */,
 				8F522BF1255F2A4100C58B5E /* SKScene+Extensions.swift in Sources */,
 				8F522BC7255F234000C58B5E /* GameViewController.swift in Sources */,
+				8F522C4A2560016600C58B5E /* ParcelNode.swift in Sources */,
+				8F522C6825601ABE00C58B5E /* PeoplePopper.swift in Sources */,
 				8F522BE3255F23C000C58B5E /* ExpBoutiqueScene.swift in Sources */,
 				8F522C41255FC84600C58B5E /* Conveyor+SpriteKit.swift in Sources */,
 				8F522C38255FC54000C58B5E /* Conveyor.swift in Sources */,
-				0C187678255F63E400C4AC1F /* PeoplePopper.swift in Sources */,
+				8F522C5725600EEF00C58B5E /* TargetMode.swift in Sources */,
 				8F522BC5255F234000C58B5E /* AppDelegate.swift in Sources */,
 				8F522C28255FC0D100C58B5E /* LaboScene.swift in Sources */,
 				8F522BFC255F36E700C58B5E /* CreditsScene.swift in Sources */,

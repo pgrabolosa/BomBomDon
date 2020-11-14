@@ -46,13 +46,6 @@ struct ConveyorSegment : Codable {
     var length = 1
     var orientation = Orientation.left
     var bloodTypeMask = BloodTypeMask.all
-}
-
-struct Conveyor : Codable {
-    var segments: [ConveyorSegment] = []
-    var length: Int {
-        segments.reduce(0) { $0 + $1.length }
-    }
     
     /// Time required to traverse one cell
     var speed: TimeInterval = 1
@@ -61,10 +54,89 @@ struct Conveyor : Codable {
     var duration: TimeInterval { TimeInterval(length) * speed }
 }
 
-class ConveyorRunner {
+struct Conveyor : Codable {
+    var segments: [ConveyorSegment] = []
+    var length: Int {
+        segments.reduce(0) { $0 + $1.length }
+    }
+    
+    /// Time required to traverse the whole conveyor
+    var duration: TimeInterval { segments.reduce(TimeInterval.zero) { $0 + $1.duration } }
+    
+    /// Time from start to each cell
+    var discreteDuration: [TimeInterval] {
+        var result: [TimeInterval] = []
+        var clock: TimeInterval = .zero
+        
+        for segment in segments {
+            for _ in 0..<segment.length {
+                result.append(clock)
+                clock += segment.speed
+            }
+        }
+        
+        return result
+    }
+}
+
+
+protocol Agent {
+    func update(_ ellapsed: TimeInterval)
+}
+
+
+class Parcel: Agent {
+    var runner: ConveyorRunner
+    init(runner:ConveyorRunner) {
+        self.runner = runner
+    }
+    
+    var age: TimeInterval = 0
+    var segmentProgress = 0
+    
+    func progression(over conveyor: Conveyor) -> CGFloat {
+        return CGFloat(age / conveyor.duration)
+    }
+    
+    func update(_ ellapsed: TimeInterval) {
+        age += ellapsed
+        
+        let newSegmentProgress = runner.conveyor.discreteDuration.lastIndex(where: { $0 <= age }) ?? runner.conveyor.length + 1
+        segmentProgress = newSegmentProgress
+        NotificationCenter.default.post(name: .parcelMovedToNewCoveyorCell, object: self)
+        
+        if progression(over: runner.conveyor) > 1.0 {
+            NotificationCenter.default.post(name: .droppedParcel, object: self)
+            runner.transportQueue.removeAll { $0 === self }
+        }
+    }
+    
+    func delivered() {
+        fatalError("TODO?")
+    }
+}
+
+class ConveyorRunner: Agent {
     var conveyor = Conveyor()
+    var transportQueue: [Parcel] = []
     
     func load() {
-        // todo: load some blod and transport it
+        let parcel = Parcel(runner: self)
+        transportQueue.append(parcel)
+        NotificationCenter.default.post(name: .newParcel, object: parcel)
     }
+    
+    func update(_ ellapsed: TimeInterval) {
+        transportQueue.forEach { $0.update(ellapsed) }
+    }
+    
+    func remove(_ parcel: Parcel) {
+        transportQueue.remove(at:transportQueue.firstIndex(where:{ $0 === parcel })!)
+    }
+}
+
+extension Notification.Name {
+    static let newParcel = Notification.Name("newParcel")
+    static let parcelMovedToNewCoveyorCell = Notification.Name("parcelMovedToNewCoveyorCell")
+    static let droppedParcel = Notification.Name("droppedParcel")
 }
