@@ -193,6 +193,11 @@ class LaboScene : SKScene {
             conveyorRunners[.AB]?.load(bloodType: .AB)
         } else if (event.keyCode == kVK_ANSI_O) {
             conveyorRunners[.O]?.load(bloodType: .O)
+        } else if (event.keyCode == kVK_ANSI_Equal) {
+            _ = peopleHandler.increaseBloodRate()
+        } else if (event.keyCode == kVK_ANSI_Minus) {
+            peopleHandler.increaseMoneyRate()
+            
         }
     }
     #endif

@@ -156,6 +156,8 @@ class PeopleHandler {
     
     let bloodPosition : CGPoint
     let moneyPosition : CGPoint
+    private var bloodRate: CGFloat
+    private var moneyRate: CGFloat
     
     init(parent: SKScene, x: CGFloat, w: CGFloat) {
         masterNode = SKShapeNode(rect: CGRect(x: 0, y: parent.frame.minY, width: w, height: parent.size.height))
@@ -163,6 +165,9 @@ class PeopleHandler {
         masterNode.fillColor = .gray
         masterNode.position.x = x - (w/2)
         let height = parent.size.height
+        
+        bloodRate = 0.1
+        moneyRate = 0.3
         
         bloodPosition = CGPoint(x:-100, y:0.4 * height + parent.frame.minY)
         moneyPosition = CGPoint(x:0, y: 0.1 * height + parent.frame.minY)
@@ -218,7 +223,7 @@ class PeopleHandler {
        
         popper = SKAction.repeatForever(SKAction.sequence([
             SKAction.run {
-                self.people.append(Person(parent: self.masterNode, sideWalkWidth: w))
+                self.people.append(Person(parent: self.masterNode, sideWalkWidth: w, bloodRate: self.bloodRate, moneyRate: self.moneyRate))
             },
             SKAction.wait(forDuration: 1, withRange: 3)
         ]))
@@ -228,7 +233,24 @@ class PeopleHandler {
         parent.addChild(masterNode)
     }
     
+    func setBloodRate(newRate: CGFloat) {
+        self.bloodRate = newRate
+    }
     
+    func setMoneyRate(newRate: CGFloat) {
+        self.moneyRate = newRate
+    }
+    
+    func increaseBloodRate() -> CGFloat {
+        self.bloodRate += 0.1
+        return self.bloodRate
+    }
+    
+    func increaseMoneyRate() -> CGFloat {
+        self.moneyRate += 0.1
+        return self.moneyRate
+    }
+
 }
 
 
@@ -242,7 +264,7 @@ class Person {
     let bloodPosition : CGPoint;
     let moneyPosition : CGPoint;
     
-    init(parent: SKNode, sideWalkWidth : CGFloat) {
+    init(parent: SKNode, sideWalkWidth : CGFloat, bloodRate: CGFloat, moneyRate: CGFloat) {
         let height = parent.frame.maxY
         let x = CGFloat.random(in: -0...sideWalkWidth)
         var speed = Double.random(in: 3...8)
@@ -250,7 +272,7 @@ class Person {
         bloodPosition = CGPoint(x:-100, y:0.4 * height + parent.frame.minY)
         moneyPosition = CGPoint(x:0, y: 0.1 * height + parent.frame.minY)
         
-        activity = Activity.random()
+        activity = Activity.random(probBlood: bloodRate, probMoney: moneyRate)
         
         sprite = SKSpriteNode(texture: gender.sprite)
         sprite.position = CGPoint(x:x, y:height)
