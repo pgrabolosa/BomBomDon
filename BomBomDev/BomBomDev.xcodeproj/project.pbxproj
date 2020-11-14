@@ -10,6 +10,8 @@
 		0C187677255F63E400C4AC1F /* PeoplePopper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C187675255F63E400C4AC1F /* PeoplePopper.swift */; };
 		0C187679255F63E400C4AC1F /* PeoplePopper.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0C187676255F63E400C4AC1F /* PeoplePopper.sks */; };
 		0C18767A255F63E400C4AC1F /* PeoplePopper.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0C187676255F63E400C4AC1F /* PeoplePopper.sks */; };
+		0CA1122E25603214007F685C /* resourcesManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA1122D25603214007F685C /* resourcesManagement.swift */; };
+		0CA1122F25603214007F685C /* resourcesManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA1122D25603214007F685C /* resourcesManagement.swift */; };
 		8F522BB4255F234000C58B5E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F522BB3255F234000C58B5E /* AppDelegate.swift */; };
 		8F522BB6255F234000C58B5E /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F522BB5255F234000C58B5E /* GameViewController.swift */; };
 		8F522BB9255F234000C58B5E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F522BB7255F234000C58B5E /* Main.storyboard */; };
@@ -65,6 +67,7 @@
 /* Begin PBXFileReference section */
 		0C187675255F63E400C4AC1F /* PeoplePopper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeoplePopper.swift; sourceTree = "<group>"; };
 		0C187676255F63E400C4AC1F /* PeoplePopper.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PeoplePopper.sks; sourceTree = "<group>"; };
+		0CA1122D25603214007F685C /* resourcesManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = resourcesManagement.swift; sourceTree = "<group>"; };
 		8F522BA9255F233F00C58B5E /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		8F522BAA255F233F00C58B5E /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		8F522BAB255F234000C58B5E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -94,7 +97,7 @@
 		8F522C4E25600C7D00C58B5E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8F522C5525600EEF00C58B5E /* TargetMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetMode.swift; sourceTree = "<group>"; };
 		8F522C6F25601C1B00C58B5E /* street_sounds.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = street_sounds.wav; sourceTree = "<group>"; };
-		8F522C8025601D6700C58B5E /* piano-1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "piano-1.mp3"; path = "../../../../piano-1.mp3"; sourceTree = "<group>"; };
+		8F522C8025601D6700C58B5E /* piano-1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano-1.mp3"; sourceTree = "<group>"; };
 		8F522C8525601DC300C58B5E /* rue paris.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "rue paris.wav"; sourceTree = "<group>"; };
 		8F8494EF256021BF004E579C /* MoneyParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MoneyParticle.sks; sourceTree = "<group>"; };
 		8F8494FA2560250C004E579C /* BloodParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BloodParticle.sks; sourceTree = "<group>"; };
@@ -233,6 +236,7 @@
 			children = (
 				8F522C36255FC54000C58B5E /* Conveyor.swift */,
 				8F522C3F255FC84600C58B5E /* Conveyor+SpriteKit.swift */,
+				0CA1122D25603214007F685C /* resourcesManagement.swift */,
 			);
 			path = Engine;
 			sourceTree = "<group>";
@@ -383,6 +387,7 @@
 				8F522BB4255F234000C58B5E /* AppDelegate.swift in Sources */,
 				8F522C27255FC0D100C58B5E /* LaboScene.swift in Sources */,
 				8F522BFB255F36E700C58B5E /* CreditsScene.swift in Sources */,
+				0CA1122E25603214007F685C /* resourcesManagement.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -402,6 +407,7 @@
 				8F522BC5255F234000C58B5E /* AppDelegate.swift in Sources */,
 				8F522C28255FC0D100C58B5E /* LaboScene.swift in Sources */,
 				8F522BFC255F36E700C58B5E /* CreditsScene.swift in Sources */,
+				0CA1122F25603214007F685C /* resourcesManagement.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -552,6 +558,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = AKUPQLPX29;
 				INFOPLIST_FILE = "BomBomDev iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -572,6 +579,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = AKUPQLPX29;
 				INFOPLIST_FILE = "BomBomDev iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -596,7 +604,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = G75DLW32M2;
+				DEVELOPMENT_TEAM = AKUPQLPX29;
 				INFOPLIST_FILE = "BomBomDev macOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -619,7 +627,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 8BNRNG4PCS;
+				DEVELOPMENT_TEAM = AKUPQLPX29;
 				INFOPLIST_FILE = "BomBomDev macOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

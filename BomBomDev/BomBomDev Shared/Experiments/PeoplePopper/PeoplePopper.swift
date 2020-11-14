@@ -10,6 +10,7 @@ import SpriteKit
 
 class PeoplePopper : SKScene {
     private var peopleHandler : PeopleHandler?
+    private var score: ResourcesManagement?
     
     class func newScene() -> PeoplePopper {
         guard let scene = SKScene(fileNamed: "PeoplePopper") as? PeoplePopper else {
@@ -22,7 +23,7 @@ class PeoplePopper : SKScene {
     }
     
     override func didMove(to view: SKView) {
-       
+        score = ResourcesManagement(parent: self, x: self.frame.minX, y: frame.maxY - 100, w: 200, h: 100)
     }
 }
 
