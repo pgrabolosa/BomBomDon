@@ -131,7 +131,9 @@ class ConveyorRunner: Agent {
     }
     
     func remove(_ parcel: Parcel) {
-        transportQueue.remove(at:transportQueue.firstIndex(where:{ $0 === parcel })!)
+        if let index = transportQueue.firstIndex(where:{ $0 === parcel }) {
+            transportQueue.remove(at:index)
+        }
     }
 }
 

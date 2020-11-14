@@ -58,6 +58,8 @@
 		8F522C8725601DC300C58B5E /* rue paris.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8F522C8525601DC300C58B5E /* rue paris.wav */; };
 		8F8494F0256021BF004E579C /* MoneyParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8F8494EF256021BF004E579C /* MoneyParticle.sks */; };
 		8F8494F1256021BF004E579C /* MoneyParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8F8494EF256021BF004E579C /* MoneyParticle.sks */; };
+		8F8494FB2560250D004E579C /* BloodParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8F8494FA2560250C004E579C /* BloodParticle.sks */; };
+		8F8494FC2560250D004E579C /* BloodParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8F8494FA2560250C004E579C /* BloodParticle.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -95,6 +97,7 @@
 		8F522C8025601D6700C58B5E /* piano-1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "piano-1.mp3"; path = "../../../../piano-1.mp3"; sourceTree = "<group>"; };
 		8F522C8525601DC300C58B5E /* rue paris.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "rue paris.wav"; sourceTree = "<group>"; };
 		8F8494EF256021BF004E579C /* MoneyParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MoneyParticle.sks; sourceTree = "<group>"; };
+		8F8494FA2560250C004E579C /* BloodParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BloodParticle.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -219,6 +222,7 @@
 				8F522C4D25600C7D00C58B5E /* MagicParticle.sks */,
 				8F522C4E25600C7D00C58B5E /* Assets.xcassets */,
 				8F522C5525600EEF00C58B5E /* TargetMode.swift */,
+				8F8494FA2560250C004E579C /* BloodParticle.sks */,
 				8F8494EF256021BF004E579C /* MoneyParticle.sks */,
 			);
 			path = Labo;
@@ -326,6 +330,7 @@
 				8F8494F0256021BF004E579C /* MoneyParticle.sks in Resources */,
 				8F522C4F25600C7D00C58B5E /* MagicParticle.sks in Resources */,
 				8F522BE9255F23F000C58B5E /* ExpBoutiqueScene.sks in Resources */,
+				8F8494FB2560250D004E579C /* BloodParticle.sks in Resources */,
 				8F522C7225601C1B00C58B5E /* street_sounds.wav in Resources */,
 				8F522BCF255F234000C58B5E /* GameScene.sks in Resources */,
 				8F522C5125600C7D00C58B5E /* Assets.xcassets in Resources */,
@@ -344,6 +349,7 @@
 			files = (
 				8F522BCA255F234000C58B5E /* Main.storyboard in Resources */,
 				8F522BD0255F234000C58B5E /* GameScene.sks in Resources */,
+				8F8494FC2560250D004E579C /* BloodParticle.sks in Resources */,
 				8F522C7325601C1B00C58B5E /* street_sounds.wav in Resources */,
 				8F522BD4255F234000C58B5E /* Assets.xcassets in Resources */,
 				8F522BEA255F23F000C58B5E /* ExpBoutiqueScene.sks in Resources */,

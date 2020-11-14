@@ -121,9 +121,8 @@ class PeopleHandler {
     private var popper : SKAction?
     private var personRemover : Any?
     
-    let bloodPosition : CGPoint;
-    let moneyPosition : CGPoint;
-    
+    let bloodPosition : CGPoint
+    let moneyPosition : CGPoint
     
     init(parent: SKScene, x: CGFloat, w: CGFloat) {
         masterNode = SKShapeNode(rect: CGRect(x: 0, y: parent.frame.minY, width: w, height: parent.size.height))
