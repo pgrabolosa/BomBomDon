@@ -162,7 +162,7 @@ class PeopleHandler {
     init(parent: SKScene, x: CGFloat, w: CGFloat) {
         masterNode = SKShapeNode(rect: CGRect(x: 0, y: parent.frame.minY, width: w, height: parent.size.height))
         masterNode.lineWidth = 0
-        masterNode.fillColor = .gray
+        masterNode.fillColor = .clear
         masterNode.position.x = x - (w/2)
         let height = parent.size.height
         

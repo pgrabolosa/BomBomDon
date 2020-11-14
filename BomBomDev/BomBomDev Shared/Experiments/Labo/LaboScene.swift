@@ -133,7 +133,7 @@ class LaboScene : SKScene {
         // MARK: Configuration des éléments
         // Initialisation des éléments auxiliaires
         
-        peopleHandler = PeopleHandler(parent: self, x: 1620, w: 200)
+        peopleHandler = PeopleHandler(parent: self, x: 1750, w: 380)
         peopleHandler.masterNode.zPosition = 5
         
         score = Score(parent: self, x: 50, y: 950, w: 200, h: 70)
