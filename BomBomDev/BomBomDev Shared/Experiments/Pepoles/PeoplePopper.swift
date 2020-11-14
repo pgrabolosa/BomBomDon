@@ -84,15 +84,52 @@ extension Gender {
 }
 
 
+struct Activity: OptionSet {
+    let rawValue: UInt8
+    
+    static let givesBlood = Activity(rawValue: 1 << 0)
+    static let givesMoney = Activity(rawValue: 1 << 1)
+}
+
+extension Activity {
+    /// Generate random activity with weighted probabilities
+    /// Args:
+    /// probBlood: Blood giving probability, between 0 and 1
+    /// probMoney: Money giving probability, between 0 and 1
+    static func random(probBlood: CGFloat, probMoney: CGFloat) -> Activity {
+        let bloodDraw = CGFloat.random(in: 0..<1)
+        let moneyDraw = CGFloat.random(in: 0..<1)
+        var activity : Activity = Activity(rawValue: 0)
+        
+        if bloodDraw < probBlood {
+            activity.insert(.givesBlood)
+        }
+        
+        if moneyDraw < probMoney {
+            activity.insert(.givesMoney)
+        }
+        
+        return activity
+    }
+    
+    static func random() -> Activity {
+        return Activity.random(probBlood: 0.1, probMoney: 0.6)
+    }
+}
+
+
 class Person {
     
     let bloodType : BloodType
     let sprite : SKSpriteNode
     let gender = [Gender.male, Gender.female].randomElement()!
+    let activity : Activity
     
     init(parent: SKScene) {
         let height = parent.frame.maxY
         let x = CGFloat.random(in: -100...100)
+        
+        activity = Activity.random()
         
         sprite = SKSpriteNode(texture: gender.sprite)
         sprite.position = CGPoint(x:x, y:height)
