@@ -121,12 +121,20 @@ class PeopleHandler {
     private var popper : SKAction?
     private var personRemover : Any?
     
+    let bloodPosition : CGPoint;
+    let moneyPosition : CGPoint;
+    
+    
     init(parent: SKScene, x: CGFloat, w: CGFloat) {
         masterNode = SKShapeNode(rect: CGRect(x: 0, y: parent.frame.minY, width: w, height: parent.size.height))
         masterNode.lineWidth = 0
         masterNode.fillColor = .gray
         masterNode.position.x = x - (w/2)
-     
+        let height = parent.size.height
+        
+        bloodPosition = CGPoint(x:-100, y:0.4 * height + parent.frame.minY)
+        moneyPosition = CGPoint(x:0, y: 0.1 * height + parent.frame.minY)
+        
         personRemover = NotificationCenter.default.addObserver(forName: .personAsksToBeRemoved, object: nil, queue: .main) { (notification) in
             if let person = self.people.firstIndex(where: { (person) -> Bool in
                 return person === notification.object as? Person
@@ -144,7 +152,7 @@ class PeopleHandler {
             label.fontName = "Noteworthy-Bold"
             self.masterNode.addChild(label)
             
-            label.position = CGPoint(x:-100, y: -400)
+            label.position = self.bloodPosition
             
             let duration = Double.random(in: 1...2)
             
@@ -164,7 +172,7 @@ class PeopleHandler {
             label.fontName = "Noteworthy-Bold"
             self.masterNode.addChild(label)
             
-            label.position = CGPoint(x:-10, y: -600)
+            label.position = self.moneyPosition
             
             let duration = Double.random(in: 1...2)
             
