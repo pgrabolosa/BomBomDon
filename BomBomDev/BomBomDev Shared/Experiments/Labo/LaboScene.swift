@@ -18,11 +18,12 @@ class LaboScene : SKScene {
     }
     
     override func didMove(to view: SKView) {
-        // initial setup
-        
         var conveyor = Conveyor()
         conveyor.segments.append(ConveyorSegment(length: 2, orientation: .left, bloodTypeMask: .all))
         conveyor.segments.append(ConveyorSegment(length: 3, orientation: .up, bloodTypeMask: .all))
+        conveyor.segments.append(ConveyorSegment(length: 3, orientation: .left, bloodTypeMask: .all))
+        conveyor.segments.append(ConveyorSegment(length: 2, orientation: .up, bloodTypeMask: .all))
+        conveyor.segments.append(ConveyorSegment(length: 2, orientation: .right, bloodTypeMask: .all))
         
         let conveyorNode = conveyor.makeSprites(with: "test", startingAtX: 8, y: 1)
         addChild(conveyorNode)

@@ -56,5 +56,4 @@ extension Conveyor {
         
         return gridNode
     }
-    
 }

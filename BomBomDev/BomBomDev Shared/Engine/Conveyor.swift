@@ -27,8 +27,8 @@ enum Orientation : String, Codable {
         switch self {
             case .left:  return 0
             case .up:    return -.pi/2
-            case .right: return .pi/2
-            case .down:  return .pi
+            case .right: return .pi
+            case .down:  return .pi/2
         }
     }
 }
@@ -50,4 +50,21 @@ struct ConveyorSegment : Codable {
 
 struct Conveyor : Codable {
     var segments: [ConveyorSegment] = []
+    var length: Int {
+        segments.reduce(0) { $0 + $1.length }
+    }
+    
+    /// Time required to traverse one cell
+    var speed: TimeInterval = 1
+    
+    /// Time required to traverse the whole segment
+    var duration: TimeInterval { TimeInterval(length) * speed }
+}
+
+class ConveyorRunner {
+    var conveyor = Conveyor()
+    
+    func load() {
+        // todo: load some blod and transport it
+    }
 }
