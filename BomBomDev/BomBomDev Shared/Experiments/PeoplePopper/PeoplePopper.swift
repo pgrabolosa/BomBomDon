@@ -50,6 +50,36 @@ enum BloodType : CaseIterable {
     }
 }
 
+extension BloodType {
+    /// Generate random activity with weighted probabilities
+    /// Args:
+    /// probabilities: Probabilities for blood types
+    static func random(probabilities: [CGFloat]) -> BloodType {
+        let probSum = probabilities.reduce(0.0) { (prev, next) -> CGFloat in
+            prev+next
+        }
+        
+        var previousLevel = CGFloat(0.0);
+        
+        let levels = probabilities.map { (value) -> CGFloat in
+            previousLevel = value + previousLevel
+            return previousLevel
+        }
+        
+        let roll = CGFloat.random(in: 0...probSum)
+        
+        let index = levels.firstIndex { (level) -> Bool in
+            roll <= level
+        }
+        
+        return BloodType.allCases[index!]
+    }
+    
+    static func random() -> BloodType {
+        return BloodType.random(probabilities: [10,3,3,1])
+    }
+}
+
 
 enum Gender {
     case male
@@ -223,7 +253,7 @@ class Person {
         sprite = SKSpriteNode(texture: gender.sprite)
         sprite.position = CGPoint(x:x, y:height)
                 
-        bloodType = BloodType.allCases.randomElement()!
+        bloodType = BloodType.random()
         sprite.run(SKAction.repeatForever(SKAction.animate(with:gender.walkingSprites, timePerFrame: 0.2)), withKey: "walking")
         
         var trajectoir : [SKAction] = []
