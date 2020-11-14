@@ -116,7 +116,7 @@ extension Activity {
 }
 
 class PeopleHandler {
-    private let masterNode: SKShapeNode
+    let masterNode: SKShapeNode
     private var people : [Person] = []
     private var popper : SKAction?
     private var personRemover : Any?

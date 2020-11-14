@@ -10,8 +10,11 @@ import SpriteKit
 class LaboScene : SKScene {
     
     let runner = ConveyorRunner()
+    
     var newParcelObserver: Any?
     var droppedParcelObserver: Any?
+    var givesBloodObserver: Any?
+    var givesMoneyObserver: Any?
     
     var selectedParcel: ParcelNode? {
         didSet {
@@ -37,6 +40,22 @@ class LaboScene : SKScene {
     override func didMove(to view: SKView) {
         
         peopleHandler = PeopleHandler(parent: self, x: 1620, w: 200)
+        peopleHandler?.masterNode.zPosition = 5
+        
+        let moneyEmitter = SKEmitterNode(fileNamed: "MoneyParticle")!
+        moneyEmitter.particleBirthRate = 0
+        moneyEmitter.zPosition = 10
+        addChild(moneyEmitter)
+        
+        givesMoneyObserver = NotificationCenter.default.addObserver(forName: .givesMoney, object: nil, queue: .main) { (notification) in
+            moneyEmitter.particleBirthRate += 0.5
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now().advanced(by: .milliseconds(500))) {
+                moneyEmitter.particleBirthRate -= 0.5
+            }
+        }
+        givesBloodObserver = NotificationCenter.default.addObserver(forName: .givesBlood, object: nil, queue: .main) { (notification) in
+            print("🩸")
+        }
         
         var conveyor = Conveyor()
         conveyor.segments.append(ConveyorSegment(length: 2, orientation: .left, bloodTypeMask: .all))
