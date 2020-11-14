@@ -41,50 +41,48 @@ class ExpBoutiqueScene : SKScene {
     override func didMove(to view: SKView) {
         // initial setup
         
+        let atlas = SKTextureAtlas(named: "conv")
+        
         var o_conveyors = [SKSpriteNode]()
         self.enumerateChildNodes(withName: "//conveyor_O/O_*") { (node, stop) in
             o_conveyors.append(node as! SKSpriteNode)
         }
         o_conveyors.sort { $0.name ?? "" < $1.name ?? "" }
         
+        o_conveyors.forEach {
+            $0.run(SKAction.repeatForever(SKAction.animate(with: atlas.textureNames.map { atlas.textureNamed($0) }, timePerFrame: 0.2)))
+        }
+        
         var ab_conveyors = [SKSpriteNode]()
         self.enumerateChildNodes(withName: "//conveyor_AB/AB_*") { (node, stop) in
             ab_conveyors.append(node as! SKSpriteNode)
         }
         ab_conveyors.sort { $0.name ?? "" < $1.name ?? "" }
-        
-        print(o_conveyors)
-        print(ab_conveyors)
-                
-        /*
-        drawerSprite = SKShapeNode(rectOf: CGSize(width: 200, height: self.frame.height - 50))
-        drawerSprite.fillColor = .clear
-        drawerSprite.strokeColor = .black
-        
-        addChild(drawerSprite)
-        
-        Timer.scheduledTimer(withTimeInterval: 3, repeats: true) { (timer) in
-            self.boutique.append("Test \(1 + self.boutique.items.count)")
-        }
-        
-        NotificationCenter.default.addObserver(forName: .BoutiqueNewItem, object: nil, queue: .main) { (notification) in
-            let item = SKShapeNode(rectOf: CGSize(width: 50, height: 50))
-            item.fillColor = .red
-            self.drawerSprite.addChild(item)
-            
-            // reorder items
-            var position = CGPoint.zero
-            position.y = -CGFloat(self.boutique.items.count * 50 + (self.boutique.items.count-1) * 20)/2
-            for child in self.drawerSprite.children {
-                child.position = position
-                position.y += 50 + 20
-            }
-        }
-         */
     }
     
     override func update(_ currentTime: TimeInterval) {
         
     }
+    
+    #if os(OSX)
+    override func mouseMoved(with event: NSEvent) {
+    }
+    
+    override func mouseDown(with event: NSEvent) {
+    }
+    
+    override func mouseDragged(with event: NSEvent) {
+    }
+    
+    override func mouseUp(with event: NSEvent) {
+        let loc = event.location(in: self)
+        for node in self.nodes(at: loc) where node is SKSpriteNode && node.name?.isEmpty == false {
+            let sprite = (node as! SKSpriteNode)
+            sprite.run(SKAction.colorize(with: .blue, colorBlendFactor: 1.0, duration: 1.0))
+//            sprite.run(SKAction.fadeAlpha(to: 1.0, duration: 0.5))
+        }
+
+    }
+    #endif
     
 }
