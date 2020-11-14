@@ -1,0 +1,10 @@
+/* 
+  Texts.strings
+  BomBomDev
+
+  Created by Aurélien VALADE on 14/11/2020.
+  
+*/
+
+"MissionTitle0" = "Votre Mission si vous l'acceptez";
+"MissionDescription0" = "Terminer ce jeu avant\nDemain 15h\n\nEt le commiter sur Itch.io";
