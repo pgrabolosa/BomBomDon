@@ -20,7 +20,7 @@ class GameViewController: NSViewController {
         let skView = self.view as! SKView
         skView.presentScene(scene)
         
-        skView.ignoresSiblingOrder = true // optimisation
+        //skView.ignoresSiblingOrder = true // optimisation
         
         skView.showsFPS = false
         skView.showsNodeCount = false

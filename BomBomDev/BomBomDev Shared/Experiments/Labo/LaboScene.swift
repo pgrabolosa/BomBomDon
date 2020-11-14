@@ -10,8 +10,11 @@ import SpriteKit
 class LaboScene : SKScene {
     
     let runner = ConveyorRunner()
+    
     var newParcelObserver: Any?
     var droppedParcelObserver: Any?
+    var givesBloodObserver: Any?
+    var givesMoneyObserver: Any?
     
     var selectedParcel: ParcelNode? {
         didSet {
@@ -32,11 +35,37 @@ class LaboScene : SKScene {
         return scene
     }
     
-    var peopleHandler: PeopleHandler?
+    var peopleHandler: PeopleHandler!
     
     override func didMove(to view: SKView) {
         
         peopleHandler = PeopleHandler(parent: self, x: 1620, w: 200)
+        peopleHandler.masterNode.zPosition = 5
+        
+        let moneyEmitter = SKEmitterNode(fileNamed: "MoneyParticle")!
+        moneyEmitter.particleBirthRate = 0
+        moneyEmitter.position = peopleHandler.masterNode.convert(peopleHandler.moneyPosition, to: self)
+        moneyEmitter.zPosition = 10
+        addChild(moneyEmitter)
+        
+        let bloodEmitter = SKEmitterNode(fileNamed: "BloodParticle")!
+        bloodEmitter.particleBirthRate = 0
+        bloodEmitter.position = peopleHandler.masterNode.convert(peopleHandler.bloodPosition, to: self)
+        bloodEmitter.zPosition = 10
+        addChild(bloodEmitter)
+        
+        givesMoneyObserver = NotificationCenter.default.addObserver(forName: .givesMoney, object: nil, queue: .main) { (notification) in
+            moneyEmitter.particleBirthRate += 0.5
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now().advanced(by: .milliseconds(500))) {
+                moneyEmitter.particleBirthRate -= 0.5
+            }
+        }
+        givesBloodObserver = NotificationCenter.default.addObserver(forName: .givesBlood, object: nil, queue: .main) { (notification) in
+            bloodEmitter.particleBirthRate += 1
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now().advanced(by: .milliseconds(500))) {
+                bloodEmitter.particleBirthRate -= 1
+            }
+        }
         
         var conveyor = Conveyor()
         conveyor.segments.append(ConveyorSegment(length: 2, orientation: .left, bloodTypeMask: .all))
@@ -112,8 +141,9 @@ class LaboScene : SKScene {
         // move the selected parcel node to the selected target
         if let node = nodes(at: event.location(in: self)).filter({ $0.parent?.name == "targets" }).first as? TargetNode {
             if let parcelNode = selectedParcel, let parcel = parcelNode.parcel {
-                print("TODO: remove selected from convoyer and send it to the target")
                 runner.remove(parcel)
+                parcelNode.move(toParent: self) // remove from the parcels to avoid future interactions
+                selectedParcel = nil
                 
                 parcelNode.removeAllActions()
                 parcelNode.run(SKAction.sequence([
