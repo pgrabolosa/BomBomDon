@@ -61,21 +61,35 @@ struct Conveyor : Codable {
     var duration: TimeInterval { TimeInterval(length) * speed }
 }
 
-class Parcel {
+
+protocol Agent {
+    func update(_ ellapsed: TimeInterval)
+}
+
+
+class Parcel: Agent {
     var runner: ConveyorRunner
     init(runner:ConveyorRunner) {
         self.runner = runner
     }
     
-    var created = Date()
-    var age: TimeInterval { created.timeIntervalSinceNow }
+    var age: TimeInterval = 0
     
     func progression(over conveyor: Conveyor) -> CGFloat {
         return CGFloat(age / conveyor.duration)
     }
+    
+    func update(_ ellapsed: TimeInterval) {
+        age += ellapsed
+        
+        if progression(over: runner.conveyor) > 1.0 {
+            NotificationCenter.default.post(name: .droppedParcel, object: self)
+            runner.transportQueue.removeAll { $0 === self }
+        }
+    }
 }
 
-class ConveyorRunner {
+class ConveyorRunner: Agent {
     var conveyor = Conveyor()
     var transportQueue: [Parcel] = []
     
@@ -83,6 +97,10 @@ class ConveyorRunner {
         let parcel = Parcel(runner: self)
         transportQueue.append(parcel)
         NotificationCenter.default.post(name: .newParcel, object: parcel)
+    }
+    
+    func update(_ ellapsed: TimeInterval) {
+        transportQueue.forEach { $0.update(ellapsed) }
     }
 }
 
