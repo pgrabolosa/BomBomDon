@@ -76,6 +76,7 @@ extension Gender {
     var walkingSprites: [SKTexture] {
         return Gender.atlas
             .textureNames
+            .sorted()
             .filter { $0.hasPrefix(self.spritePrefix) }
             .map { Gender.atlas.textureNamed($0) }
     }
@@ -118,7 +119,7 @@ extension Activity {
 class PeopleHandler {
     private let masterNode: SKShapeNode
     private var people : [Person] = []
-    private var timer : Timer?
+    private var popper : SKAction?
     private var personRemover : Any?
     
     init(parent: SKScene, x: CGFloat, w: CGFloat) {
@@ -127,10 +128,6 @@ class PeopleHandler {
         masterNode.fillColor = .gray
         masterNode.position.x = x - (w/2)
      
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
-            self.people.append(Person(parent: self.masterNode, sideWalkWidth: w))
-        }
-        
         personRemover = NotificationCenter.default.addObserver(forName: .personAsksToBeRemoved, object: nil, queue: .main) { (notification) in
             if let person = self.people.firstIndex(where: { (person) -> Bool in
                 return person === notification.object as? Person
@@ -139,9 +136,20 @@ class PeopleHandler {
                 self.people.remove(at: person)
             }
         }
+       
+        popper = SKAction.repeatForever(SKAction.sequence([
+            SKAction.run {
+                self.people.append(Person(parent: self.masterNode, sideWalkWidth: w))
+            },
+            SKAction.wait(forDuration: 1, withRange: 3)
+        ]))
+        
+        masterNode.run(popper!)
         
         parent.addChild(masterNode)
     }
+    
+    
 }
 
 
@@ -155,6 +163,7 @@ class Person {
     init(parent: SKNode, sideWalkWidth : CGFloat) {
         let height = parent.frame.maxY
         let x = CGFloat.random(in: -0...sideWalkWidth)
+        let speed = Double.random(in: 3...8)
         
         activity = Activity.random()
         
@@ -163,7 +172,7 @@ class Person {
         
         bloodType = BloodType.allCases.randomElement()!
         sprite.run(SKAction.repeatForever(SKAction.animate(with:gender.walkingSprites, timePerFrame: 0.2)))
-        sprite.run(SKAction.sequence([SKAction.move(to: CGPoint(x:x, y:parent.frame.minY), duration: 5),
+        sprite.run(SKAction.sequence([SKAction.move(to: CGPoint(x:x, y:parent.frame.minY), duration: speed),
                                       SKAction.run{
                                         self.sprite.removeFromParent()
                                         NotificationCenter.default.post(name: .personAsksToBeRemoved, object: self)
