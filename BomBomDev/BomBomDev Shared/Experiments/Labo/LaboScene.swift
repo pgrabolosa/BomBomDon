@@ -16,6 +16,8 @@ class LaboScene : SKScene {
         return result
     }()
     
+    var conveyorNodes: [BloodType:SKNode] = [:]
+    
     var resourceDisplay: Any?
     var score: Any?
     var observers: [Any] = []
@@ -108,6 +110,8 @@ class LaboScene : SKScene {
             let node = conveyor.makeSprites(with: "\(blood)", startingAtX: x, y: y)
             node.name = "conveyor-\(blood)"
             addChild(node)
+            
+            self.conveyorNodes[blood] = node
             
             conveyorRunners[blood]?.conveyor = conveyor
             conveyorRunners[blood]?.name = "\(blood)"
@@ -209,7 +213,7 @@ class LaboScene : SKScene {
             peopleHandler.increaseMoneyRate()
         } else if (event.keyCode == kVK_ANSI_V) {
             // test to append a segment to the O conveyor
-            conveyorRunners[.O]!.append(ConveyorSegment(length: 2, orientation: .up, bloodTypeMask: .all, speed: 1))
+            //conveyorRunners[.O]!.append(ConveyorSegment(length: 2, orientation: .up, bloodTypeMask: .all, speed: 1))
         }
     }
     #endif
