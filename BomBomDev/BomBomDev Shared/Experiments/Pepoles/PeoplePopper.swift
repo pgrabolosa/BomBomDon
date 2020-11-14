@@ -18,7 +18,6 @@ class PeoplePopper : SKScene {
         scene.scaleMode = .aspectFit
         scene.peopleHandler = PeopleHandler(parent: scene, x: 700, w: 200)
         
-        
         return scene
     }
     
@@ -160,10 +159,16 @@ class Person {
     let gender = [Gender.male, Gender.female].randomElement()!
     let activity : Activity
     
+    let bloodPosition : CGPoint;
+    let moneyPosition : CGPoint;
+    
     init(parent: SKNode, sideWalkWidth : CGFloat) {
         let height = parent.frame.maxY
         let x = CGFloat.random(in: -0...sideWalkWidth)
-        let speed = Double.random(in: 3...8)
+        var speed = Double.random(in: 3...8)
+        
+        bloodPosition = CGPoint(x:-100, y:0.4 * height + parent.frame.minY)
+        moneyPosition = CGPoint(x:0, y: 0.1 * height + parent.frame.minY)
         
         activity = Activity.random()
         
@@ -172,11 +177,38 @@ class Person {
         
         bloodType = BloodType.allCases.randomElement()!
         sprite.run(SKAction.repeatForever(SKAction.animate(with:gender.walkingSprites, timePerFrame: 0.2)))
-        sprite.run(SKAction.sequence([SKAction.move(to: CGPoint(x:x, y:parent.frame.minY), duration: speed),
-                                      SKAction.run{
-                                        self.sprite.removeFromParent()
-                                        NotificationCenter.default.post(name: .personAsksToBeRemoved, object: self)
-                                      }]))
+        
+        var trajectoir : [SKAction] = []
+        
+        if activity.contains(.givesBlood) {
+            trajectoir.append(SKAction.move(to: CGPoint(x:x, y:bloodPosition.y), duration: speed*0.8))
+            trajectoir.append(SKAction.rotate(byAngle: -CGFloat.pi / 2, duration: 0.3))
+            trajectoir.append(SKAction.move(to: bloodPosition, duration: 1))
+            trajectoir.append(SKAction.wait(forDuration: 2))
+            trajectoir.append(SKAction.rotate(byAngle: -CGFloat.pi, duration: 0.3))
+            trajectoir.append(SKAction.move(to: CGPoint(x:x, y:bloodPosition.y), duration: 1))
+            trajectoir.append(SKAction.rotate(byAngle: -CGFloat.pi / 2, duration: 0.3))
+            speed *= 0.2
+        }
+        
+        if activity.contains(.givesMoney) {
+            trajectoir.append(SKAction.move(to: CGPoint(x:x, y:moneyPosition.y), duration: speed*0.9))
+            trajectoir.append(SKAction.rotate(byAngle: -CGFloat.pi / 2, duration: 0.3))
+            trajectoir.append(SKAction.move(to: moneyPosition, duration: 0.5))
+            trajectoir.append(SKAction.wait(forDuration: 0.2))
+            trajectoir.append(SKAction.rotate(byAngle: -CGFloat.pi, duration: 0.3))
+            trajectoir.append(SKAction.move(to: CGPoint(x:x, y:moneyPosition.y), duration: 0.5))
+            trajectoir.append(SKAction.rotate(byAngle: -CGFloat.pi / 2, duration: 0.3))
+            speed *= 0.1
+        }
+        
+        trajectoir.append(SKAction.move(to: CGPoint(x:x, y:parent.frame.minY), duration: speed))
+        trajectoir.append(SKAction.run{
+            self.sprite.removeFromParent()
+            NotificationCenter.default.post(name: .personAsksToBeRemoved, object: self)
+          })
+        
+        sprite.run(SKAction.sequence(trajectoir))
         parent.addChild(self.sprite)
     }
     
