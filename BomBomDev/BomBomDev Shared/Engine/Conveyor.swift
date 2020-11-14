@@ -110,6 +110,7 @@ class Parcel: Agent {
         
         if progression(over: runner.conveyor) > 1.0 {
             NotificationCenter.default.post(name: .droppedParcel, object: self)
+            
             runner.transportQueue.removeAll { $0 === self }
         }
     }
