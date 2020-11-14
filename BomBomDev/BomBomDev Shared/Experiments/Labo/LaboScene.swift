@@ -173,11 +173,11 @@ class LaboScene : SKScene {
         if (event.keyCode == kVK_ANSI_A) {
             conveyorRunners[.A]?.load(bloodType: .A)
         } else if (event.keyCode == kVK_ANSI_B) {
-            conveyorRunners[.A]?.load(bloodType: .B)
+            conveyorRunners[.B]?.load(bloodType: .B)
         } else if (event.keyCode == kVK_ANSI_C) {
-            conveyorRunners[.A]?.load(bloodType: .AB)
+            conveyorRunners[.AB]?.load(bloodType: .AB)
         } else if (event.keyCode == kVK_ANSI_O) {
-            conveyorRunners[.A]?.load(bloodType: .O)
+            conveyorRunners[.O]?.load(bloodType: .O)
         }
     }
     #endif
