@@ -87,8 +87,11 @@ protocol Agent {
 
 class Parcel: Agent {
     var runner: ConveyorRunner
-    init(runner:ConveyorRunner) {
+    var bloodType: BloodType
+    
+    init(runner:ConveyorRunner, bloodType: BloodType) {
         self.runner = runner
+        self.bloodType = bloodType
     }
     
     var age: TimeInterval = 0
@@ -120,8 +123,8 @@ class ConveyorRunner: Agent {
     var conveyor = Conveyor()
     var transportQueue: [Parcel] = []
     
-    func load() {
-        let parcel = Parcel(runner: self)
+    func load(bloodType: BloodType) {
+        let parcel = Parcel(runner: self, bloodType: bloodType)
         transportQueue.append(parcel)
         NotificationCenter.default.post(name: .newParcel, object: parcel)
     }

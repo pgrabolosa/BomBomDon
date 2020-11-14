@@ -9,7 +9,11 @@ import SpriteKit
 
 class LaboScene : SKScene {
     
-    let runner = ConveyorRunner()
+    var conveyorRunners: [BloodType:ConveyorRunner] = {
+        var result = [BloodType:ConveyorRunner]()
+        BloodType.allCases.forEach { result[$0] = ConveyorRunner() }
+        return result
+    }()
     
     var newParcelObserver: Any?
     var droppedParcelObserver: Any?
@@ -65,29 +69,30 @@ class LaboScene : SKScene {
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now().advanced(by: .milliseconds(500))) {
                 bloodEmitter.particleBirthRate -= 1
             }
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now().advanced(by: .milliseconds(750))) {
+                guard let bloodType = notification.userInfo?["Type"] as? BloodType else { return }
+                self.conveyorRunners[bloodType]?.load(bloodType: bloodType)
+            }
         }
         
-        var conveyor = Conveyor()
-        conveyor.segments.append(ConveyorSegment(length: 2, orientation: .left, bloodTypeMask: .all))
-        conveyor.segments.append(ConveyorSegment(length: 3, orientation: .up, bloodTypeMask: .all))
-        conveyor.segments.append(ConveyorSegment(length: 3, orientation: .left, bloodTypeMask: .all))
-        conveyor.segments.append(ConveyorSegment(length: 2, orientation: .up, bloodTypeMask: .all))
-        conveyor.segments.append(ConveyorSegment(length: 2, orientation: .right, bloodTypeMask: .all))
-        
-        let conveyorNode = conveyor.makeSprites(with: "test", startingAtX: 8, y: 1)
-        addChild(conveyorNode)
-        
-        runner.conveyor = conveyor
-        
-        run(SKAction.repeatForever(SKAction.sequence([
-            SKAction.wait(forDuration: 3),
-            SKAction.run { self.runner.load() }
-        ])))
+        var length = 2
+        var y = 4
+        conveyorRunners.forEach { (blood, runner) in
+            var conveyor = Conveyor()
+            conveyor.segments.append(ConveyorSegment(length: length, orientation: .left, bloodTypeMask: .all))
+            let node = conveyor.makeSprites(with: "\(blood)", startingAtX: 13, y: y)
+            node.name = "conveyor-\(blood)"
+            
+            length += 2
+            y -= 1
+            
+            addChild(node)
+            runner.conveyor = conveyor
+        }
         
         let parcels = SKNode()
         parcels.name = "parcels"
         addChild(parcels)
-        
         
         let targets = SKNode()
         targets.name = "targets"
@@ -95,17 +100,17 @@ class LaboScene : SKScene {
         
         targets.addChild(TargetNode.newInstance(at: CGPoint(x: 1920/2 - 500/2, y: 1080-100)))
         
-        
         newParcelObserver = NotificationCenter.default.addObserver(forName: .newParcel, object: nil, queue: .main) { (notification) in
-            let shape = ParcelNode.newInstance(with: notification.object as? Parcel, at: conveyorNode.children.first!.position)
+            let parcel = notification.object as! Parcel
+            let shape = ParcelNode.newInstance(with: parcel, at: self.childNode(withName: "/conveyor-\(parcel.bloodType)")!.children.first!.position)
             parcels.addChild(shape)
         }
         
         droppedParcelObserver = NotificationCenter.default.addObserver(forName: .droppedParcel, object: nil, queue: .main) { (notification) in
             let parcel = notification.object as? Parcel
-            let parcelNode = parcels.children.first { ($0 as! ParcelNode).parcel === parcel } as! ParcelNode
-            
-            parcelNode.explode()
+            if let parcelNode = parcels.children.first(where: { ($0 as! ParcelNode).parcel === parcel }) as? ParcelNode {
+                parcelNode.explode()
+            }
         }
     }
     
@@ -114,7 +119,9 @@ class LaboScene : SKScene {
         let interval = currentTime - (lastUpdate ?? currentTime)
         lastUpdate = currentTime
         
-        runner.update(interval)
+        conveyorRunners.forEach { (_, runner) in
+            runner.update(interval)
+        }
     }
     
     #if os(OSX)
@@ -141,7 +148,8 @@ class LaboScene : SKScene {
         // move the selected parcel node to the selected target
         if let node = nodes(at: event.location(in: self)).filter({ $0.parent?.name == "targets" }).first as? TargetNode {
             if let parcelNode = selectedParcel, let parcel = parcelNode.parcel {
-                runner.remove(parcel)
+                
+                conveyorRunners.forEach { (_, runner) in runner.remove(parcel) }
                 parcelNode.move(toParent: self) // remove from the parcels to avoid future interactions
                 selectedParcel = nil
                 
