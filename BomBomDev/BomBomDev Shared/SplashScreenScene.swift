@@ -1,5 +1,5 @@
 //
-//  GameScene.swift
+//  SplashScreenScene.swift
 //  BomBomDev Shared
 //
 //  Created by Pierre Grabolosa on 13/11/2020.
@@ -7,13 +7,13 @@
 
 import SpriteKit
 
-class GameScene: SKScene {
+class SplashScreenScene: SKScene {
     
     var buttonActions: [SKNode:()->Void] = [:]
     
-    class func newScene() -> GameScene {
-        guard let scene = SKScene(fileNamed: "GameScene") as? GameScene else {
-            fatalError("Failed to load GameScene.sks")
+    class func newScene() -> SplashScreenScene {
+        guard let scene = SKScene(fileNamed: "SplashScreenScene") as? SplashScreenScene else {
+            fatalError("Failed to load SplashScreenScene.sks")
         }
         scene.scaleMode = .aspectFill
         return scene
@@ -41,7 +41,7 @@ class GameScene: SKScene {
 
 #if os(iOS) || os(tvOS)
 // Touch-based event handling
-extension GameScene {
+extension SplashScreenScene {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
             let loc = touch.location(in: self)
@@ -53,7 +53,7 @@ extension GameScene {
 
 #if os(OSX)
 // Mouse-based event handling
-extension GameScene {
+extension SplashScreenScene {
     override func mouseUp(with event: NSEvent) {
         let loc = event.location(in: self)
         touched(at: loc)
