@@ -45,10 +45,10 @@ class LaboScene : SKScene {
         
         runner.conveyor = conveyor
         
-        run(SKAction.sequence([
+        run(SKAction.repeatForever(SKAction.sequence([
             SKAction.wait(forDuration: 3),
             SKAction.run { self.runner.load() }
-        ]))
+        ])))
         
         let parcels = SKNode()
         parcels.name = "parcels"
@@ -69,8 +69,19 @@ class LaboScene : SKScene {
         
         droppedParcelObserver = NotificationCenter.default.addObserver(forName: .droppedParcel, object: nil, queue: .main) { (notification) in
             let parcel = notification.object as? Parcel
-            let parcelNode = parcels.children.first { ($0 as! ParcelNode).parcel === parcel }
-            parcelNode?.removeFromParent()
+            let parcelNode = parcels.children.first { ($0 as! ParcelNode).parcel === parcel }!
+            
+            let emitter = SKEmitterNode(fileNamed: "MagicParticle")!
+            emitter.run(SKAction.sequence([
+                SKAction.wait(forDuration: 0.5),
+                SKAction.run { emitter.particleBirthRate = 0 },
+                SKAction.wait(forDuration: 1),
+                SKAction.removeFromParent()
+            ]))
+            emitter.position = parcelNode.position
+            self.addChild(emitter)
+            
+            parcelNode.removeFromParent()
         }
     }
     

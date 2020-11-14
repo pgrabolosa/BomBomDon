@@ -44,6 +44,10 @@
 		8F522C41255FC84600C58B5E /* Conveyor+SpriteKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F522C3F255FC84600C58B5E /* Conveyor+SpriteKit.swift */; };
 		8F522C492560016600C58B5E /* ParcelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F522C482560016600C58B5E /* ParcelNode.swift */; };
 		8F522C4A2560016600C58B5E /* ParcelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F522C482560016600C58B5E /* ParcelNode.swift */; };
+		8F522C4F25600C7D00C58B5E /* MagicParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8F522C4D25600C7D00C58B5E /* MagicParticle.sks */; };
+		8F522C5025600C7D00C58B5E /* MagicParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8F522C4D25600C7D00C58B5E /* MagicParticle.sks */; };
+		8F522C5125600C7D00C58B5E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F522C4E25600C7D00C58B5E /* Assets.xcassets */; };
+		8F522C5225600C7D00C58B5E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F522C4E25600C7D00C58B5E /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +78,8 @@
 		8F522C36255FC54000C58B5E /* Conveyor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conveyor.swift; sourceTree = "<group>"; };
 		8F522C3F255FC84600C58B5E /* Conveyor+SpriteKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Conveyor+SpriteKit.swift"; sourceTree = "<group>"; };
 		8F522C482560016600C58B5E /* ParcelNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParcelNode.swift; sourceTree = "<group>"; };
+		8F522C4D25600C7D00C58B5E /* MagicParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MagicParticle.sks; sourceTree = "<group>"; };
+		8F522C4E25600C7D00C58B5E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,6 +200,8 @@
 				8F522C21255FC0C600C58B5E /* LaboScene.sks */,
 				8F522C26255FC0D100C58B5E /* LaboScene.swift */,
 				8F522C482560016600C58B5E /* ParcelNode.swift */,
+				8F522C4D25600C7D00C58B5E /* MagicParticle.sks */,
+				8F522C4E25600C7D00C58B5E /* Assets.xcassets */,
 			);
 			path = Labo;
 			sourceTree = "<group>";
@@ -286,8 +294,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				8F522C22255FC0C600C58B5E /* LaboScene.sks in Resources */,
+				8F522C4F25600C7D00C58B5E /* MagicParticle.sks in Resources */,
 				8F522BE9255F23F000C58B5E /* ExpBoutiqueScene.sks in Resources */,
 				8F522BCF255F234000C58B5E /* GameScene.sks in Resources */,
+				8F522C5125600C7D00C58B5E /* Assets.xcassets in Resources */,
 				8F522BB9255F234000C58B5E /* Main.storyboard in Resources */,
 				8F522BF6255F36DD00C58B5E /* CreditsScene.sks in Resources */,
 				0C187679255F63E400C4AC1F /* PeoplePopper.sks in Resources */,
@@ -305,7 +315,9 @@
 				8F522BD4255F234000C58B5E /* Assets.xcassets in Resources */,
 				8F522BEA255F23F000C58B5E /* ExpBoutiqueScene.sks in Resources */,
 				8F522C23255FC0C600C58B5E /* LaboScene.sks in Resources */,
+				8F522C5025600C7D00C58B5E /* MagicParticle.sks in Resources */,
 				0C18767A255F63E400C4AC1F /* PeoplePopper.sks in Resources */,
+				8F522C5225600C7D00C58B5E /* Assets.xcassets in Resources */,
 				8F522BF7255F36DD00C58B5E /* CreditsScene.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

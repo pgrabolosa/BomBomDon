@@ -22,12 +22,15 @@ class ParcelNode : SKShapeNode {
             let (dx, dy) = segment.orientation.integerOffset
             let offset = CGVector(dx: CGFloat(dx * segment.length) * 100,
                                   dy: CGFloat(dy * segment.length) * 100)
-            let duration = TimeInterval(segment.length) * conveyor.speed
+            let duration = TimeInterval(segment.length) * segment.speed
             
             var actions = [SKAction.move(by: offset, duration: duration)]
             
             if currentOrientation != segment.orientation {
-                actions.insert(SKAction.rotate(byAngle: (segment.orientation.rotation - currentOrientation.rotation).truncatingRemainder(dividingBy: .pi), duration: 0.2), at: 0)
+                let rotationDuration: TimeInterval = 0.2
+                
+                actions[0].duration -= rotationDuration
+                actions.insert(SKAction.rotate(byAngle: (segment.orientation.rotation - currentOrientation.rotation).truncatingRemainder(dividingBy: .pi), duration: rotationDuration), at: 0)
                 currentOrientation = segment.orientation
             }
             
