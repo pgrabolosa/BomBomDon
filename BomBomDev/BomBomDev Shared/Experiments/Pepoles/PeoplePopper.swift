@@ -7,25 +7,23 @@
 
 import SpriteKit
 
+
 class PeoplePopper : SKScene {
-    
-    var people : [Person] = []
-    private var timer : Timer?
+    private var peopleHandler : PeopleHandler?
     
     class func newScene() -> PeoplePopper {
         guard let scene = SKScene(fileNamed: "PeoplePopper") as? PeoplePopper else {
             fatalError("Failed to find PeoplePopper")
         }
         scene.scaleMode = .aspectFit
+        scene.peopleHandler = PeopleHandler(parent: scene, x: 700, w: 200)
         
-        scene.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
-            scene.people.append(Person(parent: scene))
-        }
+        
         return scene
     }
     
     override func didMove(to view: SKView) {
-        people.append(Person(parent: self))
+       
     }
 }
 
@@ -117,6 +115,35 @@ extension Activity {
     }
 }
 
+class PeopleHandler {
+    private let masterNode: SKShapeNode
+    private var people : [Person] = []
+    private var timer : Timer?
+    private var personRemover : Any?
+    
+    init(parent: SKScene, x: CGFloat, w: CGFloat) {
+        masterNode = SKShapeNode(rect: CGRect(x: 0, y: parent.frame.minY, width: w, height: parent.size.height))
+        masterNode.lineWidth = 0
+        masterNode.fillColor = .gray
+        masterNode.position.x = x - (w/2)
+     
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+            self.people.append(Person(parent: self.masterNode, sideWalkWidth: w))
+        }
+        
+        personRemover = NotificationCenter.default.addObserver(forName: .personAsksToBeRemoved, object: nil, queue: .main) { (notification) in
+            if let person = self.people.firstIndex(where: { (person) -> Bool in
+                return person === notification.object as? Person
+            })
+            {
+                self.people.remove(at: person)
+            }
+        }
+        
+        parent.addChild(masterNode)
+    }
+}
+
 
 class Person {
     
@@ -125,9 +152,9 @@ class Person {
     let gender = [Gender.male, Gender.female].randomElement()!
     let activity : Activity
     
-    init(parent: SKScene) {
+    init(parent: SKNode, sideWalkWidth : CGFloat) {
         let height = parent.frame.maxY
-        let x = CGFloat.random(in: -100...100)
+        let x = CGFloat.random(in: -0...sideWalkWidth)
         
         activity = Activity.random()
         
@@ -139,12 +166,18 @@ class Person {
         sprite.run(SKAction.sequence([SKAction.move(to: CGPoint(x:x, y:parent.frame.minY), duration: 5),
                                       SKAction.run{
                                         self.sprite.removeFromParent()
-                                        if let scn = self.sprite.scene as? PeoplePopper {
-                                            if let index = scn.people.firstIndex(where:{ $0 === self }) {
-                                                scn.people.remove(at: index)
-                                            }
-                                        }
+                                        NotificationCenter.default.post(name: .personAsksToBeRemoved, object: self)
                                       }]))
         parent.addChild(self.sprite)
     }
+    
+    func givesBlood()
+    {
+        
+    }
+}
+
+
+extension Notification.Name {
+    static let personAsksToBeRemoved = Notification.Name("PersonAsksToBeRemoved")
 }
