@@ -135,6 +135,46 @@ class PeopleHandler {
                 self.people.remove(at: person)
             }
         }
+        
+        NotificationCenter.default.addObserver(forName: .givesBlood, object: nil, queue: .main) { (notification) in
+            guard let type = notification.userInfo?["Type"] else { return }
+            let label = SKLabelNode(text: "\(type)")
+            label.fontSize = 36
+            label.fontColor = .red
+            label.fontName = "Noteworthy-Bold"
+            self.masterNode.addChild(label)
+            
+            label.position = CGPoint(x:-100, y: -400)
+            
+            let duration = Double.random(in: 1...2)
+            
+            label.run(SKAction.sequence([SKAction.move(by: CGVector(dx:0, dy: 300), duration: duration),
+                                         SKAction.run({
+                                            label.removeFromParent()
+                                         })]))
+            label.run(SKAction.sequence([SKAction.wait(forDuration: duration * 0.7),
+            SKAction.fadeOut(withDuration: duration * 0.3),]))
+        }
+        
+        NotificationCenter.default.addObserver(forName: .givesMoney, object: nil, queue: .main) { (notification) in
+            guard let amount = notification.userInfo?["Amount"] else { return }
+            let label = SKLabelNode(text: "\(amount)")
+            label.fontSize = 36
+            label.fontColor = .green
+            label.fontName = "Noteworthy-Bold"
+            self.masterNode.addChild(label)
+            
+            label.position = CGPoint(x:-10, y: -600)
+            
+            let duration = Double.random(in: 1...2)
+            
+            label.run(SKAction.sequence([SKAction.move(by: CGVector(dx:0, dy: 300), duration: duration),
+                                         SKAction.run({
+                                            label.removeFromParent()
+                                         })]))
+            label.run(SKAction.sequence([SKAction.wait(forDuration: duration * 0.7),
+            SKAction.fadeOut(withDuration: duration * 0.3),]))
+        }
        
         popper = SKAction.repeatForever(SKAction.sequence([
             SKAction.run {
@@ -176,7 +216,7 @@ class Person {
         sprite.position = CGPoint(x:x, y:height)
         
         bloodType = BloodType.allCases.randomElement()!
-        sprite.run(SKAction.repeatForever(SKAction.animate(with:gender.walkingSprites, timePerFrame: 0.2)))
+        sprite.run(SKAction.repeatForever(SKAction.animate(with:gender.walkingSprites, timePerFrame: 0.2)), withKey: "walking")
         
         var trajectoir : [SKAction] = []
         
@@ -184,7 +224,17 @@ class Person {
             trajectoir.append(SKAction.move(to: CGPoint(x:x, y:bloodPosition.y), duration: speed*0.8))
             trajectoir.append(SKAction.rotate(byAngle: -CGFloat.pi / 2, duration: 0.3))
             trajectoir.append(SKAction.move(to: bloodPosition, duration: 1))
+            trajectoir.append(SKAction.run{
+                self.sprite.removeAction(forKey: "walking")
+                self.sprite.texture = self.gender.walkingSprites[0]
+            })
             trajectoir.append(SKAction.wait(forDuration: 2))
+            trajectoir.append(SKAction.run{
+                self.sprite.run(SKAction.repeatForever(SKAction.animate(with:self.gender.walkingSprites, timePerFrame: 0.2)), withKey: "walking")
+            })
+            trajectoir.append(SKAction.run {
+                NotificationCenter.default.post(name: .givesBlood, object: self, userInfo: ["Type" : self.bloodType])
+            })
             trajectoir.append(SKAction.rotate(byAngle: -CGFloat.pi, duration: 0.3))
             trajectoir.append(SKAction.move(to: CGPoint(x:x, y:bloodPosition.y), duration: 1))
             trajectoir.append(SKAction.rotate(byAngle: -CGFloat.pi / 2, duration: 0.3))
@@ -195,7 +245,18 @@ class Person {
             trajectoir.append(SKAction.move(to: CGPoint(x:x, y:moneyPosition.y), duration: speed*0.9))
             trajectoir.append(SKAction.rotate(byAngle: -CGFloat.pi / 2, duration: 0.3))
             trajectoir.append(SKAction.move(to: moneyPosition, duration: 0.5))
+            trajectoir.append(SKAction.run{
+                self.sprite.removeAction(forKey: "walking")
+                self.sprite.texture = self.gender.walkingSprites[0]
+
+            })
             trajectoir.append(SKAction.wait(forDuration: 0.2))
+            trajectoir.append(SKAction.run{
+                self.sprite.run(SKAction.repeatForever(SKAction.animate(with:self.gender.walkingSprites, timePerFrame: 0.2)), withKey: "walking")
+            })
+            trajectoir.append(SKAction.run {
+                NotificationCenter.default.post(name: .givesMoney, object: self, userInfo: ["Amount" : Int.random(in: 1...10)])
+            })
             trajectoir.append(SKAction.rotate(byAngle: -CGFloat.pi, duration: 0.3))
             trajectoir.append(SKAction.move(to: CGPoint(x:x, y:moneyPosition.y), duration: 0.5))
             trajectoir.append(SKAction.rotate(byAngle: -CGFloat.pi / 2, duration: 0.3))
@@ -221,4 +282,6 @@ class Person {
 
 extension Notification.Name {
     static let personAsksToBeRemoved = Notification.Name("PersonAsksToBeRemoved")
+    static let givesBlood = Notification.Name("GivesBlood")
+    static let givesMoney = Notification.Name("GivesMoney")
 }
