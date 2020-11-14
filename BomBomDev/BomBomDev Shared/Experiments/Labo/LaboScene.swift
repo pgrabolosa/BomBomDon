@@ -32,7 +32,12 @@ class LaboScene : SKScene {
         return scene
     }
     
+    var peopleHandler: PeopleHandler?
+    
     override func didMove(to view: SKView) {
+        
+        peopleHandler = PeopleHandler(parent: self, x: 1620, w: 200)
+        
         var conveyor = Conveyor()
         conveyor.segments.append(ConveyorSegment(length: 2, orientation: .left, bloodTypeMask: .all))
         conveyor.segments.append(ConveyorSegment(length: 3, orientation: .up, bloodTypeMask: .all))

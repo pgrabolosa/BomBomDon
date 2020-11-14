@@ -27,9 +27,9 @@ class ParcelNode : SKShapeNode {
         }
         
         let conveyor = parcel.runner.conveyor
-        var currentOrientation = parcel.runner.conveyor.segments.first!.orientation
+        var currentOrientation = conveyor.segments.first!.orientation
         
-        return parcel.runner.conveyor.segments.flatMap { segment -> [SKAction] in
+        return conveyor.segments.flatMap { segment -> [SKAction] in
             let (dx, dy) = segment.orientation.integerOffset
             let offset = CGVector(dx: CGFloat(dx * segment.length) * 100,
                                   dy: CGFloat(dy * segment.length) * 100)
