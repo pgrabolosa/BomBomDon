@@ -17,8 +17,8 @@ class ResourcesManagement {
     init(parent: SKNode, x: CGFloat, y: CGFloat, w: CGFloat, h: CGFloat) {
         moneyCount = 0
         moneyLabel = SKLabelNode(text: "0")
-        moneyLabel.fontName = "Noteworthy-Bold"
-        moneyLabel.fontSize = 38
+        moneyLabel.fontName = Constants.fontName
+        moneyLabel.fontSize = Constants.fontSize
         moneyLabel.fontColor = .black
         moneyLabel.horizontalAlignmentMode = .right
         moneyLabel.position = CGPoint(x:w, y:0)
@@ -64,8 +64,8 @@ class Score {
     init(parent: SKNode, x: CGFloat, y:CGFloat, w:CGFloat, h:CGFloat) {
         score = 0
         scoreLabel = SKLabelNode(text: "0")
-        scoreLabel.fontName = "Noteworthy-Bold"
-        scoreLabel.fontSize = 38
+        scoreLabel.fontName = Constants.fontName
+        scoreLabel.fontSize = Constants.fontSize
         scoreLabel.fontColor = .black
         scoreLabel.horizontalAlignmentMode = .right
         scoreLabel.position = CGPoint(x:w, y:0)

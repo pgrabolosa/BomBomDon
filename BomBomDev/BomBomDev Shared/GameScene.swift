@@ -7,6 +7,11 @@
 
 import SpriteKit
 
+enum Constants {
+    static let fontName = "Montserrat-Black"
+    static let fontSize = CGFloat(36)
+}
+
 class GameScene: SKScene {
     
     var buttonActions: [SKNode:()->Void] = [:]
@@ -24,7 +29,7 @@ class GameScene: SKScene {
         addChild(makeButton(at: CGPoint(x: 0, y: -300), color: .red, title: "Exp-Labo", action: { self.load(LaboScene.newScene()) }))
         addChild(makeButton(at: CGPoint(x: 0, y: -100), color: .red, title: "Exp-Boutique", action: { self.load(ExpBoutiqueScene.newScene()) }))
         addChild(makeButton(at: CGPoint(x: 0, y: 100), color: .blue, title: "Exp-Credits", action: { self.load(CreditsScene.newScene()) }))
-        addChild(makeButton(at: CGPoint(x: 0, y: 300), color: .green, title: "Exp-Popper", action: { self.load(PeoplePopper.newScene()) }))
+        addChild(makeButton(at: CGPoint(x: 0, y: 300), color: .green, title: "Exp-Popper", action: { self.load(MissionSheet.newScene(title: "Votre mission si vous l'acceptez", description: "Terminer ce jeu avant\nDemain 15h\n\nEt le commiter sur Itch.io")) }))
     }
 
     func makeButton(at pos: CGPoint, color: SKColor, title: String, action: (()->Void)? = nil) -> SKNode {
