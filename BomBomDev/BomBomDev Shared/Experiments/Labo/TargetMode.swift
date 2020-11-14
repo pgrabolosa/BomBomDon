@@ -8,12 +8,15 @@
 import SpriteKit
 
 class TargetNode : SKShapeNode {
+    
+    var bloodType: BloodType = .O
 
-    class func newInstance(at position: CGPoint) -> TargetNode {
+    class func newInstance(at position: CGPoint, for bloodType: BloodType) -> TargetNode {
         let shape = TargetNode(rectOf: CGSize(width: 100, height: 100))
         shape.fillColor = .white
         shape.strokeColor = .red
         shape.position = position
+        shape.bloodType = bloodType
         return shape
     }
     

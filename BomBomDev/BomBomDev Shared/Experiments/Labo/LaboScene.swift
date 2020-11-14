@@ -98,7 +98,7 @@ class LaboScene : SKScene {
             conveyorRunners[blood]?.conveyor = conveyor
             
             // one target per blood type
-            let target = TargetNode.newInstance(at: targetPosition)
+            let target = TargetNode.newInstance(at: targetPosition, for: blood)
             target.name = "target-\(blood)"
             targets.addChild(target)
         }
@@ -161,6 +161,12 @@ class LaboScene : SKScene {
                 conveyorRunners.forEach { (_, runner) in runner.remove(parcel) }
                 parcelNode.move(toParent: self) // remove from the parcels to avoid future interactions
                 selectedParcel = nil
+                
+                if (parcel.bloodType == node.bloodType) {
+                    print("TODO: Success! :-)")
+                } else {
+                    print("TODO: Failed! :-)")
+                }
                 
                 parcelNode.removeAllActions()
                 parcelNode.run(SKAction.sequence([
