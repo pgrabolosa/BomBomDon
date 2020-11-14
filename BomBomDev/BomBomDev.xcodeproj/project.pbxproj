@@ -34,6 +34,14 @@
 		8F522BF7255F36DD00C58B5E /* CreditsScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8F522BF5255F36DD00C58B5E /* CreditsScene.sks */; };
 		8F522BFB255F36E700C58B5E /* CreditsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F522BFA255F36E700C58B5E /* CreditsScene.swift */; };
 		8F522BFC255F36E700C58B5E /* CreditsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F522BFA255F36E700C58B5E /* CreditsScene.swift */; };
+		8F522C22255FC0C600C58B5E /* LaboScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8F522C21255FC0C600C58B5E /* LaboScene.sks */; };
+		8F522C23255FC0C600C58B5E /* LaboScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8F522C21255FC0C600C58B5E /* LaboScene.sks */; };
+		8F522C27255FC0D100C58B5E /* LaboScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F522C26255FC0D100C58B5E /* LaboScene.swift */; };
+		8F522C28255FC0D100C58B5E /* LaboScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F522C26255FC0D100C58B5E /* LaboScene.swift */; };
+		8F522C37255FC54000C58B5E /* Conveyor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F522C36255FC54000C58B5E /* Conveyor.swift */; };
+		8F522C38255FC54000C58B5E /* Conveyor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F522C36255FC54000C58B5E /* Conveyor.swift */; };
+		8F522C40255FC84600C58B5E /* Conveyor+SpriteKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F522C3F255FC84600C58B5E /* Conveyor+SpriteKit.swift */; };
+		8F522C41255FC84600C58B5E /* Conveyor+SpriteKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F522C3F255FC84600C58B5E /* Conveyor+SpriteKit.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +67,10 @@
 		8F522BEF255F2A4100C58B5E /* SKScene+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKScene+Extensions.swift"; sourceTree = "<group>"; };
 		8F522BF5255F36DD00C58B5E /* CreditsScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CreditsScene.sks; sourceTree = "<group>"; };
 		8F522BFA255F36E700C58B5E /* CreditsScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsScene.swift; sourceTree = "<group>"; };
+		8F522C21255FC0C600C58B5E /* LaboScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = LaboScene.sks; sourceTree = "<group>"; };
+		8F522C26255FC0D100C58B5E /* LaboScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaboScene.swift; sourceTree = "<group>"; };
+		8F522C36255FC54000C58B5E /* Conveyor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conveyor.swift; sourceTree = "<group>"; };
+		8F522C3F255FC84600C58B5E /* Conveyor+SpriteKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Conveyor+SpriteKit.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +113,7 @@
 		8F522BA7255F233F00C58B5E /* BomBomDev Shared */ = {
 			isa = PBXGroup;
 			children = (
+				8F522C35255FC51C00C58B5E /* Engine */,
 				8F522BDF255F239500C58B5E /* Experiments */,
 				8F522BA9255F233F00C58B5E /* GameScene.sks */,
 				8F522BAA255F233F00C58B5E /* GameScene.swift */,
@@ -146,6 +159,7 @@
 		8F522BDF255F239500C58B5E /* Experiments */ = {
 			isa = PBXGroup;
 			children = (
+				8F522C20255FC09800C58B5E /* Labo */,
 				0C187674255F63E400C4AC1F /* Pepoles */,
 				8F522BF4255F36C300C58B5E /* Credits */,
 				8F522BE0255F23A100C58B5E /* Boutique */,
@@ -169,6 +183,24 @@
 				8F522BFA255F36E700C58B5E /* CreditsScene.swift */,
 			);
 			path = Credits;
+			sourceTree = "<group>";
+		};
+		8F522C20255FC09800C58B5E /* Labo */ = {
+			isa = PBXGroup;
+			children = (
+				8F522C21255FC0C600C58B5E /* LaboScene.sks */,
+				8F522C26255FC0D100C58B5E /* LaboScene.swift */,
+			);
+			path = Labo;
+			sourceTree = "<group>";
+		};
+		8F522C35255FC51C00C58B5E /* Engine */ = {
+			isa = PBXGroup;
+			children = (
+				8F522C36255FC54000C58B5E /* Conveyor.swift */,
+				8F522C3F255FC84600C58B5E /* Conveyor+SpriteKit.swift */,
+			);
+			path = Engine;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -249,6 +281,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F522C22255FC0C600C58B5E /* LaboScene.sks in Resources */,
 				8F522BE9255F23F000C58B5E /* ExpBoutiqueScene.sks in Resources */,
 				8F522BCF255F234000C58B5E /* GameScene.sks in Resources */,
 				8F522BB9255F234000C58B5E /* Main.storyboard in Resources */,
@@ -267,6 +300,7 @@
 				8F522BD0255F234000C58B5E /* GameScene.sks in Resources */,
 				8F522BD4255F234000C58B5E /* Assets.xcassets in Resources */,
 				8F522BEA255F23F000C58B5E /* ExpBoutiqueScene.sks in Resources */,
+				8F522C23255FC0C600C58B5E /* LaboScene.sks in Resources */,
 				0C18767A255F63E400C4AC1F /* PeoplePopper.sks in Resources */,
 				8F522BF7255F36DD00C58B5E /* CreditsScene.sks in Resources */,
 			);
@@ -283,8 +317,11 @@
 				8F522BF0255F2A4100C58B5E /* SKScene+Extensions.swift in Sources */,
 				8F522BB6255F234000C58B5E /* GameViewController.swift in Sources */,
 				8F522BE2255F23C000C58B5E /* ExpBoutiqueScene.swift in Sources */,
+				8F522C40255FC84600C58B5E /* Conveyor+SpriteKit.swift in Sources */,
+				8F522C37255FC54000C58B5E /* Conveyor.swift in Sources */,
 				0C187677255F63E400C4AC1F /* PeoplePopper.swift in Sources */,
 				8F522BB4255F234000C58B5E /* AppDelegate.swift in Sources */,
+				8F522C27255FC0D100C58B5E /* LaboScene.swift in Sources */,
 				8F522BFB255F36E700C58B5E /* CreditsScene.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -297,8 +334,11 @@
 				8F522BF1255F2A4100C58B5E /* SKScene+Extensions.swift in Sources */,
 				8F522BC7255F234000C58B5E /* GameViewController.swift in Sources */,
 				8F522BE3255F23C000C58B5E /* ExpBoutiqueScene.swift in Sources */,
+				8F522C41255FC84600C58B5E /* Conveyor+SpriteKit.swift in Sources */,
+				8F522C38255FC54000C58B5E /* Conveyor.swift in Sources */,
 				0C187678255F63E400C4AC1F /* PeoplePopper.swift in Sources */,
 				8F522BC5255F234000C58B5E /* AppDelegate.swift in Sources */,
+				8F522C28255FC0D100C58B5E /* LaboScene.swift in Sources */,
 				8F522BFC255F36E700C58B5E /* CreditsScene.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
