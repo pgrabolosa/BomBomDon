@@ -6,6 +6,7 @@
 //
 
 import SpriteKit
+import Carbon.HIToolbox
 
 class LaboScene : SKScene {
     
@@ -75,19 +76,21 @@ class LaboScene : SKScene {
             }
         }
         
-        var length = 2
-        var y = 4
-        conveyorRunners.forEach { (blood, runner) in
+        let config: [(bloodType:BloodType, length:Int, y:Int)] = [
+            (.AB, 2, 4),
+            ( .A, 4, 3),
+            ( .B, 6, 2),
+            ( .O, 8, 1),
+        ]
+        
+        config.forEach { (blood, length, y) in
             var conveyor = Conveyor()
             conveyor.segments.append(ConveyorSegment(length: length, orientation: .left, bloodTypeMask: .all))
             let node = conveyor.makeSprites(with: "\(blood)", startingAtX: 13, y: y)
             node.name = "conveyor-\(blood)"
-            
-            length += 2
-            y -= 1
-            
             addChild(node)
-            runner.conveyor = conveyor
+            
+            conveyorRunners[blood]?.conveyor = conveyor
         }
         
         let parcels = SKNode()
@@ -162,6 +165,18 @@ class LaboScene : SKScene {
         }
         
         
+    }
+    
+    override func keyUp(with event: NSEvent) {
+        if (event.keyCode == kVK_ANSI_A) {
+            conveyorRunners[.A]?.load(bloodType: .A)
+        } else if (event.keyCode == kVK_ANSI_B) {
+            conveyorRunners[.A]?.load(bloodType: .B)
+        } else if (event.keyCode == kVK_ANSI_C) {
+            conveyorRunners[.A]?.load(bloodType: .AB)
+        } else if (event.keyCode == kVK_ANSI_O) {
+            conveyorRunners[.A]?.load(bloodType: .O)
+        }
     }
     #endif
     
