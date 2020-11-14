@@ -10,6 +10,20 @@ import SpriteKit
 import Carbon.HIToolbox
 #endif
 
+enum ShoppingProduct: CaseIterable {
+    //TODO
+}
+
+class Shop {
+    /// L'élément de la boutique sélectionné (TODO: pour Aurélien)
+    var selectedShoppingItem: ShoppingProduct? = nil
+    
+    /// Confirme la volonté d'acheter l'élément sélectionné
+    func purchase() {  }
+}
+
+
+
 class LaboScene : SKScene {
     
     // MARK: - Constructeurs
@@ -57,6 +71,9 @@ class LaboScene : SKScene {
         }
     }
     
+    /// La boutique
+    var shop: Shop!
+    
     /// Le gestionnaire des piétons
     var peopleHandler: PeopleHandler!
     
@@ -76,6 +93,10 @@ class LaboScene : SKScene {
         let parcels = SKNode()
         parcels.name = "parcels"
         addChild(parcels)
+        
+        let placeholders = SKNode() // pour indiquer où ajouter des éléments
+        placeholders.name = "placeholders"
+        addChild(placeholders)
         
         // MARK: Configuration du layout
         // Il faut tout d'abord créer les tapis roulants initiaux
@@ -234,17 +255,7 @@ class LaboScene : SKScene {
         }
     }
     
-    
     #if os(OSX)
-    override func mouseMoved(with event: NSEvent) {
-    }
-    
-    override func mouseDown(with event: NSEvent) {
-    }
-    
-    override func mouseDragged(with event: NSEvent) {
-    }
-    
     override func mouseUp(with event: NSEvent) {
         tapped(at: event.location(in: self))
     }
@@ -267,6 +278,15 @@ class LaboScene : SKScene {
         } else if (event.keyCode == kVK_ANSI_V) {
             // test to append a segment to the O conveyor
             //conveyorRunners[.O]!.append(ConveyorSegment(length: 2, orientation: .up, bloodTypeMask: .all, speed: 1))
+            
+            BloodType.allCases.forEach { bloodType in
+                let loc = locationAfterLastCell(of: bloodType)
+                let shape = SKShapeNode(ellipseOf: CGSize(width: 65, height: 65))
+                shape.fillColor = .green
+                shape.position = loc
+                
+                addChild(shape)
+            }
         }
     }
     #elseif os(iOS)
@@ -276,5 +296,23 @@ class LaboScene : SKScene {
         }
     }
     #endif
+    
+    // MARK: - Utility Functions
+    
+    func lastCell(of type: BloodType) -> SKNode {
+        return conveyorNodes[type]!.children.last!
+    }
+    
+    func locationAfterLastCell(of type: BloodType) -> CGPoint {
+        let cell = lastCell(of: type)
+        let orientation = conveyorRunners[type]!.conveyor.segments.last!.orientation
+        let itemSize = GridConfiguration.default.itemSize
+        
+        var position: CGPoint = cell.position
+        position.x += CGFloat(orientation.integerOffset.dx) * itemSize.width
+        position.y += CGFloat(orientation.integerOffset.dy) * itemSize.height
+        
+        return position
+    }
     
 }
