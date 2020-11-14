@@ -170,13 +170,18 @@ class Person {
         sprite = SKSpriteNode(texture: gender.sprite)
         sprite.position = CGPoint(x:x, y:height)
         
+        sprite.physicsBody = SKPhysicsBody(rectangleOf: sprite.frame.size)
+        sprite.physicsBody?.allowsRotation = false
+        sprite.physicsBody?.affectedByGravity = false
+        sprite.physicsBody?.velocity = CGVector(dx: 0, dy: -Double.random(in: 150...300))
+        
         bloodType = BloodType.allCases.randomElement()!
         sprite.run(SKAction.repeatForever(SKAction.animate(with:gender.walkingSprites, timePerFrame: 0.2)))
-        sprite.run(SKAction.sequence([SKAction.move(to: CGPoint(x:x, y:parent.frame.minY), duration: speed),
-                                      SKAction.run{
-                                        self.sprite.removeFromParent()
-                                        NotificationCenter.default.post(name: .personAsksToBeRemoved, object: self)
-                                      }]))
+//        sprite.run(SKAction.sequence([SKAction.move(to: CGPoint(x:x, y:parent.frame.minY), duration: speed),
+//                                      SKAction.run{
+//                                        self.sprite.removeFromParent()
+//                                        NotificationCenter.default.post(name: .personAsksToBeRemoved, object: self)
+//                                      }]))
         parent.addChild(self.sprite)
     }
     
