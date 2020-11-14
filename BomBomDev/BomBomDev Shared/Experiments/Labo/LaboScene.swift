@@ -49,9 +49,6 @@ class LaboScene : SKScene {
         peopleHandler = PeopleHandler(parent: self, x: 1620, w: 200)
         peopleHandler.masterNode.zPosition = 5
         
-        resourceDisplay = ResourcesManagement(parent: self, x: 10, y: 1000, w: 200, h: 70)
-        score = Score(parent: self, x: 10, y: 950, w: 200, h: 70)
-        
         let moneyEmitter = SKEmitterNode(fileNamed: "MoneyParticle")!
         moneyEmitter.particleBirthRate = 0
         moneyEmitter.position = peopleHandler.masterNode.convert(peopleHandler.moneyPosition, to: self)

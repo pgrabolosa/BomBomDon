@@ -76,7 +76,7 @@ struct Conveyor : Codable {
         }
         
         return result
-    }
+    }    
 }
 
 
@@ -84,6 +84,19 @@ protocol Agent {
     func update(_ ellapsed: TimeInterval)
 }
 
+extension ConveyorSegment {
+    var asUserInfo: [AnyHashable:Any] {
+        var userInfo: [AnyHashable:Any] = [:]
+        let offset = orientation.integerOffset
+        
+        userInfo["orientationX"] = offset.dx
+        userInfo["orientationY"] = offset.dy
+        userInfo["speed"] = speed
+        userInfo["length"] = length
+
+        return userInfo
+    }
+}
 
 class Parcel: Agent {
     var runner: ConveyorRunner
@@ -95,7 +108,9 @@ class Parcel: Agent {
     }
     
     var age: TimeInterval = 0
-    var segmentProgress = 0
+    
+    /// Index of the currently visited segment
+    var segmentProgress: Int? = 0
     
     func progression(over conveyor: Conveyor) -> CGFloat {
         return CGFloat(age / conveyor.duration)
@@ -104,9 +119,28 @@ class Parcel: Agent {
     func update(_ ellapsed: TimeInterval) {
         age += ellapsed
         
-        let newSegmentProgress = runner.conveyor.discreteDuration.lastIndex(where: { $0 <= age }) ?? runner.conveyor.length + 1
-        segmentProgress = newSegmentProgress
-        NotificationCenter.default.post(name: .parcelMovedToNewCoveyorCell, object: self)
+        var currentIndex: Int?
+        var totalTime: TimeInterval = 0
+        for (i, segment) in runner.conveyor.segments.enumerated() {
+            totalTime += segment.duration
+            if totalTime > age {
+                currentIndex = i
+                break
+            }
+        }
+        
+        
+        
+        if segmentProgress != currentIndex {
+            segmentProgress = currentIndex
+            
+            var userInfo: [AnyHashable:Any]? = nil
+            if let index = currentIndex {
+                userInfo = runner.conveyor.segments[index].asUserInfo
+            }
+            
+            NotificationCenter.default.post(name: .parcelMovedToNewConveyorCell, object: self, userInfo: userInfo)
+        }
         
         if progression(over: runner.conveyor) > 1.0 {
             NotificationCenter.default.post(name: .droppedParcel, object: self)
@@ -121,6 +155,8 @@ class Parcel: Agent {
 }
 
 class ConveyorRunner: Agent {
+    var name: String = ""
+    
     var conveyor = Conveyor()
     var transportQueue: [Parcel] = []
     
@@ -128,10 +164,16 @@ class ConveyorRunner: Agent {
         let parcel = Parcel(runner: self, bloodType: bloodType)
         transportQueue.append(parcel)
         NotificationCenter.default.post(name: .newParcel, object: parcel)
+        NotificationCenter.default.post(name: .parcelMovedToNewConveyorCell, object: parcel, userInfo: conveyor.segments.first?.asUserInfo)
     }
     
     func update(_ ellapsed: TimeInterval) {
         transportQueue.forEach { $0.update(ellapsed) }
+    }
+    
+    func append(_ segment: ConveyorSegment) {
+        conveyor.segments.append(segment)
+        NotificationCenter.default.post(name: .conveyorShapeDidChange, object: self)
     }
     
     func remove(_ parcel: Parcel) {
@@ -143,6 +185,7 @@ class ConveyorRunner: Agent {
 
 extension Notification.Name {
     static let newParcel = Notification.Name("newParcel")
-    static let parcelMovedToNewCoveyorCell = Notification.Name("parcelMovedToNewCoveyorCell")
+    static let parcelMovedToNewConveyorCell = Notification.Name("parcelMovedToNewCoveyorCell")
     static let droppedParcel = Notification.Name("droppedParcel")
+    static let conveyorShapeDidChange = Notification.Name("conveyorShapeDidChange")
 }
