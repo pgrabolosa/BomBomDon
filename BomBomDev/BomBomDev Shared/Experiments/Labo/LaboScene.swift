@@ -80,10 +80,10 @@ class LaboScene : SKScene {
         }
         
         let config: [(bloodType:BloodType, length:Int, y:Int, targetPosition:CGPoint)] = [
-            (.AB, 2, 4, CGPoint(x: 1920/2 - 500/2 - 250, y: 1080-100)),
-            ( .A, 4, 3, CGPoint(x: 1920/2 - 500/2 - 0, y: 1080-100)),
-            ( .B, 6, 2, CGPoint(x: 1920/2 - 500/2 + 250, y: 1080-100)),
-            ( .O, 8, 1, CGPoint(x: 1920/2 - 500/2 + 500, y: 1080-100)),
+            (.AB, 2, 4, CGPoint(x: 0, y: 1080-100)),
+            ( .A, 4, 3, CGPoint(x: 0, y: 1080-100)),
+            ( .B, 6, 2, CGPoint(x: 0, y: 1080-100)),
+            ( .O, 8, 1, CGPoint(x: 0, y: 1080-100)),
         ]
         
         
@@ -101,7 +101,7 @@ class LaboScene : SKScene {
             conveyorRunners[blood]?.conveyor = conveyor
             
             // one target per blood type
-            let target = TargetNode.newInstance(at: targetPosition, for: blood)
+            let target = TargetNode.newInstance(at: CGPoint(x: node.children.last!.position.x, y: targetPosition.y), for: blood)
             target.name = "target-\(blood)"
             targets.addChild(target)
         }
