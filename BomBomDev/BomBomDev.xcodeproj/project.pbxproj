@@ -48,6 +48,8 @@
 		8F522C5025600C7D00C58B5E /* MagicParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8F522C4D25600C7D00C58B5E /* MagicParticle.sks */; };
 		8F522C5125600C7D00C58B5E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F522C4E25600C7D00C58B5E /* Assets.xcassets */; };
 		8F522C5225600C7D00C58B5E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F522C4E25600C7D00C58B5E /* Assets.xcassets */; };
+		8F522C5625600EEF00C58B5E /* TargetMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F522C5525600EEF00C58B5E /* TargetMode.swift */; };
+		8F522C5725600EEF00C58B5E /* TargetMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F522C5525600EEF00C58B5E /* TargetMode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,6 +82,7 @@
 		8F522C482560016600C58B5E /* ParcelNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParcelNode.swift; sourceTree = "<group>"; };
 		8F522C4D25600C7D00C58B5E /* MagicParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MagicParticle.sks; sourceTree = "<group>"; };
 		8F522C4E25600C7D00C58B5E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8F522C5525600EEF00C58B5E /* TargetMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetMode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,6 +205,7 @@
 				8F522C482560016600C58B5E /* ParcelNode.swift */,
 				8F522C4D25600C7D00C58B5E /* MagicParticle.sks */,
 				8F522C4E25600C7D00C58B5E /* Assets.xcassets */,
+				8F522C5525600EEF00C58B5E /* TargetMode.swift */,
 			);
 			path = Labo;
 			sourceTree = "<group>";
@@ -336,6 +340,7 @@
 				8F522BE2255F23C000C58B5E /* ExpBoutiqueScene.swift in Sources */,
 				8F522C40255FC84600C58B5E /* Conveyor+SpriteKit.swift in Sources */,
 				8F522C37255FC54000C58B5E /* Conveyor.swift in Sources */,
+				8F522C5625600EEF00C58B5E /* TargetMode.swift in Sources */,
 				0C187677255F63E400C4AC1F /* PeoplePopper.swift in Sources */,
 				8F522BB4255F234000C58B5E /* AppDelegate.swift in Sources */,
 				8F522C27255FC0D100C58B5E /* LaboScene.swift in Sources */,
@@ -354,6 +359,7 @@
 				8F522BE3255F23C000C58B5E /* ExpBoutiqueScene.swift in Sources */,
 				8F522C41255FC84600C58B5E /* Conveyor+SpriteKit.swift in Sources */,
 				8F522C38255FC54000C58B5E /* Conveyor.swift in Sources */,
+				8F522C5725600EEF00C58B5E /* TargetMode.swift in Sources */,
 				0C187678255F63E400C4AC1F /* PeoplePopper.swift in Sources */,
 				8F522BC5255F234000C58B5E /* AppDelegate.swift in Sources */,
 				8F522C28255FC0D100C58B5E /* LaboScene.swift in Sources */,

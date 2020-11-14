@@ -112,7 +112,7 @@ class Parcel: Agent {
     }
     
     func delivered() {
-        
+        fatalError("TODO?")
     }
 }
 
@@ -128,6 +128,10 @@ class ConveyorRunner: Agent {
     
     func update(_ ellapsed: TimeInterval) {
         transportQueue.forEach { $0.update(ellapsed) }
+    }
+    
+    func remove(_ parcel: Parcel) {
+        transportQueue.remove(at:transportQueue.firstIndex(where:{ $0 === parcel })!)
     }
 }
 

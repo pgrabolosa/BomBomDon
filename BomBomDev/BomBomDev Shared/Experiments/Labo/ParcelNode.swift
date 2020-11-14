@@ -10,6 +10,17 @@ import SpriteKit
 class ParcelNode : SKShapeNode {
     var parcel: Parcel?
     
+    class func newInstance(with parcel: Parcel?, at position: CGPoint) -> ParcelNode {
+        let shape = ParcelNode(rectOf: CGSize(width: 50, height: 50))
+        shape.fillColor = .red
+        shape.zPosition = 5
+        shape.position = position
+        shape.parcel = parcel
+        shape.run(SKAction.sequence(shape.makeActions()))
+    
+        return shape
+    }
+    
     func makeActions() -> [SKAction] {
         guard let parcel = parcel else {
             return []
@@ -36,6 +47,19 @@ class ParcelNode : SKShapeNode {
             
             return actions
         }
+    }
+    
+    func explode() {
+        let emitter = SKEmitterNode(fileNamed: "MagicParticle")!
+        emitter.run(SKAction.sequence([
+            SKAction.wait(forDuration: 0.5),
+            SKAction.run { emitter.particleBirthRate = 0 },
+            SKAction.wait(forDuration: 1),
+            SKAction.removeFromParent()
+        ]))
+        emitter.position = self.position
+        parent?.addChild(emitter)
+        self.removeFromParent()
     }
     
     func selectionStyle(_ selected: Bool) {

@@ -54,34 +54,24 @@ class LaboScene : SKScene {
         parcels.name = "parcels"
         addChild(parcels)
         
+        
+        let targets = SKNode()
+        targets.name = "targets"
+        addChild(targets)
+        
+        targets.addChild(TargetNode.newInstance(at: CGPoint(x: 1920/2 - 500/2, y: 1080-100)))
+        
+        
         newParcelObserver = NotificationCenter.default.addObserver(forName: .newParcel, object: nil, queue: .main) { (notification) in
-            print("Yay!")
-            
-            let shape = ParcelNode(rectOf: CGSize(width: 50, height: 50))
-            shape.fillColor = .red
-            shape.zPosition = 5
-            shape.position = conveyorNode.children.first!.position
-            shape.parcel = notification.object as? Parcel
-            
+            let shape = ParcelNode.newInstance(with: notification.object as? Parcel, at: conveyorNode.children.first!.position)
             parcels.addChild(shape)
-            shape.run(SKAction.sequence(shape.makeActions()))
         }
         
         droppedParcelObserver = NotificationCenter.default.addObserver(forName: .droppedParcel, object: nil, queue: .main) { (notification) in
             let parcel = notification.object as? Parcel
-            let parcelNode = parcels.children.first { ($0 as! ParcelNode).parcel === parcel }!
+            let parcelNode = parcels.children.first { ($0 as! ParcelNode).parcel === parcel } as! ParcelNode
             
-            let emitter = SKEmitterNode(fileNamed: "MagicParticle")!
-            emitter.run(SKAction.sequence([
-                SKAction.wait(forDuration: 0.5),
-                SKAction.run { emitter.particleBirthRate = 0 },
-                SKAction.wait(forDuration: 1),
-                SKAction.removeFromParent()
-            ]))
-            emitter.position = parcelNode.position
-            self.addChild(emitter)
-            
-            parcelNode.removeFromParent()
+            parcelNode.explode()
         }
     }
     
@@ -104,17 +94,31 @@ class LaboScene : SKScene {
     }
     
     override func mouseUp(with event: NSEvent) {
-        guard let node = nodes(at: event.location(in: self)).filter({ $0.parent?.name == "parcels" }).first else {
-            return
-        }
-        
-        if let parcelNode = node as? ParcelNode {
-            if selectedParcel === parcelNode {
+
+        // (de)select a parcel node
+        if let node = nodes(at: event.location(in: self)).filter({ $0.parent?.name == "parcels" }).first as? ParcelNode {
+            if selectedParcel === node {
                 selectedParcel = nil
             } else {
-                selectedParcel = parcelNode
+                selectedParcel = node
             }
         }
+        
+        // move the selected parcel node to the selected target
+        if let node = nodes(at: event.location(in: self)).filter({ $0.parent?.name == "targets" }).first as? TargetNode {
+            if let parcelNode = selectedParcel, let parcel = parcelNode.parcel {
+                print("TODO: remove selected from convoyer and send it to the target")
+                runner.remove(parcel)
+                
+                parcelNode.removeAllActions()
+                parcelNode.run(SKAction.sequence([
+                    SKAction.move(to: node.position, duration: 1),
+                    SKAction.run { parcelNode.explode() }
+                ]))
+            }
+        }
+        
+        
     }
     #endif
     
