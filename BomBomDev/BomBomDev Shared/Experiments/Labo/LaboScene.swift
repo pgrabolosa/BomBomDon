@@ -93,7 +93,7 @@ class LaboScene : SKScene {
     }
     
     override func mouseUp(with event: NSEvent) {
-        guard let node = nodes(at: event.location(in: self)).filter { $0.parent?.name == "parcels" }.first else {
+        guard let node = nodes(at: event.location(in: self)).filter({ $0.parent?.name == "parcels" }).first else {
             return
         }
         
