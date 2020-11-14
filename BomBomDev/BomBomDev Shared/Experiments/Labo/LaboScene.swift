@@ -24,8 +24,6 @@ class LaboScene : SKScene {
         conveyor.segments.append(ConveyorSegment(length: 2, orientation: .left, bloodTypeMask: .all))
         conveyor.segments.append(ConveyorSegment(length: 3, orientation: .up, bloodTypeMask: .all))
         
-        try! JSONEncoder().encode(conveyor).write(to: URL(fileURLWithPath: "/Users/pierre/Downloads/conv.json"))
-        
         let conveyorNode = conveyor.makeSprites(with: "test", startingAtX: 8, y: 1)
         addChild(conveyorNode)
     }

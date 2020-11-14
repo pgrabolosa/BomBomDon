@@ -22,31 +22,24 @@ extension Conveyor {
         }
         let gridConfiguration = GridConfiguration()
         
+        let makeCell = {(x:Int, y:Int) -> SKNode in
+            let shapeNode = SKShapeNode(rectOf: gridConfiguration.itemSize)
+            shapeNode.fillColor = .white
+            shapeNode.strokeColor = .gray
+            shapeNode.name = "\(prefix)-\(x)-\(y)"
+            
+            shapeNode.position.x = (CGFloat(x) + 0.5) * shapeNode.frame.width
+            shapeNode.position.y = (CGFloat(y) + 0.5) * shapeNode.frame.height
+            
+            return shapeNode
+        }
+        
         // build the scene grid
         let gridNode = SKNode()
         
-        var gridItems: [[SKShapeNode]] = []
-        
-        for i in 0..<gridConfiguration.itemsWidth {
-            var column: [SKShapeNode] = []
-            for j in 0..<gridConfiguration.itemsHeight {
-                let shapeNode = SKShapeNode(rectOf: gridConfiguration.itemSize)
-                shapeNode.fillColor = .white
-                shapeNode.strokeColor = .gray
-                shapeNode.name = "\(prefix)-\(i)-\(j)"
-                
-                shapeNode.position.x = (CGFloat(i) + 0.5) * shapeNode.frame.width
-                shapeNode.position.y = (CGFloat(j) + 0.5) * shapeNode.frame.height
-                
-                gridNode.addChild(shapeNode)
-                column.append(shapeNode)
-            }
-            gridItems.append(column)
-        }
-        
         // color
         var loc = (x: x, y: y)
-        gridItems[x][y].fillColor = .black
+        gridNode.addChild(makeCell(x, y)) // starting point
         
         for segment in segments {
             let orientation = segment.orientation.integerOffset
@@ -56,7 +49,7 @@ extension Conveyor {
                 loc.y += orientation.dy
                 
                 if 0 <= loc.x && loc.x < gridConfiguration.itemsWidth && 0 <= loc.y && loc.y < gridConfiguration.itemsHeight {
-                    gridItems[loc.x][loc.y].fillColor = .black
+                    gridNode.addChild(makeCell(loc.x, loc.y))
                 }
             }
         }
