@@ -1,11 +1,11 @@
 {
   "images" : [
     {
-      "filename" : "256px-Money_Flat_Icon.svg.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "€.png",
       "idiom" : "universal",
       "scale" : "2x"
     },

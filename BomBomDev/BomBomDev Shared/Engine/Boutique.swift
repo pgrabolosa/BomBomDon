@@ -13,6 +13,7 @@ enum Direction : CaseIterable{
 
 protocol ShoppingElement {
     func getNode() -> SKNode
+    func getPrice() -> CGFloat
 }
 
 class Tapis : ShoppingElement {
@@ -24,7 +25,7 @@ class Tapis : ShoppingElement {
         self.direction = direction
         self.length = length
         
-        let image = SKSpriteNode(imageNamed: "conv-0")
+        let image = SKSpriteNode(imageNamed: "tapis-v")
         switch direction {
         case .up:
             image.zRotation = 0
@@ -36,7 +37,7 @@ class Tapis : ShoppingElement {
         let labelNode = SKLabelNode(text: "\(length)")
         labelNode.fontSize = Constants.fontSize
         labelNode.fontName = Constants.fontName
-        labelNode.fontColor = .white
+        labelNode.fontColor = .red
         labelNode.horizontalAlignmentMode = .center
         labelNode.verticalAlignmentMode = .center
         self.node = SKNode()
@@ -52,6 +53,10 @@ class Tapis : ShoppingElement {
     
     func getNode() -> SKNode {
         return node
+    }
+    
+    func getPrice() -> CGFloat {
+        return 50.0
     }
 }
 
@@ -127,7 +132,13 @@ class Shop {
     }
     
     /// Confirme la volonté d'acheter l'élément sélectionné
-    func purchase() {  }
+    func purchase(element: SKNode) -> CGFloat {
+        guard let elt = self.elements.first(where: { $0.asElement().getNode() === element }) else {
+            return 0.0
+        }
+            
+        return elt.asElement().getPrice()
+    }
 }
 
 extension Notification.Name {

@@ -9,5 +9,5 @@ import Foundation
 
 enum Constants {
     static let fontName = "Montserrat-Black"
-    static let fontSize = CGFloat(36)
+    static let fontSize = CGFloat(32)
 }

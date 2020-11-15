@@ -13,7 +13,6 @@ class Score {
     }
     
     private let scoreLabel: SKLabelNode
-    private let scoreSprite: SKSpriteNode
     private let baseNode: SKShapeNode
     
     private var configuration = ScoreConfiguration.default
@@ -29,19 +28,14 @@ class Score {
     init(parent: SKNode, x: CGFloat, y:CGFloat, w:CGFloat, h:CGFloat) {
         score = 0
         scoreLabel = SKLabelNode(text: "0")
-        scoreLabel.fontName = "Noteworthy-Bold"
-        scoreLabel.fontSize = 38
+        scoreLabel.fontName = Constants.fontName
+        scoreLabel.fontSize = Constants.fontSize
         scoreLabel.fontColor = .black
         scoreLabel.horizontalAlignmentMode = .right
         scoreLabel.position = CGPoint(x:w, y:0)
-        
-        scoreSprite = SKSpriteNode(imageNamed: "heart")
-        scoreSprite.position = CGPoint(x: h/2, y: 38 / 2)
-        scoreSprite.scale(to: CGSize(width: h/2, height: h/2))
         baseNode = SKShapeNode(rect: CGRect(x:0.0, y:0.0, width:w, height:h))
         baseNode.position = CGPoint(x:x, y:y)
         baseNode.lineWidth = 0
-        baseNode.addChild(scoreSprite)
         baseNode.addChild(scoreLabel)
         
         parent.addChild(baseNode)
