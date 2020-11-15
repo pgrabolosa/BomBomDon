@@ -130,6 +130,13 @@ class LaboScene : SKScene {
         }
         
         
+        // initialize the shop
+        run(.repeatForever(.sequence([
+            .wait(forDuration: 20 + 10 * TimeInterval.random(in: 0...1)),
+            .run { self.shop.newNode() }
+        ])))
+        
+        
         // MARK: Configuration du layout
         // Il faut tout d'abord créer les tapis roulants initiaux
         // ainsi que les poches qui vont recevoir le sang (`target`).
@@ -273,14 +280,10 @@ class LaboScene : SKScene {
                 }
                 
                 // was it dropped on the letter?
-                let height =
-                    config.filter { $0.bloodType == parcel!.bloodType }.first!.y +
-                    parcel!.runner.conveyor.segments.reduce(0) { (value:Int, segment:ConveyorSegment) in
-                        return value + segment.length * segment.orientation.integerOffset.dy
-                    }
-                
+                let height = self.computeDiscreteHeight(for: parcel!.bloodType)
                 if height > 7 {
                     // it was!!! dropped on the letter
+                    #warning("TODO – déplacer ce 7 dans la configuration de grille `maxHeight`")
                     #warning("TODO - increase points for automatic")
                     NotificationCenter.default.post(name: .bagScored, object: nil, userInfo: ["BloodType" : parcel!.bloodType])
                     parcelNode.explode(success: true)
@@ -416,15 +419,29 @@ class LaboScene : SKScene {
         return position
     }
     
+    func computeDiscreteHeight(for type: BloodType) -> Int {
+        return Int(locationAfterLastCell(of: type).y / CGFloat(GridConfiguration.default.itemSize.height))
+    }
+    
     /// Ajoute des éléments en fin des tapis/convoyeurs afin de faciliter l'ajout d'éléments
     func showHandles() {
         let placeholders = childNode(withName: "handles")!
+        guard let shoppingItem = shop.selectedShoppingItem as? Tapis else {
+            return
+        }
         
         BloodType.allCases.forEach { bloodType in
-            let loc = locationAfterLastCell(of: bloodType)
+            let currentY = computeDiscreteHeight(for: bloodType)
+            let nextY = currentY + Int(shoppingItem.length)
             
+            if nextY > 8 {
+                return // continue
+            }
+            
+            let loc = locationAfterLastCell(of: bloodType)
             let shape = HandleNode.newNode(for: bloodType) {
-                self.conveyorRunners[bloodType]?.append(ConveyorSegment(length: 1, orientation: .up, bloodTypeMask: .all, speed: 1))
+                self.shop.purchase()
+                self.conveyorRunners[bloodType]?.append(ConveyorSegment(length: Int(shoppingItem.length), orientation: .up, bloodTypeMask: .all, speed: 1))
             }
             shape.position = loc
             placeholders.addChild(shape)

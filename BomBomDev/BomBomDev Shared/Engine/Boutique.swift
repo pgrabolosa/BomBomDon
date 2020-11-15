@@ -17,7 +17,7 @@ protocol ShoppingElement : SKNode {
 
 class Tapis : SKNode, ShoppingElement {
     private let direction : Direction
-    private let length : UInt
+    var length : UInt
         
     init(direction: Direction, length: UInt) {
         self.direction = direction
@@ -138,6 +138,12 @@ class Shop {
     }
     
     func newNode() {
+        if elements.count == 3 {
+            // purge
+            elements.removeAll()
+            baseNode.removeAllChildren()
+        }
+        
         guard let elt = ShoppingProduct.allCases.randomElement() else { return }
         elements.append(elt.asElement())
         updateDiplay()
@@ -167,8 +173,13 @@ class Shop {
     }
     
     /// Confirme la volonté d'acheter l'élément sélectionné
-    func purchase(element: ShoppingProduct) {
-       
+    func purchase() {
+        selectedShoppingItem?.removeFromParent()
+        selectedShoppingItem = nil
+        
+        // remove it all
+        self.elements.removeAll()
+        self.baseNode.removeAllChildren()
     }
 }
 
