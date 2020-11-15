@@ -61,7 +61,14 @@ class Score {
                 print("Error getting blood type")
                 return }
             
-            self.score += self.configuration.bagScoredByHand[type] ?? 0
+            var autoFactor : Double = 1.0
+            
+            if let auto = notification.userInfo?["isAutomatic"] as? Bool {
+                if auto {
+                    autoFactor = Constants.autoFactor
+                }
+            }
+            self.score += Int(Double(self.configuration.bagScoredByHand[type] ?? 0) * autoFactor)
         })
         
         observers.append(NotificationCenter.default.addObserver(forName: .bagDropped, object: nil, queue: .main) { [weak self] (notification) in

@@ -14,4 +14,6 @@ enum Constants {
     static let timerFont = "DISPLAY FREE TFB"
     static let timerSize = CGFloat(24)
     static let timerStartValue = 99
+    static let autoFactor : Double = 2.0
+    #warning("TODO: Set the automatic factor")
 }

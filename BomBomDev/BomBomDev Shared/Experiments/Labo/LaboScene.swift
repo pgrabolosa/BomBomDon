@@ -311,8 +311,7 @@ class LaboScene : SKScene {
                 if height > 7 {
                     // it was!!! dropped on the letter
                     #warning("TODO – déplacer ce 7 dans la configuration de grille `maxHeight`")
-                    #warning("TODO - increase points for automatic")
-                    NotificationCenter.default.post(name: .bagScored, object: nil, userInfo: ["BloodType" : parcel!.bloodType])
+                    NotificationCenter.default.post(name: .bagScored, object: nil, userInfo: ["BloodType" : parcel!.bloodType, "isAutomatic":true])
                     parcelNode.explode(success: true)
                 } else {
                     // if not… fail!
