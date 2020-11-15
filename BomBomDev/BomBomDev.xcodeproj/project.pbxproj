@@ -672,7 +672,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = AKUPQLPX29;
+				DEVELOPMENT_TEAM = 7NV48259TL;
 				INFOPLIST_FILE = "BomBomDev iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -693,7 +693,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = AKUPQLPX29;
+				DEVELOPMENT_TEAM = 7NV48259TL;
 				INFOPLIST_FILE = "BomBomDev iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -718,14 +718,14 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = AKUPQLPX29;
+				DEVELOPMENT_TEAM = 7NV48259TL;
 				INFOPLIST_FILE = "BomBomDev macOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11;
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.BomBomDev;
+				PRODUCT_BUNDLE_IDENTIFIER = fr.grabolosa.BomBomDev;
 				PRODUCT_NAME = BomBomDev;
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
@@ -741,14 +741,14 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = AKUPQLPX29;
+				DEVELOPMENT_TEAM = 7NV48259TL;
 				INFOPLIST_FILE = "BomBomDev macOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11;
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.BomBomDev;
+				PRODUCT_BUNDLE_IDENTIFIER = fr.grabolosa.BomBomDev;
 				PRODUCT_NAME = BomBomDev;
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
