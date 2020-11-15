@@ -130,7 +130,7 @@ class LaboScene : SKScene {
         peopleHandler.masterNode.zPosition = 5
         
         score = Score(parent: self, x: 1320, y: 950, w: 100, h: 70)
-        resourceDisplay = ResourcesManagement(parent: self, x: 1320, y: 850, w: 100, h: 70)
+        resourceDisplay = ResourcesManagement(parent: self, x: 1320, y: 860, w: 100, h: 70)
         
         shop = Shop(parent: self, x: 150, y: 0, w: 200, h: 600)
         
