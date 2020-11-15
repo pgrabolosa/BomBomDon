@@ -254,8 +254,8 @@ class LaboScene : SKScene {
         // MARK: Notification : Gives Money 💰
         observers.append(NotificationCenter.default.addObserver(forName: .givesMoney, object: nil, queue: .main) { [unowned moneyEmitter] (notification) in
             moneyEmitter.particleBirthRate += 0.5
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now().advanced(by: .milliseconds(500))) {
-                moneyEmitter.particleBirthRate -= 0.5
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now().advanced(by: .milliseconds(500))) { [weak moneyEmitter] in
+                moneyEmitter?.particleBirthRate -= 0.5
             }
         })
         
@@ -263,8 +263,8 @@ class LaboScene : SKScene {
         observers.append(NotificationCenter.default.addObserver(forName: .givesBlood, object: nil, queue: .main) { [weak self, unowned bloodEmitter] (notification) in
             guard let self = self else { return }
             bloodEmitter.particleBirthRate += 1
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now().advanced(by: .milliseconds(500))) {
-                bloodEmitter.particleBirthRate -= 1
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now().advanced(by: .milliseconds(500))) { [weak bloodEmitter] in
+                bloodEmitter?.particleBirthRate -= 1
             }
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now().advanced(by: .milliseconds(750))) { [weak self] in
                 guard let bloodType = notification.userInfo?["Type"] as? BloodType else { return }
