@@ -11,6 +11,8 @@ import GameplayKit
 
 class GameViewController: NSViewController {
 
+    var gameOverObservation: Any? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -22,8 +24,9 @@ class GameViewController: NSViewController {
         
         //skView.ignoresSiblingOrder = true // optimisation
         
-        skView.showsFPS = false
-        skView.showsNodeCount = false
+        gameOverObservation = NotificationCenter.default.addObserver(forName: .gameOver, object: nil, queue: .main) { _ in
+            skView.presentScene(GameOverScene.newScene())
+        }
     }
 
 }

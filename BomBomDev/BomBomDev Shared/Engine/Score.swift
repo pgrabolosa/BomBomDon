@@ -9,7 +9,16 @@ import SpriteKit
 
 class Score {
     private var score: Int {
-        didSet { self.scoreLabel.text = "\(self.score)" }
+        didSet {
+            // update the display
+            self.scoreLabel.text = "\(self.score)"
+            
+            // if the score falls bellow this limit => Game Over
+            if score <= configuration.gameOverLimit {
+                // Causes the GameViewController to display the end game title
+                NotificationCenter.default.post(name: .gameOver, object: self)
+            }
+        }
     }
     
     private let scoreLabel: SKLabelNode
@@ -23,6 +32,9 @@ class Score {
         var bagScoredByHand: [BloodType:Int] = [.A: 100, .B: 100, .AB: 50, .O: 200]
         var bagDropped: Int = -200
         var badBag: Int = -200
+        
+        /// Whenever the score reaches this lower boung => Game Over
+        var gameOverLimit = -1000
     }
     
     init(parent: SKNode, x: CGFloat, y:CGFloat, w:CGFloat, h:CGFloat) {
@@ -63,4 +75,5 @@ extension Notification.Name {
     static let bagDropped = Notification.Name(rawValue: "BagDropped")
     static let bagScored = Notification.Name(rawValue: "BagScored")
     static let badBag = Notification.Name(rawValue: "BadBag")
+    static let gameOver = Notification.Name(rawValue: "GameOver")
 }

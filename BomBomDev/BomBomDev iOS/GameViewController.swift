@@ -11,6 +11,8 @@ import GameplayKit
 
 class GameViewController: UIViewController {
 
+    var gameOverObservation: Any? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -23,6 +25,10 @@ class GameViewController: UIViewController {
         //skView.ignoresSiblingOrder = true
         //skView.showsFPS = true
         //skView.showsNodeCount = true
+        
+        gameOverObservation = NotificationCenter.default.addObserver(forName: .gameOver, object: nil, queue: .main) { _ in
+            skView.presentScene(GameOverScene.newScene())
+        }
     }
 
     override var shouldAutorotate: Bool {
