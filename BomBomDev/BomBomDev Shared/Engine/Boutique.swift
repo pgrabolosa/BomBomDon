@@ -166,6 +166,7 @@ class Shop {
             background.name = "background"
             background.strokeColor = Constants.bleuChloe
             background.lineWidth = 3
+            background.glowWidth = 2
             background.zPosition = 5
             element.addChild(background)
             return true
