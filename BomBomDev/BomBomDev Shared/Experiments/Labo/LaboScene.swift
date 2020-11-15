@@ -81,21 +81,15 @@ class LaboScene : SKScene {
     // MARK: - Évènementiel
     
     override func didMove(to view: SKView) {
-        
-//        let overlay = SKShapeNode(rectOf: frame.size)
-//        overlay.fillColor = .black
-//        overlay.alpha = 0.5
-//        overlay.run(SKAction.sequence([
-//            SKAction.wait(forDuration: 1),
-//            SKAction.fadeOut(withDuration: 1)
-//        ]))
-//        overlay.position = CGPoint(x: frame.midX, y: frame.midY)
-//        overlay.zPosition = 1000
-//        addChild(overlay)
-        
+                
         // Ces noeuds servent à encapsuler les cibles et les poches de sang.
         // Ainsi lors d'un clic/toucher on peut traverser la hiérarchie et vérifier
         // s'il s'agit d'un target ou d'un parcel. ==> TODO: Utiliser des types de nœuds ≠
+        
+        let conveyorBelt = SKNode()
+        conveyorBelt.name = "conveyorBelt"
+        conveyorBelt.position.y = -50 // adjusted bc background arrow
+        addChild(conveyorBelt)
         
         let targets = SKNode()
         targets.name = "targets"
@@ -103,10 +97,12 @@ class LaboScene : SKScene {
         
         let parcels = SKNode()
         parcels.name = "parcels"
+        parcels.position.y = -50 // adjusted bc background arrow
         addChild(parcels)
         
         let placeholders = SKNode() // pour indiquer où ajouter des éléments
         placeholders.name = "placeholders"
+        placeholders.position.y = -50 // adjusted bc background arrow
         addChild(placeholders)
         
         // MARK: Configuration du layout
@@ -128,7 +124,7 @@ class LaboScene : SKScene {
             conveyor.segments.append(ConveyorSegment(length: length, orientation: .left, bloodTypeMask: .all))
             let node = conveyor.makeSprites(with: "\(blood)", startingAtX: x, y: y)
             node.name = "conveyor-\(blood)"
-            addChild(node)
+            conveyorBelt.addChild(node)
             
             self.conveyorNodes[blood] = node
             
@@ -204,7 +200,7 @@ class LaboScene : SKScene {
         // MARK: Notification : New Parcel Available
         observers.append(NotificationCenter.default.addObserver(forName: .newParcel, object: nil, queue: .main) { (notification) in
             let parcel = notification.object as! Parcel
-            let shape = ParcelNode.newInstance(with: parcel, at: self.childNode(withName: "/conveyor-\(parcel.bloodType)")!.children.first!.position)
+            let shape = ParcelNode.newInstance(with: parcel, at: self.conveyorNodes[parcel.bloodType]!.children.first!.position)
             parcels.addChild(shape)
         })
         
@@ -288,7 +284,7 @@ class LaboScene : SKScene {
         } else if (event.keyCode == kVK_ANSI_T) {
             conveyorRunners[.O]?.append(ConveyorSegment(length: 4, orientation: .up, bloodTypeMask: .all, speed: 1))
         } else if (event.keyCode == kVK_ANSI_V) {
-            generateHandles()
+            toggleHandles()
         }
     }
     #elseif os(iOS)
@@ -318,15 +314,30 @@ class LaboScene : SKScene {
     }
     
     /// Ajoute des éléments en fin des tapis/convoyeurs afin de faciliter l'ajout d'éléments
-    func generateHandles() {
+    func showHandles() {
+        let placeholders = childNode(withName: "placeholders")!
+        
         BloodType.allCases.forEach { bloodType in
             let loc = locationAfterLastCell(of: bloodType)
             let shape = SKShapeNode(ellipseOf: CGSize(width: 65, height: 65))
             shape.fillColor = .green
             shape.position = loc
             
-            addChild(shape)
+            placeholders.addChild(shape)
         }
     }
     
+    func hideHandles() {
+        let placeholders = childNode(withName: "placeholders")!
+        placeholders.removeAllChildren()
+    }
+    
+    func toggleHandles() {
+        let placeholders = childNode(withName: "placeholders")!
+        if placeholders.children.isEmpty {
+            showHandles()
+        } else {
+            hideHandles()
+        }
+    }
 }
