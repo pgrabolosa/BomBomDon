@@ -36,7 +36,7 @@ class SplashScreenScene: SKScene {
     
     func enterGame() {
         //view?.presentScene(LaboScene.newScene(), transition: .doorsOpenVertical(withDuration: 2))
-        _ = SKColor(calibratedRed: CGFloat(UInt8(0x32))/255, green: CGFloat(UInt8(0xaf))/255, blue: CGFloat(UInt8(0xff))/255, alpha: 1.0)
+        //let bleuChloe = SKColor(calibratedRed: CGFloat(UInt8(0x32))/255, green: CGFloat(UInt8(0xaf))/255, blue: CGFloat(UInt8(0xff))/255, alpha: 1.0)
         view?.presentScene(LaboScene.newScene(), transition: .fade(with: .white, duration: 1))
     }
 }

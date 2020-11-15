@@ -7,13 +7,18 @@
 
 import SpriteKit
 
-class ParcelNode : SKShapeNode {
+class ParcelNode : SKSpriteNode {
     var parcel: Parcel?
     var observation: Any?
     
+    /// Les textures pour les globules
+    static let globulesAtlas = SKTextureAtlas(named: "globules")
+    
     class func newInstance(with parcel: Parcel?, at position: CGPoint) -> ParcelNode {
-        let shape = ParcelNode(rectOf: CGSize(width: 50, height: 50))
-        shape.fillColor = .red
+        let shape = ParcelNode(texture: nil, size: CGSize(width: 50, height: 50))
+        shape.run(SKAction.repeatForever(
+            SKAction.animate(with: globulesAtlas.textureNames.map{globulesAtlas.textureNamed($0)}, timePerFrame: 0.5)
+        ), withKey: "textureAnimation")
         shape.zPosition = 5
         shape.position = position
         shape.parcel = parcel
@@ -55,13 +60,14 @@ class ParcelNode : SKShapeNode {
     
     func selectionStyle(_ selected: Bool) {
         if selected {
-            strokeColor = .cyan
-            lineWidth = 4
-            glowWidth = 8
+            #warning("TODO - FIX ME")
+//            strokeColor = .cyan
+//            lineWidth = 4
+//            glowWidth = 8
         } else {
-            strokeColor = .clear
-            lineWidth = 0
-            glowWidth = 0
+//            strokeColor = .clear
+//            lineWidth = 0
+//            glowWidth = 0
         }
     }
 }
