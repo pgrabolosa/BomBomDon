@@ -37,6 +37,16 @@ class LaboScene : SKScene {
         return scene
     }
     
+    override func willMove(from view: SKView) {
+        NotificationCenter.default.removeObserver(self)
+        self.observers = []
+        self.score = nil
+        self.peopleHandler = nil
+        self.removeAllActions()
+        self.removeAllChildren()
+    }
+
+    
     // MARK: - Variables
     
     /// The runners organized by BloodType
