@@ -283,7 +283,7 @@ class Person {
                 self.sprite.run(SKAction.repeatForever(SKAction.animate(with:self.gender.walkingSprites, timePerFrame: 0.2)), withKey: "walking")
             })
             trajectoir.append(SKAction.run {
-                NotificationCenter.default.post(name: .givesMoney, object: self, userInfo: ["Amount" : Int.random(in: 1...10)])
+                NotificationCenter.default.post(name: .givesMoney, object: self, userInfo: ["Amount" : Int.random(in: Constants.moneyRange)])
             })
             trajectoir.append(SKAction.rotate(byAngle: -CGFloat.pi, duration: 0.3))
             trajectoir.append(SKAction.move(to: CGPoint(x:x, y:moneyPosition.y), duration: 0.5))
