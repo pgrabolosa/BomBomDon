@@ -252,17 +252,17 @@ class LaboScene : SKScene {
         }))
         
         // MARK: Notification : Gives Money 💰
-        observers.append(NotificationCenter.default.addObserver(forName: .givesMoney, object: nil, queue: .main) { [unowned moneyEmitter] (notification) in
-            moneyEmitter.particleBirthRate += 0.5
+        observers.append(NotificationCenter.default.addObserver(forName: .givesMoney, object: nil, queue: .main) { [weak moneyEmitter] (notification) in
+            moneyEmitter?.particleBirthRate += 0.5
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now().advanced(by: .milliseconds(500))) { [weak moneyEmitter] in
                 moneyEmitter?.particleBirthRate -= 0.5
             }
         })
         
         // MARK: Notification : Gives Blood 🩸
-        observers.append(NotificationCenter.default.addObserver(forName: .givesBlood, object: nil, queue: .main) { [weak self, unowned bloodEmitter] (notification) in
+        observers.append(NotificationCenter.default.addObserver(forName: .givesBlood, object: nil, queue: .main) { [weak self, weak bloodEmitter] (notification) in
             guard let self = self else { return }
-            bloodEmitter.particleBirthRate += 1
+            bloodEmitter?.particleBirthRate += 1
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now().advanced(by: .milliseconds(500))) { [weak bloodEmitter] in
                 bloodEmitter?.particleBirthRate -= 1
             }
