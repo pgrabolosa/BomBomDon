@@ -115,12 +115,17 @@ class LaboScene : SKScene {
     func resetConveyors() {
         let conveyorBelt = childNode(withName: "conveyorBelt")!
         let targets = childNode(withName: "targets")!
+        let parcels = childNode(withName: "parcels")!
+        let handles = childNode(withName: "handles")!
         
         conveyorBelt.removeAllActions()
         conveyorBelt.removeAllChildren()
-        
         targets.removeAllActions()
         targets.removeAllChildren()
+        parcels.removeAllActions()
+        parcels.removeAllChildren()
+        handles.removeAllActions()
+        handles.removeAllChildren()
         
         config.forEach { (blood, length, x, y, targetPosition) in
             var conveyor = Conveyor()
@@ -510,6 +515,15 @@ class LaboScene : SKScene {
             setPercentage(of: .O, to: 90)
         } else if (event.keyCode == kVK_ANSI_X) {
             resetConveyors()
+        } else if (event.keyCode == kVK_ANSI_Z) {
+            
+            resetConveyors()
+            conveyorRunners[.O]?.append(ConveyorSegment(length: 3, orientation: .up, bloodTypeMask: .all, speed: 1))
+            conveyorRunners[.O]?.append(ConveyorSegment(length: 5, orientation: .right, bloodTypeMask: .all, speed: 0.25))
+            conveyorRunners[.O]?.append(ConveyorSegment(length: 2, orientation: .up, bloodTypeMask: .all, speed: 2))
+            conveyorRunners[.O]?.append(ConveyorSegment(length: 5, orientation: .left, bloodTypeMask: .all, speed: 1))
+            conveyorRunners[.O]?.append(ConveyorSegment(length: 2, orientation: .up, bloodTypeMask: .all, speed: 1))
+            
         }
     }
     #elseif os(iOS)
