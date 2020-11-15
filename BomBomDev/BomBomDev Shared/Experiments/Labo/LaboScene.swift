@@ -620,4 +620,20 @@ class LaboScene : SKScene {
             .move(by: CGVector(dx: 0, dy: -alertBox.frame.height), duration: 1),
         ]))
     }
+    
+    func alertNiveau(_ value: Int, for duration: TimeInterval = 2) {
+        guard let alertBox = childNode(withName: "//alertniveau") else {
+            print("ERROR: alertbox not found")
+            return
+        }
+        
+        let label = alertBox.childNode(withName: "//label") as! SKLabelNode
+        label.text = "\(value)"
+                
+        alertBox.run(SKAction.sequence([
+            .move(by: CGVector(dx: 0, dy: alertBox.frame.height), duration: 1),
+            .wait(forDuration: duration),
+            .move(by: CGVector(dx: 0, dy: -alertBox.frame.height), duration: 1),
+        ]))
+    }
 }
