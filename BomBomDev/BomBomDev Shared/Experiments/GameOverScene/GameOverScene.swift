@@ -9,11 +9,14 @@ import SpriteKit
 
 class GameOverScene : SKScene {
     
-    class func newScene() -> GameOverScene {
+    class func newScene(score: Int) -> GameOverScene {
         guard let scene = SKScene(fileNamed: "GameOverScene") as? GameOverScene else {
             fatalError("Failed to find GameOverScene")
         }
         scene.scaleMode = .aspectFit
+        if let sLabel = scene.childNode(withName: "score") as? SKLabelNode {
+            sLabel.text = "\(score)"
+        }
         return scene
     }
     

@@ -278,12 +278,13 @@ class LaboScene : SKScene {
             self.resetConveyors()
             self.previousScore += self.score!.getScore()
             self.score?.reset()
+            self.gameTimer.reset()
             
             self.difficultyClass += 1
             if self.difficultyClass >= 5 {
                 NotificationCenter.default.post(name: .gameOver, object: nil, userInfo: ["score" : self.previousScore, "level" : self.difficultyClass])
             } else {
-                self.alertNiveau(self.difficultyClass)
+                self.alertNiveau(self.difficultyClass + 1)
             }
         }))
         
