@@ -25,10 +25,11 @@ class GameViewController: NSViewController {
         
         //skView.ignoresSiblingOrder = true // optimisation
         
-        gameOverObservation = NotificationCenter.default.addObserver(forName: .gameOver, object: nil, queue: .main) { [weak self] _ in
+        gameOverObservation = NotificationCenter.default.addObserver(forName: .gameOver, object: nil, queue: .main) { [weak self] (notification) in
             guard let self = self else { return }
             //self.view = SKView(frame: self.view.frame)
-            self.skView.presentScene(GameOverScene.newScene())
+            let score = notification.userInfo?["score"] as? Int ?? 0
+            self.skView.presentScene(GameOverScene.newScene(score: score))
         }
     }
 }

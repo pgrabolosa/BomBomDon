@@ -41,8 +41,13 @@ class GameTimer : SKShapeNode {
         self.label?.text = "\(duration)"
         if duration == 0 {
             NotificationCenter.default.post(name: .timerFinished, object: nil)
-            removeAllActions()
+//            removeAllActions()
         }
+    }
+    
+    func reset() {
+        self.duration = Constants.timerStartValue + 1
+        self.updateTimer()
     }
     
 }
