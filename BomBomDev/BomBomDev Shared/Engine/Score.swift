@@ -37,6 +37,8 @@ class Score {
         var gameOverLimit = -1000
     }
     
+    var observers: [Any] = []
+    
     init(parent: SKNode, x: CGFloat, y:CGFloat, w:CGFloat, h:CGFloat) {
         score = 0
         scoreLabel = SKLabelNode(text: "0")
@@ -53,21 +55,24 @@ class Score {
         
         parent.addChild(baseNode)
         
-        NotificationCenter.default.addObserver(forName: .bagScored, object: nil, queue: .main) { (notification) in
+        observers.append(NotificationCenter.default.addObserver(forName: .bagScored, object: nil, queue: .main) { [weak self] (notification) in
+            guard let self = self else { return }
             guard let type = notification.userInfo?["BloodType"] as? BloodType else {
                 print("Error getting blood type")
                 return }
             
             self.score += self.configuration.bagScoredByHand[type] ?? 0
-        }
+        })
         
-        NotificationCenter.default.addObserver(forName: .bagDropped, object: nil, queue: .main) { (notification) in
+        observers.append(NotificationCenter.default.addObserver(forName: .bagDropped, object: nil, queue: .main) { [weak self] (notification) in
+            guard let self = self else { return }
             self.score += self.configuration.bagDropped
-        }
+        })
         
-        NotificationCenter.default.addObserver(forName: .badBag, object: nil, queue: .main) { (notification) in
+        observers.append(NotificationCenter.default.addObserver(forName: .badBag, object: nil, queue: .main) { [weak self] (notification) in
+            guard let self = self else { return }
             self.score += self.configuration.badBag
-        }
+        })
     }
 }
 

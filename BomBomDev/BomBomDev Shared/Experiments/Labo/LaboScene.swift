@@ -92,6 +92,13 @@ class LaboScene : SKScene {
     
     override func didMove(to view: SKView) {
                 
+        observers.append(NotificationCenter.default.addObserver(forName: .gameOver, object: nil, queue: .main) { [weak self] _ in
+            guard let self = self else { return }
+            NotificationCenter.default.removeObserver(self)
+            self.observers = []
+            self.score = nil
+        })
+        
         // Ces noeuds servent à encapsuler les cibles et les poches de sang.
         // Ainsi lors d'un clic/toucher on peut traverser la hiérarchie et vérifier
         // s'il s'agit d'un target ou d'un parcel. ==> TODO: Utiliser des types de nœuds ≠
@@ -205,19 +212,22 @@ class LaboScene : SKScene {
         // Écoute des Notifications
         
         // MARK: Notification : Boutique 🛍
-        observers.append(NotificationCenter.default.addObserver(forName: .shopElementSelected, object: nil, queue: .main, using: { (notification) in
+        observers.append(NotificationCenter.default.addObserver(forName: .shopElementSelected, object: nil, queue: .main, using: { [weak self] (notification) in
+            guard let self = self else { return }
             if notification.object != nil {
                 self.showHandles()
             } else {
                 self.hideHandles()
             }
         }))
-        observers.append(NotificationCenter.default.addObserver(forName: .shopElementDeselected, object: nil, queue: .main, using: { (notification) in
+        observers.append(NotificationCenter.default.addObserver(forName: .shopElementDeselected, object: nil, queue: .main, using: { [weak self] (notification) in
+            guard let self = self else { return }
             self.hideHandles()
         }))
         
         // MARK: Notification : Bag received blood 🩸
-        observers.append(NotificationCenter.default.addObserver(forName: .bagScored, object: nil, queue: .main, using: { (notification) in
+        observers.append(NotificationCenter.default.addObserver(forName: .bagScored, object: nil, queue: .main, using: { [weak self] (notification) in
+            guard let self = self else { return }
             // adjust texture of bag -- TODO: move this in the node itself?
             if let bloodType = notification.userInfo?["BloodType"] as? BloodType {
                 self.bloodLevels[bloodType, default: 0] += 1
@@ -232,7 +242,7 @@ class LaboScene : SKScene {
         }))
         
         // MARK: Notification : Gives Money 💰
-        observers.append(NotificationCenter.default.addObserver(forName: .givesMoney, object: nil, queue: .main) { (notification) in
+        observers.append(NotificationCenter.default.addObserver(forName: .givesMoney, object: nil, queue: .main) { [unowned moneyEmitter] (notification) in
             moneyEmitter.particleBirthRate += 0.5
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now().advanced(by: .milliseconds(500))) {
                 moneyEmitter.particleBirthRate -= 0.5
@@ -240,19 +250,21 @@ class LaboScene : SKScene {
         })
         
         // MARK: Notification : Gives Blood 🩸
-        observers.append(NotificationCenter.default.addObserver(forName: .givesBlood, object: nil, queue: .main) { (notification) in
+        observers.append(NotificationCenter.default.addObserver(forName: .givesBlood, object: nil, queue: .main) { [weak self, unowned bloodEmitter] (notification) in
+            guard let self = self else { return }
             bloodEmitter.particleBirthRate += 1
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now().advanced(by: .milliseconds(500))) {
                 bloodEmitter.particleBirthRate -= 1
             }
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now().advanced(by: .milliseconds(750))) {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now().advanced(by: .milliseconds(750))) { [weak self] in
                 guard let bloodType = notification.userInfo?["Type"] as? BloodType else { return }
-                self.conveyorRunners[bloodType]?.load(bloodType: bloodType)
+                self?.conveyorRunners[bloodType]?.load(bloodType: bloodType)
             }
         })
         
         // MARK: Notification : Conveyor Shape Changed
-        observers.append(NotificationCenter.default.addObserver(forName: .conveyorShapeDidChange, object: nil, queue: .main) { (notification) in
+        observers.append(NotificationCenter.default.addObserver(forName: .conveyorShapeDidChange, object: nil, queue: .main) { [weak self] (notification) in
+            guard let self = self else { return }
             let runner = notification.object as! ConveyorRunner
             let latestSegment = runner.conveyor.segments.last!
             
@@ -268,14 +280,16 @@ class LaboScene : SKScene {
         })
         
         // MARK: Notification : New Parcel Available
-        observers.append(NotificationCenter.default.addObserver(forName: .newParcel, object: nil, queue: .main) { (notification) in
+        observers.append(NotificationCenter.default.addObserver(forName: .newParcel, object: nil, queue: .main) { [weak self, unowned parcels] (notification) in
+            guard let self = self else { return }
             let parcel = notification.object as! Parcel
             let shape = ParcelNode.newInstance(with: parcel, at: self.conveyorNodes[parcel.bloodType]!.children.first!.position)
             parcels.addChild(shape)
         })
         
         // MARK: Notification : A Parcel was Dropped
-        observers.append(NotificationCenter.default.addObserver(forName: .droppedParcel, object: nil, queue: .main) { (notification) in
+        observers.append(NotificationCenter.default.addObserver(forName: .droppedParcel, object: nil, queue: .main) { [weak self, unowned parcels] (notification) in
+            guard let self = self else { return }
             let parcel = notification.object as? Parcel
             if let parcelNode = parcels.children.first(where: { ($0 as? ParcelNode)?.parcel === parcel }) as? ParcelNode {
                 if self.selectedParcel === parcelNode {
@@ -348,9 +362,14 @@ class LaboScene : SKScene {
                 parcelNode.removeAllActions()
                 parcelNode.run(SKAction.sequence([
                     SKAction.move(to: p, duration: 1),
-                    SKAction.run { parcelNode.explode(success: success,
-                                                      texture: success ? nil : SKTexture(imageNamed: "tache_b"),
-                                                      sound: "broken gasss")}
+                    SKAction.run { [weak self] in
+                        if !success {
+                            self?.bloodLevels[node.bloodType, default: 0] = 0
+                            self?.setPercentage(of: node.bloodType, to: 0)
+                        }
+                        parcelNode.explode(success: success,
+                                           texture: success ? nil : SKTexture(imageNamed: "tache_b"),
+                                           sound: "broken gasss")}
                 ]))
             }
         }

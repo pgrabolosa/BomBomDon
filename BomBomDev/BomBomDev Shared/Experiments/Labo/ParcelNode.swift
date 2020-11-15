@@ -23,7 +23,7 @@ class ParcelNode : SKSpriteNode {
         shape.position = position
         shape.parcel = parcel
         
-        shape.observation = NotificationCenter.default.addObserver(forName: .parcelMovedToNewConveyorCell, object: parcel, queue: .main, using: { (notification) in
+        shape.observation = NotificationCenter.default.addObserver(forName: .parcelMovedToNewConveyorCell, object: parcel, queue: .main, using: { [weak shape] (notification) in
             if let ox = notification.userInfo?["orientationX"] as? Int,
                let oy = notification.userInfo?["orientationY"] as? Int,
                let speed = notification.userInfo?["speed"] as? TimeInterval,
@@ -33,7 +33,7 @@ class ParcelNode : SKSpriteNode {
                 let dx = CGFloat(ox * length) * sz.width
                 let dy = CGFloat(oy * length) * sz.height
                 
-                shape.run(SKAction.move(by: CGVector(dx: dx, dy: dy), duration: speed * TimeInterval(length)))
+                shape?.run(SKAction.move(by: CGVector(dx: dx, dy: dy), duration: speed * TimeInterval(length)))
             }
         })
     
