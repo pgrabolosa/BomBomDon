@@ -288,6 +288,16 @@ class LaboScene : SKScene {
             self.difficultyClass += 1
             if self.difficultyClass >= 5 {
                 NotificationCenter.default.post(name: .gameOver, object: nil, userInfo: ["score" : self.previousScore, "level" : self.difficultyClass])
+                if self.difficultyClass < Constants.bloodRateLevel.count {
+                    self.peopleHandler.setBloodRate(newRate: CGFloat(Constants.bloodRateLevel[self.difficultyClass]))
+                    self.peopleHandler.setMoneyRate(newRate: CGFloat(Constants.moneyRateLevel[self.difficultyClass]))
+                }
+                else
+                {
+                    self.peopleHandler.setBloodRate(newRate: 1.0)
+                    self.peopleHandler.setMoneyRate(newRate: 1.0)
+                }
+                
             } else {
                 self.alertNiveau(self.difficultyClass + 1)
             }
