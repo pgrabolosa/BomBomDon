@@ -367,6 +367,36 @@ class LaboScene : SKScene {
             hideHandles()
         }
         
+        // deal with sound-on/off
+        if let node = nodes(at: location).filter({ $0.name == "soundBtn" }).first {
+            let sprite = (node as! SKSpriteNode)
+            let music = childNode(withName: "//music")
+            
+            if music != nil {
+                music?.removeFromParent()
+                sprite.texture = SKTexture(imageNamed: "son-off")
+            } else {
+                let audio = SKAudioNode(fileNamed: "piano-2.mp3")
+                audio.name = "music"
+                audio.autoplayLooped = true
+                audio.isPositional = false
+                addChild(audio)
+                sprite.texture = SKTexture(imageNamed: "son-on")
+            }
+        }
+        
+        // deal with play/pause
+        if let node = nodes(at: location).filter({ $0.name == "pauseBtn" }).first {
+            let sprite = (node as! SKSpriteNode)
+            
+            if isPaused {
+                isPaused = false
+                sprite.texture = SKTexture(imageNamed: "pause")
+            } else {
+                isPaused = true
+                sprite.texture = SKTexture(imageNamed: "play")
+            }
+        }
         
         // (de)select a parcel node
         if let node = nodes(at: location).filter({ $0.parent?.name == "parcels" }).first as? ParcelNode {
