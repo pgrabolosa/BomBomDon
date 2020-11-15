@@ -207,7 +207,6 @@ class LaboScene : SKScene {
                     self.selectedParcel = nil
                 }
                 NotificationCenter.default.post(name: .bagDropped, object: nil)
-                self.run(SKAction.playSoundFileNamed("bag fall 1", waitForCompletion: false))
                 parcelNode.explode(success: false)
             }
         })
@@ -255,7 +254,9 @@ class LaboScene : SKScene {
                 parcelNode.removeAllActions()
                 parcelNode.run(SKAction.sequence([
                     SKAction.move(to: p, duration: 1),
-                    SKAction.run { parcelNode.explode(success: success, texture: success ? nil : SKTexture(imageNamed: "tache_b")) }
+                    SKAction.run { parcelNode.explode(success: success,
+                                                      texture: success ? nil : SKTexture(imageNamed: "tache_b"),
+                                                      sound: "broken gasss")}
                 ]))
             }
         }
