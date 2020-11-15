@@ -31,10 +31,11 @@ class Score {
         scoreLabel.fontName = Constants.fontName
         scoreLabel.fontSize = Constants.fontSize
         scoreLabel.fontColor = .black
-        scoreLabel.horizontalAlignmentMode = .right
+        scoreLabel.horizontalAlignmentMode = .left
         scoreLabel.position = CGPoint(x:w, y:0)
+        
         baseNode = SKShapeNode(rect: CGRect(x:0.0, y:0.0, width:w, height:h))
-        baseNode.position = CGPoint(x:x, y:y)
+        baseNode.position = CGPoint(x:x-100, y:y)
         baseNode.lineWidth = 0
         baseNode.addChild(scoreLabel)
         

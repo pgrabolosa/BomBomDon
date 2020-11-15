@@ -100,16 +100,16 @@ class LaboScene : SKScene {
         addChild(parcels)
         
         let placeholders = SKNode() // pour indiquer où ajouter des éléments
-        placeholders.name = "placeholders"
+        placeholders.name = "handles"
         placeholders.position.y =  -50 // adjusted bc background arrow
         placeholders.position.x = -100 // adjusted bc background arrow
         addChild(placeholders)
         
         // init blog bags
-        bloodBags[ .O] = childNode(withName: "//blood_o") as! SKSpriteNode
-        bloodBags[ .A] = childNode(withName: "//blood_a") as! SKSpriteNode
-        bloodBags[ .B] = childNode(withName: "//blood_b") as! SKSpriteNode
-        bloodBags[.AB] = childNode(withName: "//blood_ab") as! SKSpriteNode
+        bloodBags[ .O] = (childNode(withName: "//blood_o") as? SKSpriteNode)!
+        bloodBags[ .A] = (childNode(withName: "//blood_a") as? SKSpriteNode)!
+        bloodBags[ .B] = (childNode(withName: "//blood_b") as? SKSpriteNode)!
+        bloodBags[.AB] = (childNode(withName: "//blood_ab") as? SKSpriteNode)!
         
         BloodType.allCases.forEach {
             self.setPercentage(of: $0, to: 0)
@@ -124,10 +124,10 @@ class LaboScene : SKScene {
         // NB: la coordonnée X est dérivée de là où finit le tapis initial.
         
         let config: [(bloodType:BloodType, length:Int, x:Int, y:Int, targetPosition:CGPoint)] = [
-            (.AB, 1, 13, 4, CGPoint(x: 0, y: 1080-100)),
-            ( .B, 3, 13, 3, CGPoint(x: 0, y: 1080-100)),
-            ( .A, 5, 13, 2, CGPoint(x: 0, y: 1080-100)),
-            ( .O, 7, 13, 1, CGPoint(x: 0, y: 1080-100)),
+            (.AB, 1, 13, 4, CGPoint(x: 0, y: 1080)),
+            ( .B, 3, 13, 3, CGPoint(x: 0, y: 1080)),
+            ( .A, 5, 13, 2, CGPoint(x: 0, y: 1080)),
+            ( .O, 7, 13, 1, CGPoint(x: 0, y: 1080)),
         ]
         
         config.forEach { (blood, length, x, y, targetPosition) in
@@ -143,8 +143,12 @@ class LaboScene : SKScene {
             conveyorRunners[blood]?.name = "\(blood)"
             
             // one target per blood type
-            let target = TargetNode.newInstance(at: CGPoint(x: node.children.last!.position.x - GridConfiguration.default.itemSize.width, y: targetPosition.y), for: blood)
+            let fr = self.bloodBags[blood]!.frame
+            let p = CGPoint(x: node.children.last!.position.x - GridConfiguration.default.itemSize.width, y: targetPosition.y - fr.height)
+            
+            let target = TargetNode.newInstance(at: p, with: fr.size, for: blood)
             target.name = "target-\(blood)"
+            
             targets.addChild(target)
         }
         
@@ -175,6 +179,18 @@ class LaboScene : SKScene {
         addChild(bloodEmitter)
         
         // Écoute des Notifications
+        
+        // MARK: Notification : Boutique 🛍
+        observers.append(NotificationCenter.default.addObserver(forName: .shopElementSelected, object: nil, queue: .main, using: { (notification) in
+            if notification.object != nil {
+                self.showHandles()
+            } else {
+                self.hideHandles()
+            }
+        }))
+        observers.append(NotificationCenter.default.addObserver(forName: .shopElementDeselected, object: nil, queue: .main, using: { (notification) in
+            self.hideHandles()
+        }))
         
         // MARK: Notification : Gives Money 💰
         observers.append(NotificationCenter.default.addObserver(forName: .givesMoney, object: nil, queue: .main) { (notification) in
@@ -245,6 +261,13 @@ class LaboScene : SKScene {
     // MARK: - Interaction Utilisateur
     
     func tapped(at location: CGPoint) {
+        // deal with handles for the shop
+        if let node = nodes(at: location).filter({ $0.parent?.name == "handles" }).first {
+            print("TODO: Proceed with purchase!")
+            #warning("TODO")
+        }
+        
+        
         // (de)select a parcel node
         if let node = nodes(at: location).filter({ $0.parent?.name == "parcels" }).first as? ParcelNode {
             if selectedParcel === node {
@@ -268,7 +291,7 @@ class LaboScene : SKScene {
                     // adjust texture of bag -- TODO: move this in the node itself?
                     self.bloodLevels[node.bloodType, default: 0] += 1
                     self.bloodLevels[node.bloodType, default: 0] %= 4
-                    setPercentage(of: node.bloodType, to: CGFloat(self.bloodLevels[node.bloodType]!) * 25)
+                    setPercentage(of: node.bloodType, to: CGFloat(self.bloodLevels[node.bloodType]!) * 26)
                 } else {
                     NotificationCenter.default.post(name: .badBag, object: nil, userInfo: ["BloodType" : node.bloodType])
                 }
@@ -355,7 +378,7 @@ class LaboScene : SKScene {
     
     /// Ajoute des éléments en fin des tapis/convoyeurs afin de faciliter l'ajout d'éléments
     func showHandles() {
-        let placeholders = childNode(withName: "placeholders")!
+        let placeholders = childNode(withName: "handles")!
         
         BloodType.allCases.forEach { bloodType in
             let loc = locationAfterLastCell(of: bloodType)
@@ -368,12 +391,12 @@ class LaboScene : SKScene {
     }
     
     func hideHandles() {
-        let placeholders = childNode(withName: "placeholders")!
+        let placeholders = childNode(withName: "handles")!
         placeholders.removeAllChildren()
     }
     
     func toggleHandles() {
-        let placeholders = childNode(withName: "placeholders")!
+        let placeholders = childNode(withName: "handles")!
         if placeholders.children.isEmpty {
             showHandles()
         } else {

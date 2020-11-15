@@ -11,8 +11,8 @@ class TargetNode : SKShapeNode {
     
     var bloodType: BloodType = .O
 
-    class func newInstance(at position: CGPoint, for bloodType: BloodType) -> TargetNode {
-        let shape = TargetNode(rectOf: CGSize(width: 100, height: 100))
+    class func newInstance(at position: CGPoint, with size: CGSize, for bloodType: BloodType) -> TargetNode {
+        let shape = TargetNode(rectOf: size)
         shape.fillColor = .clear
         shape.strokeColor = .clear
         shape.position = position

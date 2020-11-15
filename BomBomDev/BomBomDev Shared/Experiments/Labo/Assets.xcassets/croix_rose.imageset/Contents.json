@@ -1,11 +1,11 @@
 {
   "images" : [
     {
+      "filename" : "croix_rose.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "tapis-c@2x copie.png",
       "idiom" : "universal",
       "scale" : "2x"
     },

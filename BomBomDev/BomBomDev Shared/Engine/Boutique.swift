@@ -103,7 +103,16 @@ extension ShoppingProduct {
 
 class Shop {
     /// L'élément de la boutique sélectionné (TODO: pour Aurélien)
-    var selectedShoppingItem: ShoppingElement? = nil
+    var selectedShoppingItem: ShoppingElement? = nil {
+        didSet {
+            if selectedShoppingItem == nil {
+                NotificationCenter.default.post(name: .shopElementDeselected, object: oldValue)
+            } else {
+                NotificationCenter.default.post(name: .shopElementSelected, object: selectedShoppingItem)
+            }
+        }
+    }
+    
     private let baseNode : SKShapeNode
     private var elements : [ShoppingElement]
     private let height : CGFloat

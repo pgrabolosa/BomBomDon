@@ -19,10 +19,10 @@ class ResourcesManagement {
         moneyLabel.fontName = Constants.fontName
         moneyLabel.fontSize = Constants.fontSize
         moneyLabel.fontColor = .black
-        moneyLabel.horizontalAlignmentMode = .right
+        moneyLabel.horizontalAlignmentMode = .left
         moneyLabel.position = CGPoint(x:w, y:0)
         baseNode = SKShapeNode(rect: CGRect(x:0.0, y:0.0, width:w, height:h))
-        baseNode.position = CGPoint(x:x, y:y)
+        baseNode.position = CGPoint(x:x-100, y:y)
         baseNode.lineWidth = 0
         baseNode.addChild(moneyLabel)
         
