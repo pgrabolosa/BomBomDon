@@ -51,17 +51,20 @@ class ParcelNode : SKSpriteNode {
             let emitter = SKEmitterNode(fileNamed: "MagicParticle")!
             if let texture = texture {
                 emitter.particleTexture = texture
+                emitter.particleScale = 0.2 // HACK
             }
             emitter.run(SKAction.sequence([
+                SKAction.playSoundFileNamed("broken gasss", waitForCompletion: false),
                 SKAction.wait(forDuration: 0.5),
                 SKAction.run { emitter.particleBirthRate = 0 },
                 SKAction.wait(forDuration: 1),
-                SKAction.removeFromParent()
+                SKAction.removeFromParent(),
             ]))
             emitter.position = self.position
             parent?.addChild(emitter)
             self.removeFromParent()
         } else {
+            run(.playSoundFileNamed("bood fall 2", waitForCompletion: false))
             run(.removeFromParent())
         }
     }

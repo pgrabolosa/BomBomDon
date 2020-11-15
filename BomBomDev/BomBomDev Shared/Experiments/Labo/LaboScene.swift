@@ -104,9 +104,9 @@ class LaboScene : SKScene {
         // NB: la coordonnée X est dérivée de là où finit le tapis initial.
         
         let config: [(bloodType:BloodType, length:Int, x:Int, y:Int, targetPosition:CGPoint)] = [
-            (.AB, 1, 13, 4, CGPoint(x: 0, y: 1080-100)),
-            ( .A, 3, 13, 3, CGPoint(x: 0, y: 1080-100)),
-            ( .B, 5, 13, 2, CGPoint(x: 0, y: 1080-100)),
+            (.AB, 2, 13, 4, CGPoint(x: 0, y: 1080-100)),
+            ( .B, 3, 13, 3, CGPoint(x: 0, y: 1080-100)),
+            ( .A, 5, 13, 2, CGPoint(x: 0, y: 1080-100)),
             ( .O, 7, 13, 1, CGPoint(x: 0, y: 1080-100)),
         ]
         
@@ -183,6 +183,8 @@ class LaboScene : SKScene {
             let configInit = config.first(where: { "\($0.bloodType)" == runner.name })!
             let nodes = runner.conveyor.makeSpritesForSegment(with: "\(runner.name)", havingStartedAtX: configInit.x, y: configInit.y, segment: latestSegment)
             
+            self.run(SKAction.playSoundFileNamed("pause-convoyeur", waitForCompletion: false))
+            
             if let rootNode = self.childNode(withName: "//conveyor-\(runner.name)") {
                 nodes.forEach { rootNode.addChild($0) }
             }
@@ -198,11 +200,12 @@ class LaboScene : SKScene {
         // MARK: Notification : A Parcel was Dropped
         observers.append(NotificationCenter.default.addObserver(forName: .droppedParcel, object: nil, queue: .main) { (notification) in
             let parcel = notification.object as? Parcel
-            if let parcelNode = parcels.children.first(where: { ($0 as! ParcelNode).parcel === parcel }) as? ParcelNode {
+            if let parcelNode = parcels.children.first(where: { ($0 as? ParcelNode)?.parcel === parcel }) as? ParcelNode {
                 if self.selectedParcel === parcelNode {
                     self.selectedParcel = nil
                 }
                 NotificationCenter.default.post(name: .bagDropped, object: nil)
+                self.run(SKAction.playSoundFileNamed("bag fall 1", waitForCompletion: false))
                 parcelNode.explode(success: false)
             }
         })
