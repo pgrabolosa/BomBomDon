@@ -74,21 +74,26 @@ class LaboScene : SKScene {
         
         let conveyorBelt = SKNode()
         conveyorBelt.name = "conveyorBelt"
-        conveyorBelt.position.y = -50 // adjusted bc background arrow
+        conveyorBelt.position.y =    0  // adjusted bc background arrow
+        conveyorBelt.position.x = -100 // adjusted bc background arrow
         addChild(conveyorBelt)
         
         let targets = SKNode()
         targets.name = "targets"
+        targets.position.y =    0 // adjusted bc background arrow
+        targets.position.x = -100 // adjusted bc background arrow
         addChild(targets)
         
         let parcels = SKNode()
         parcels.name = "parcels"
-        parcels.position.y = -50 // adjusted bc background arrow
+        parcels.position.y =    0 // adjusted bc background arrow
+        parcels.position.x = -100 // adjusted bc background arrow
         addChild(parcels)
         
         let placeholders = SKNode() // pour indiquer où ajouter des éléments
         placeholders.name = "placeholders"
-        placeholders.position.y = -50 // adjusted bc background arrow
+        placeholders.position.y =    0 // adjusted bc background arrow
+        placeholders.position.x = -100 // adjusted bc background arrow
         addChild(placeholders)
         
         // MARK: Configuration du layout
@@ -99,10 +104,10 @@ class LaboScene : SKScene {
         // NB: la coordonnée X est dérivée de là où finit le tapis initial.
         
         let config: [(bloodType:BloodType, length:Int, x:Int, y:Int, targetPosition:CGPoint)] = [
-            (.AB, 2, 13, 4, CGPoint(x: 0, y: 1080-100)),
-            ( .A, 4, 13, 3, CGPoint(x: 0, y: 1080-100)),
-            ( .B, 6, 13, 2, CGPoint(x: 0, y: 1080-100)),
-            ( .O, 8, 13, 1, CGPoint(x: 0, y: 1080-100)),
+            (.AB, 1, 13, 4, CGPoint(x: 0, y: 1080-100)),
+            ( .A, 3, 13, 3, CGPoint(x: 0, y: 1080-100)),
+            ( .B, 5, 13, 2, CGPoint(x: 0, y: 1080-100)),
+            ( .O, 7, 13, 1, CGPoint(x: 0, y: 1080-100)),
         ]
         
         config.forEach { (blood, length, x, y, targetPosition) in
@@ -198,7 +203,7 @@ class LaboScene : SKScene {
                     self.selectedParcel = nil
                 }
                 NotificationCenter.default.post(name: .bagDropped, object: nil)
-                parcelNode.explode()
+                parcelNode.explode(success: false)
             }
         })
     }
@@ -232,16 +237,20 @@ class LaboScene : SKScene {
                 parcelNode.move(toParent: self) // remove from the parcels to avoid future interactions
                 selectedParcel = nil
                 
-                if (parcel.bloodType == node.bloodType) {
+                let success = (parcel.bloodType == node.bloodType)
+                if success {
                     NotificationCenter.default.post(name: .bagScored, object: nil, userInfo: ["BloodType" : node.bloodType])
                 } else {
                     NotificationCenter.default.post(name: .badBag, object: nil, userInfo: ["BloodType" : node.bloodType])
                 }
                 
+                var p = node.position
+                p.x -= 100 // TODO: fix ugly hack
+                
                 parcelNode.removeAllActions()
                 parcelNode.run(SKAction.sequence([
-                    SKAction.move(to: node.position, duration: 1),
-                    SKAction.run { parcelNode.explode() }
+                    SKAction.move(to: p, duration: 1),
+                    SKAction.run { parcelNode.explode(success: success, texture: success ? nil : SKTexture(imageNamed: "tache_b")) }
                 ]))
             }
         }
@@ -268,7 +277,8 @@ class LaboScene : SKScene {
         } else if (event.keyCode == kVK_ANSI_Minus) {
             _ = peopleHandler.increaseMoneyRate()
         } else if (event.keyCode == kVK_ANSI_T) {
-            conveyorRunners[.O]?.append(ConveyorSegment(length: 4, orientation: .up, bloodTypeMask: .all, speed: 1))
+            
+            conveyorRunners[BloodType.allCases.randomElement()!]?.append(ConveyorSegment(length: 4, orientation: .up, bloodTypeMask: .all, speed: 1))
         } else if (event.keyCode == kVK_ANSI_V) {
             toggleHandles()
         }
