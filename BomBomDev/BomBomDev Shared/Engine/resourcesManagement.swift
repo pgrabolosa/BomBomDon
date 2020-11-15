@@ -17,8 +17,8 @@ class ResourcesManagement {
     init(parent: SKNode, x: CGFloat, y: CGFloat, w: CGFloat, h: CGFloat) {
         moneyCount = 0
         moneyLabel = SKLabelNode(text: "0")
-        moneyLabel.fontName = "Noteworthy-Bold"
-        moneyLabel.fontSize = 38
+        moneyLabel.fontName = Constants.fontName
+        moneyLabel.fontSize = Constants.fontSize
         moneyLabel.fontColor = .black
         moneyLabel.horizontalAlignmentMode = .right
         moneyLabel.position = CGPoint(x:w, y:0)

@@ -12,6 +12,7 @@ class PeoplePopper : SKScene {
     private var peopleHandler : PeopleHandler?
     private var score: ResourcesManagement?
     private var scoreDisplay : Score?
+    private var boutique : Shop?
     
     class func newScene() -> PeoplePopper {
         guard let scene = SKScene(fileNamed: "PeoplePopper") as? PeoplePopper else {
@@ -26,6 +27,9 @@ class PeoplePopper : SKScene {
     override func didMove(to view: SKView) {
         score = ResourcesManagement(parent: self, x: self.frame.minX, y: frame.maxY - 100, w: 200, h: 100)
         scoreDisplay = Score(parent: self, x: self.frame.minX, y: frame.maxY-200, w: 200, h: 100)
+        boutique = Shop(parent: self, x: -800, y: -500, w: 200, h: 800)
+        boutique?.newNode()
+        boutique?.newNode()
     }
 }
 
@@ -184,9 +188,9 @@ class PeopleHandler {
         NotificationCenter.default.addObserver(forName: .givesBlood, object: nil, queue: .main) { (notification) in
             guard let type = notification.userInfo?["Type"] else { return }
             let label = SKLabelNode(text: "\(type)")
-            label.fontSize = 36
+            label.fontSize = Constants.fontSize
             label.fontColor = .red
-            label.fontName = "Noteworthy-Bold"
+            label.fontName = Constants.fontName
             self.masterNode.addChild(label)
             
             label.position = self.bloodPosition
@@ -204,9 +208,9 @@ class PeopleHandler {
         NotificationCenter.default.addObserver(forName: .givesMoney, object: nil, queue: .main) { (notification) in
             guard let amount = notification.userInfo?["Amount"] else { return }
             let label = SKLabelNode(text: "\(amount)")
-            label.fontSize = 36
+            label.fontSize = Constants.fontSize
             label.fontColor = .green
-            label.fontName = "Noteworthy-Bold"
+            label.fontName = Constants.fontName
             self.masterNode.addChild(label)
             
             label.position = self.moneyPosition
