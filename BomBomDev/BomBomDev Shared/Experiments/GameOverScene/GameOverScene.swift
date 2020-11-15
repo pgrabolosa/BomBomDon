@@ -17,24 +17,30 @@ class GameOverScene : SKScene {
         return scene
     }
     
-    var canRestart = false
+    var canContinue = false
+    
+    func doContinue() {
+        if self.canContinue {
+            view?.presentScene(CreditsScene.newScene())
+        }
+    }
     
     override func didMove(to view: SKView) {
         super.didMove(to: view)
         
         run(.sequence([
             .wait(forDuration: 5),
-            .run { self.canRestart = true }
+            .run { self.canContinue = true }
         ]))
     }
     
     #if os(OSX)
     override func mouseUp(with event: NSEvent) {
-        view?.presentScene(SplashScreenScene.newScene())
+        doContinue()
     }
     #elseif os(iOS)
     override func touchesEnded(with event: NSEvent) {
-        view?.presentScene(SplashScreenScene.newScene())
+        doContinue()
     }
     #endif
     
