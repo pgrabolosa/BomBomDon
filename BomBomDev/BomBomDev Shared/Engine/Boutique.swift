@@ -24,7 +24,7 @@ class Tapis : ShoppingElement {
         self.direction = direction
         self.length = length
         
-        let image = SKSpriteNode(imageNamed: "conv-0")
+        let image = SKSpriteNode(imageNamed: "tapis-v")
         switch direction {
         case .up:
             image.zRotation = 0
@@ -36,7 +36,7 @@ class Tapis : ShoppingElement {
         let labelNode = SKLabelNode(text: "\(length)")
         labelNode.fontSize = Constants.fontSize
         labelNode.fontName = Constants.fontName
-        labelNode.fontColor = .white
+        labelNode.fontColor = .red
         labelNode.horizontalAlignmentMode = .center
         labelNode.verticalAlignmentMode = .center
         self.node = SKNode()

@@ -133,8 +133,10 @@ class LaboScene : SKScene {
         peopleHandler = PeopleHandler(parent: self, x: 1750, w: 380)
         peopleHandler.masterNode.zPosition = 5
         
-        score = Score(parent: self, x: 50, y: 950, w: 200, h: 70)
-        resourceDisplay = ResourcesManagement(parent: self, x: 50, y: 1000, w: 200, h: 70)
+        score = Score(parent: self, x: 1320, y: 950, w: 100, h: 70)
+        resourceDisplay = ResourcesManagement(parent: self, x: 1320, y: 850, w: 100, h: 70)
+        
+        shop = Shop(parent: self, x: 150, y: 0, w: 200, h: 600)
         
         // MARK: Générateurs de particules (💸 et ❤️)
         // Initialisation des filtres à particules liés au don de sang/argent
@@ -275,6 +277,8 @@ class LaboScene : SKScene {
             conveyorRunners[.O]?.append(ConveyorSegment(length: 4, orientation: .up, bloodTypeMask: .all, speed: 1))
         } else if (event.keyCode == kVK_ANSI_V) {
             generateHandles()
+        } else if (event.keyCode == kVK_ANSI_S) {
+            shop.newNode()
         }
     }
     #elseif os(iOS)

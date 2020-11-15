@@ -11,7 +11,6 @@ import SpriteKit
 class ResourcesManagement {
     private let baseNode : SKShapeNode
     private let moneyLabel: SKLabelNode
-    private let moneySprite: SKSpriteNode
     private var moneyCount: Int
     
     init(parent: SKNode, x: CGFloat, y: CGFloat, w: CGFloat, h: CGFloat) {
@@ -22,13 +21,9 @@ class ResourcesManagement {
         moneyLabel.fontColor = .black
         moneyLabel.horizontalAlignmentMode = .right
         moneyLabel.position = CGPoint(x:w, y:0)
-        moneySprite = SKSpriteNode(imageNamed: "money")
-        moneySprite.position = CGPoint(x: h/2, y: 38 / 2)
-        moneySprite.scale(to: CGSize(width: h/2, height: h/2))
         baseNode = SKShapeNode(rect: CGRect(x:0.0, y:0.0, width:w, height:h))
         baseNode.position = CGPoint(x:x, y:y)
         baseNode.lineWidth = 0
-        baseNode.addChild(moneySprite)
         baseNode.addChild(moneyLabel)
         
         NotificationCenter.default.addObserver(forName: .givesMoney, object: nil, queue: .main) { (notification) in
