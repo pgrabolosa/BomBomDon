@@ -45,29 +45,42 @@ class ParcelNode : SKSpriteNode {
         fatalError("Actions are now built live through notifications…")
     }
     
-    func explode() {
-        let emitter = SKEmitterNode(fileNamed: "MagicParticle")!
-        emitter.run(SKAction.sequence([
-            SKAction.wait(forDuration: 0.5),
-            SKAction.run { emitter.particleBirthRate = 0 },
-            SKAction.wait(forDuration: 1),
-            SKAction.removeFromParent()
-        ]))
-        emitter.position = self.position
-        parent?.addChild(emitter)
-        self.removeFromParent()
+    func explode(success: Bool, texture: SKTexture? = nil) {
+        
+        if success == false { // splash it down
+            let emitter = SKEmitterNode(fileNamed: "MagicParticle")!
+            if let texture = texture {
+                emitter.particleTexture = texture
+            }
+            emitter.run(SKAction.sequence([
+                SKAction.wait(forDuration: 0.5),
+                SKAction.run { emitter.particleBirthRate = 0 },
+                SKAction.wait(forDuration: 1),
+                SKAction.removeFromParent()
+            ]))
+            emitter.position = self.position
+            parent?.addChild(emitter)
+            self.removeFromParent()
+        } else {
+            run(.removeFromParent())
+        }
     }
+    
+    let bleuChloe = SKColor(calibratedRed: CGFloat(UInt8(0x32))/255, green: CGFloat(UInt8(0xaf))/255, blue: CGFloat(UInt8(0xff))/255, alpha: 1.0)
     
     func selectionStyle(_ selected: Bool) {
         if selected {
-            #warning("TODO - FIX ME")
-//            strokeColor = .cyan
-//            lineWidth = 4
-//            glowWidth = 8
+            //run(SKAction.repeatForever(SKAction.colorize(with: bleuChloe, colorBlendFactor: 1.0, duration: 0.3)), withKey: "selection")
+            let ring = SKShapeNode(circleOfRadius: frame.width/2)
+            ring.name = "ring"
+            ring.fillColor = .clear
+            ring.strokeColor = bleuChloe
+            ring.lineWidth = 3
+            ring.glowWidth = 2
+            addChild(ring)
         } else {
-//            strokeColor = .clear
-//            lineWidth = 0
-//            glowWidth = 0
+            //removeAction(forKey: "selection")
+            childNode(withName: "ring")?.removeFromParent()
         }
     }
 }

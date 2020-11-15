@@ -70,12 +70,12 @@
 		8F8494F1256021BF004E579C /* MoneyParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8F8494EF256021BF004E579C /* MoneyParticle.sks */; };
 		8F8494FB2560250D004E579C /* BloodParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8F8494FA2560250C004E579C /* BloodParticle.sks */; };
 		8F8494FC2560250D004E579C /* BloodParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8F8494FA2560250C004E579C /* BloodParticle.sks */; };
-		8F84950B25603592004E579C /* piano-1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8F84950A25603592004E579C /* piano-1.mp3 */; };
-		8F84950C25603592004E579C /* piano-1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8F84950A25603592004E579C /* piano-1.mp3 */; };
-		8FCF7026256094D20075EE68 /* piano-2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8FCF7025256094D20075EE68 /* piano-2.mp3 */; };
-		8FCF7027256094D20075EE68 /* piano-2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8FCF7025256094D20075EE68 /* piano-2.mp3 */; };
 		8FCF702B2560A0540075EE68 /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCF702A2560A0540075EE68 /* Score.swift */; };
 		8FCF702C2560A0540075EE68 /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCF702A2560A0540075EE68 /* Score.swift */; };
+		8FCF70442560BA810075EE68 /* piano-2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8FCF70432560BA810075EE68 /* piano-2.mp3 */; };
+		8FCF70452560BA810075EE68 /* piano-2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8FCF70432560BA810075EE68 /* piano-2.mp3 */; };
+		8FCF70492560BA880075EE68 /* piano-1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8FCF70482560BA880075EE68 /* piano-1.mp3 */; };
+		8FCF704A2560BA880075EE68 /* piano-1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8FCF70482560BA880075EE68 /* piano-1.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -119,9 +119,9 @@
 		8F522C8525601DC300C58B5E /* rue paris.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "rue paris.wav"; sourceTree = "<group>"; };
 		8F8494EF256021BF004E579C /* MoneyParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MoneyParticle.sks; sourceTree = "<group>"; };
 		8F8494FA2560250C004E579C /* BloodParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BloodParticle.sks; sourceTree = "<group>"; };
-		8F84950A25603592004E579C /* piano-1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano-1.mp3"; sourceTree = "<group>"; };
-		8FCF7025256094D20075EE68 /* piano-2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano-2.mp3"; sourceTree = "<group>"; };
 		8FCF702A2560A0540075EE68 /* Score.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
+		8FCF70432560BA810075EE68 /* piano-2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano-2.mp3"; sourceTree = "<group>"; };
+		8FCF70482560BA880075EE68 /* piano-1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano-1.mp3"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -280,8 +280,8 @@
 			isa = PBXGroup;
 			children = (
 				8F522C8525601DC300C58B5E /* rue paris.wav */,
-				8F84950A25603592004E579C /* piano-1.mp3 */,
-				8FCF7025256094D20075EE68 /* piano-2.mp3 */,
+				8FCF70432560BA810075EE68 /* piano-2.mp3 */,
+				8FCF70482560BA880075EE68 /* piano-1.mp3 */,
 				8F522C6F25601C1B00C58B5E /* street_sounds.wav */,
 			);
 			path = Sounds;
@@ -368,6 +368,7 @@
 				8F522C22255FC0C600C58B5E /* LaboScene.sks in Resources */,
 				8F522C8625601DC300C58B5E /* rue paris.wav in Resources */,
 				8F8494F0256021BF004E579C /* MoneyParticle.sks in Resources */,
+				8FCF70492560BA880075EE68 /* piano-1.mp3 in Resources */,
 				8F522C4F25600C7D00C58B5E /* MagicParticle.sks in Resources */,
 				0CD6ACBE2560824A000AC3B8 /* Texts.strings in Resources */,
 				8F522BE9255F23F000C58B5E /* ExpBoutiqueScene.sks in Resources */,
@@ -378,11 +379,10 @@
 				8F522BB9255F234000C58B5E /* Main.storyboard in Resources */,
 				0CD6ACB02560630C000AC3B8 /* MissionSheet.sks in Resources */,
 				8F522BF6255F36DD00C58B5E /* CreditsScene.sks in Resources */,
+				8FCF70442560BA810075EE68 /* piano-2.mp3 in Resources */,
 				0C187679255F63E400C4AC1F /* PeoplePopper.sks in Resources */,
-				8F84950B25603592004E579C /* piano-1.mp3 in Resources */,
 				8F522BBC255F234000C58B5E /* LaunchScreen.storyboard in Resources */,
 				8F522BD3255F234000C58B5E /* Assets.xcassets in Resources */,
-				8FCF7026256094D20075EE68 /* piano-2.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -394,17 +394,17 @@
 				8F522BD0255F234000C58B5E /* SplashScreenScene.sks in Resources */,
 				8F8494FC2560250D004E579C /* BloodParticle.sks in Resources */,
 				8F522C7325601C1B00C58B5E /* street_sounds.wav in Resources */,
+				8FCF70452560BA810075EE68 /* piano-2.mp3 in Resources */,
 				8F522BD4255F234000C58B5E /* Assets.xcassets in Resources */,
 				8F522BEA255F23F000C58B5E /* ExpBoutiqueScene.sks in Resources */,
-				8FCF7027256094D20075EE68 /* piano-2.mp3 in Resources */,
 				8F522C23255FC0C600C58B5E /* LaboScene.sks in Resources */,
 				8F522C5025600C7D00C58B5E /* MagicParticle.sks in Resources */,
 				0CD6ACB12560630C000AC3B8 /* MissionSheet.sks in Resources */,
 				8F8494F1256021BF004E579C /* MoneyParticle.sks in Resources */,
 				8F522C8725601DC300C58B5E /* rue paris.wav in Resources */,
-				8F84950C25603592004E579C /* piano-1.mp3 in Resources */,
 				0C18767A255F63E400C4AC1F /* PeoplePopper.sks in Resources */,
 				0CD6ACBF2560824A000AC3B8 /* Texts.strings in Resources */,
+				8FCF704A2560BA880075EE68 /* piano-1.mp3 in Resources */,
 				8F522C5225600C7D00C58B5E /* Assets.xcassets in Resources */,
 				8F522BF7255F36DD00C58B5E /* CreditsScene.sks in Resources */,
 			);
