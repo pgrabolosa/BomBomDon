@@ -13,6 +13,7 @@ enum Direction : CaseIterable{
 
 protocol ShoppingElement {
     func getNode() -> SKNode
+    func getPrice() -> CGFloat
 }
 
 class Tapis : ShoppingElement {
@@ -52,6 +53,10 @@ class Tapis : ShoppingElement {
     
     func getNode() -> SKNode {
         return node
+    }
+    
+    func getPrice() -> CGFloat {
+        return 50.0
     }
 }
 
@@ -127,7 +132,13 @@ class Shop {
     }
     
     /// Confirme la volonté d'acheter l'élément sélectionné
-    func purchase() {  }
+    func purchase(element: SKNode) -> CGFloat {
+        guard let elt = self.elements.first(where: { $0.asElement().getNode() === element }) else {
+            return 0.0
+        }
+            
+        return elt.asElement().getPrice()
+    }
 }
 
 extension Notification.Name {
