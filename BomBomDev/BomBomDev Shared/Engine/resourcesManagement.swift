@@ -13,9 +13,9 @@ class ResourcesManagement {
     private let moneyLabel: SKLabelNode
     private var moneyCount: Int
     
-    init(parent: SKNode, x: CGFloat, y: CGFloat, w: CGFloat, h: CGFloat) {
-        moneyCount = 0
-        moneyLabel = SKLabelNode(text: "0")
+    init(parent: SKNode, x: CGFloat, y: CGFloat, w: CGFloat, h: CGFloat, initialValue: Int = 0) {
+        moneyCount = initialValue
+        moneyLabel = SKLabelNode(text: "\(moneyCount)")
         moneyLabel.fontName = Constants.fontName
         moneyLabel.fontSize = Constants.fontSize
         moneyLabel.fontColor = .black

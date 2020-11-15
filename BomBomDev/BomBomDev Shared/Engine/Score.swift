@@ -81,6 +81,10 @@ class Score {
             self.score += self.configuration.badBag
         })
     }
+    
+    func getScore() -> Int {
+        return self.score
+    }
 }
 
 extension Notification.Name {

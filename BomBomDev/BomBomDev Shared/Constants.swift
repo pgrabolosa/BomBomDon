@@ -16,4 +16,6 @@ enum Constants {
     static let timerStartValue = 99
     static let autoFactor : Double = 2.0
     #warning("TODO: Set the automatic factor")
+    static let bloodRateLevel = [0.1, 0.2, 0.4, 0.7, 0.9]
+    static let moneyRateLevel = [0.2, 0.5, 0.8, 1, 1]
 }

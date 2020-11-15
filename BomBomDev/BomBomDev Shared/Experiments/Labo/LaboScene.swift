@@ -29,11 +29,14 @@ class LaboScene : SKScene {
     // MARK: - Constructeurs
     
     /// Au lieu d'un constructeur, utiliser cette méthode fabrique
-    class func newScene() -> LaboScene {
+    class func newScene(initialMoney: Int = 0, prevScore: Int = 0, difficulty: Int = 0) -> LaboScene {
         guard let scene = SKScene(fileNamed: "LaboScene") as? LaboScene else {
             fatalError("Failed to find LaboScene")
         }
         scene.scaleMode = .aspectFit
+        scene.initialMoney = initialMoney
+        scene.previousScore = prevScore
+        scene.difficultyClass = difficulty
         return scene
     }
     
@@ -48,6 +51,10 @@ class LaboScene : SKScene {
 
     
     // MARK: - Variables
+    
+    var initialMoney : Int!
+    var previousScore : Int!
+    var difficultyClass : Int!
     
     /// The runners organized by BloodType
     var conveyorRunners: [BloodType:ConveyorRunner] = {
@@ -198,11 +205,23 @@ class LaboScene : SKScene {
         peopleHandler.masterNode.zPosition = 5
         
         score = Score(parent: self, x: 1320, y: 950, w: 100, h: 70)
-        resourceDisplay = ResourcesManagement(parent: self, x: 1320, y: 860, w: 100, h: 70)
+        resourceDisplay = ResourcesManagement(parent: self, x: 1320, y: 860, w: 100, h: 70, initialValue: initialMoney)
         
         shop = Shop(parent: self, x: 150, y: 0, w: 200, h: 600)
         gameTimer = GameTimer.create(rect: CGRect(x: 390, y: 610, width: 60, height: 30))
         addChild(gameTimer)
+        
+        
+        // MARK: Level difficulty handler
+        if difficultyClass < Constants.bloodRateLevel.count {
+            peopleHandler.setBloodRate(newRate: CGFloat(Constants.bloodRateLevel[self.difficultyClass]))
+            peopleHandler.setMoneyRate(newRate: CGFloat(Constants.moneyRateLevel[self.difficultyClass]))
+        }
+        else
+        {
+            peopleHandler.setBloodRate(newRate: 1.0)
+            peopleHandler.setMoneyRate(newRate: 1.0)
+        }
         
         // MARK: Générateurs de particules (💸 et ❤️)
         // Initialisation des filtres à particules liés au don de sang/argent
@@ -233,6 +252,13 @@ class LaboScene : SKScene {
         observers.append(NotificationCenter.default.addObserver(forName: .shopElementDeselected, object: nil, queue: .main, using: { [weak self] (notification) in
             guard let self = self else { return }
             self.hideHandles()
+        }))
+        
+        
+        // MARK: Notification : Timer end ⏰
+        observers.append(NotificationCenter.default.addObserver(forName: .timerFinished, object: nil, queue: .main, using: { [weak self] _ in
+            #warning("TODO: Level transition screen")
+            self?.view?.presentScene(LaboScene.newScene(initialMoney: self!.resourceDisplay!.available(), prevScore: self!.previousScore + self!.score!.getScore(), difficulty: self!.difficultyClass+1))
         }))
         
         // MARK: Notification : Bag received blood 🩸
