@@ -82,6 +82,7 @@ class LaboScene : SKScene {
     
     /// La boutique
     var shop: Shop!
+    var gameTimer: GameTimer!
     
     /// Le gestionnaire des piétons
     var peopleHandler: PeopleHandler!
@@ -183,6 +184,8 @@ class LaboScene : SKScene {
         resourceDisplay = ResourcesManagement(parent: self, x: 1320, y: 860, w: 100, h: 70)
         
         shop = Shop(parent: self, x: 150, y: 0, w: 200, h: 600)
+        gameTimer = GameTimer.create(rect: CGRect(x: 390, y: 610, width: 60, height: 30))
+        addChild(gameTimer)
         
         // MARK: Générateurs de particules (💸 et ❤️)
         // Initialisation des filtres à particules liés au don de sang/argent

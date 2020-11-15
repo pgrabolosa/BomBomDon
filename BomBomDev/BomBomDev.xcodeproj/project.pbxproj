@@ -12,6 +12,8 @@
 		0C18767A255F63E400C4AC1F /* PeoplePopper.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0C187676255F63E400C4AC1F /* PeoplePopper.sks */; };
 		0C486C112560AF9B00A5597F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C486C102560AF9B00A5597F /* Constants.swift */; };
 		0C486C122560AF9B00A5597F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C486C102560AF9B00A5597F /* Constants.swift */; };
+		0C486C2E256110CF00A5597F /* GameTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C486C2D256110CF00A5597F /* GameTimer.swift */; };
+		0C486C2F256110CF00A5597F /* GameTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C486C2D256110CF00A5597F /* GameTimer.swift */; };
 		0CA1122E25603214007F685C /* ResourcesManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA1122D25603214007F685C /* ResourcesManagement.swift */; };
 		0CA1122F25603214007F685C /* ResourcesManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA1122D25603214007F685C /* ResourcesManagement.swift */; };
 		0CD6ACB02560630C000AC3B8 /* MissionSheet.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0CD6ACAF2560630C000AC3B8 /* MissionSheet.sks */; };
@@ -96,6 +98,7 @@
 		0C187675255F63E400C4AC1F /* PeoplePopper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeoplePopper.swift; sourceTree = "<group>"; };
 		0C187676255F63E400C4AC1F /* PeoplePopper.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PeoplePopper.sks; sourceTree = "<group>"; };
 		0C486C102560AF9B00A5597F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		0C486C2D256110CF00A5597F /* GameTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTimer.swift; sourceTree = "<group>"; };
 		0CA1122D25603214007F685C /* ResourcesManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourcesManagement.swift; sourceTree = "<group>"; };
 		0CD6ACAF2560630C000AC3B8 /* MissionSheet.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MissionSheet.sks; sourceTree = "<group>"; };
 		0CD6ACB42560634D000AC3B8 /* MissionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionSheet.swift; sourceTree = "<group>"; };
@@ -303,6 +306,7 @@
 				0CD6ACD025608929000AC3B8 /* Boutique.swift */,
 				0CA1122D25603214007F685C /* ResourcesManagement.swift */,
 				8FCF702A2560A0540075EE68 /* Score.swift */,
+				0C486C2D256110CF00A5597F /* GameTimer.swift */,
 			);
 			path = Engine;
 			sourceTree = "<group>";
@@ -476,6 +480,7 @@
 				8F522BE2255F23C000C58B5E /* ExpBoutiqueScene.swift in Sources */,
 				8F522C40255FC84600C58B5E /* Conveyor+SpriteKit.swift in Sources */,
 				8F522C37255FC54000C58B5E /* Conveyor.swift in Sources */,
+				0C486C2E256110CF00A5597F /* GameTimer.swift in Sources */,
 				8F522C5625600EEF00C58B5E /* TargetMode.swift in Sources */,
 				0C187677255F63E400C4AC1F /* PeoplePopper.swift in Sources */,
 				8F522BB4255F234000C58B5E /* AppDelegate.swift in Sources */,
@@ -501,6 +506,7 @@
 				8F522C6825601ABE00C58B5E /* PeoplePopper.swift in Sources */,
 				8F522BE3255F23C000C58B5E /* ExpBoutiqueScene.swift in Sources */,
 				8F522C41255FC84600C58B5E /* Conveyor+SpriteKit.swift in Sources */,
+				0C486C2F256110CF00A5597F /* GameTimer.swift in Sources */,
 				8F522C38255FC54000C58B5E /* Conveyor.swift in Sources */,
 				8F522C5725600EEF00C58B5E /* TargetMode.swift in Sources */,
 				8F522BC5255F234000C58B5E /* AppDelegate.swift in Sources */,
@@ -666,7 +672,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7NV48259TL;
+				DEVELOPMENT_TEAM = AKUPQLPX29;
 				INFOPLIST_FILE = "BomBomDev iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -687,7 +693,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7NV48259TL;
+				DEVELOPMENT_TEAM = AKUPQLPX29;
 				INFOPLIST_FILE = "BomBomDev iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -712,7 +718,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = G75DLW32M2;
+				DEVELOPMENT_TEAM = AKUPQLPX29;
 				INFOPLIST_FILE = "BomBomDev macOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -735,7 +741,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = G75DLW32M2;
+				DEVELOPMENT_TEAM = AKUPQLPX29;
 				INFOPLIST_FILE = "BomBomDev macOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
