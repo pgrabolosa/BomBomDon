@@ -276,6 +276,7 @@ class Person {
         
         sprite = SKSpriteNode(texture: gender.sprite)
         sprite.position = CGPoint(x:x, y:height)
+        sprite.setScale(1.5)
                 
         bloodType = BloodType.random()
         sprite.run(SKAction.repeatForever(SKAction.animate(with:gender.walkingSprites, timePerFrame: 0.2)), withKey: "walking")

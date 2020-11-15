@@ -48,6 +48,8 @@ extension Conveyor {
         spriteNode.position.x = (CGFloat(x) + 0.5) * spriteNode.frame.width
         spriteNode.position.y = (CGFloat(y) + 0.5) * spriteNode.frame.height
         
+        spriteNode.zRotation = CGFloat.random(in: -1...1) * .pi/32
+        
         return spriteNode
     }
     

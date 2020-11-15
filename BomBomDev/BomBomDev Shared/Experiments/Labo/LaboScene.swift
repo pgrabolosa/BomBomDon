@@ -82,6 +82,17 @@ class LaboScene : SKScene {
     
     override func didMove(to view: SKView) {
         
+//        let overlay = SKShapeNode(rectOf: frame.size)
+//        overlay.fillColor = .black
+//        overlay.alpha = 0.5
+//        overlay.run(SKAction.sequence([
+//            SKAction.wait(forDuration: 1),
+//            SKAction.fadeOut(withDuration: 1)
+//        ]))
+//        overlay.position = CGPoint(x: frame.midX, y: frame.midY)
+//        overlay.zPosition = 1000
+//        addChild(overlay)
+        
         // Ces noeuds servent à encapsuler les cibles et les poches de sang.
         // Ainsi lors d'un clic/toucher on peut traverser la hiérarchie et vérifier
         // s'il s'agit d'un target ou d'un parcel. ==> TODO: Utiliser des types de nœuds ≠
