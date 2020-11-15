@@ -69,7 +69,7 @@ class ParcelNode : SKSpriteNode {
         }
     }
     
-    let bleuChloe = SKColor(calibratedRed: CGFloat(UInt8(0x32))/255, green: CGFloat(UInt8(0xaf))/255, blue: CGFloat(UInt8(0xff))/255, alpha: 1.0)
+    
     
     func selectionStyle(_ selected: Bool) {
         if selected {
@@ -77,7 +77,7 @@ class ParcelNode : SKSpriteNode {
             let ring = SKShapeNode(circleOfRadius: frame.width/2)
             ring.name = "ring"
             ring.fillColor = .clear
-            ring.strokeColor = bleuChloe
+            ring.strokeColor = Constants.bleuChloe
             ring.lineWidth = 3
             ring.glowWidth = 2
             addChild(ring)

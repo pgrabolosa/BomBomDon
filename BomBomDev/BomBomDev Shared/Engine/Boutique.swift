@@ -11,16 +11,14 @@ enum Direction : CaseIterable{
     case up, left, right
 }
 
-protocol ShoppingElement {
-    func getNode() -> SKNode
+protocol ShoppingElement : SKNode {
     func getPrice() -> CGFloat
 }
 
-class Tapis : ShoppingElement {
+class Tapis : SKNode, ShoppingElement {
     private let direction : Direction
     private let length : UInt
-    private let node : SKNode
-    
+        
     init(direction: Direction, length: UInt) {
         self.direction = direction
         self.length = length
@@ -40,11 +38,15 @@ class Tapis : ShoppingElement {
         labelNode.fontColor = .red
         labelNode.horizontalAlignmentMode = .center
         labelNode.verticalAlignmentMode = .center
-        self.node = SKNode()
         image.zPosition = 0
         labelNode.zPosition = 1
-        self.node.addChild(image)
-        self.node.addChild(labelNode)
+        super.init()
+        addChild(image)
+        addChild(labelNode)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     func getDirection() -> Direction {
@@ -52,7 +54,7 @@ class Tapis : ShoppingElement {
     }
     
     func getNode() -> SKNode {
-        return node
+        return self
     }
     
     func getPrice() -> CGFloat {
@@ -101,14 +103,15 @@ extension ShoppingProduct {
 
 class Shop {
     /// L'élément de la boutique sélectionné (TODO: pour Aurélien)
-    var selectedShoppingItem: ShoppingProduct? = nil
+    var selectedShoppingItem: ShoppingElement? = nil
     private let baseNode : SKShapeNode
-    private var elements : [ShoppingProduct]
+    private var elements : [ShoppingElement]
     private let height : CGFloat
     
     init(parent: SKNode, x: CGFloat, y: CGFloat, w: CGFloat, h: CGFloat) {
         baseNode = SKShapeNode(rect: CGRect(x: 0, y: 0, width: w, height: h))
         baseNode.lineWidth = 0
+        baseNode.name = "Shop"
         elements = []
         height = h
         baseNode.position = CGPoint(x: x, y: y)
@@ -119,7 +122,7 @@ class Shop {
         self.baseNode.removeAllChildren()
         
         for (index, child) in self.elements.enumerated() {
-            let node = child.asElement().getNode()
+            let node = child as SKNode
             node.position = CGPoint(x: 0, y: (self.height/3) * (CGFloat(index) + 0.5))
             self.baseNode.addChild(node)
         }
@@ -127,17 +130,36 @@ class Shop {
     
     func newNode() {
         guard let elt = ShoppingProduct.allCases.randomElement() else { return }
-        elements.append(elt)
+        elements.append(elt.asElement())
         updateDiplay()
     }
     
-    /// Confirme la volonté d'acheter l'élément sélectionné
-    func purchase(element: SKNode) -> CGFloat {
-        guard let elt = self.elements.first(where: { $0.asElement().getNode() === element }) else {
-            return 0.0
+    func select(element: ShoppingElement) -> Bool {
+        if selectedShoppingItem === element {
+            print("Deselecting")
+            selectedShoppingItem?.childNode(withName: "background")?.removeFromParent()
+            selectedShoppingItem = nil
+            return false
         }
-            
-        return elt.asElement().getPrice()
+        else {
+            for el in elements {
+                el.childNode(withName: "background")?.removeFromParent()
+            }
+            print("Selecting")
+            selectedShoppingItem = element
+            let background = SKShapeNode(circleOfRadius: 50)
+            background.name = "background"
+            background.strokeColor = Constants.bleuChloe
+            background.lineWidth = 3
+            background.zPosition = 5
+            element.addChild(background)
+            return true
+        }
+    }
+    
+    /// Confirme la volonté d'acheter l'élément sélectionné
+    func purchase(element: ShoppingProduct) {
+       
     }
 }
 
