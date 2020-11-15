@@ -29,7 +29,7 @@ class GameScene: SKScene {
         addChild(makeButton(at: CGPoint(x: 0, y: -300), color: .red, title: "Exp-Labo", action: { self.load(LaboScene.newScene()) }))
         addChild(makeButton(at: CGPoint(x: 0, y: -100), color: .red, title: "Exp-Boutique", action: { self.load(ExpBoutiqueScene.newScene()) }))
         addChild(makeButton(at: CGPoint(x: 0, y: 100), color: .blue, title: "Exp-Credits", action: { self.load(CreditsScene.newScene()) }))
-        addChild(makeButton(at: CGPoint(x: 0, y: 300), color: .green, title: "Exp-Popper", action: { self.load(MissionSheet.newScene(number: 0))}))
+        addChild(makeButton(at: CGPoint(x: 0, y: 300), color: .green, title: "Exp-Popper", action: { self.load(PeoplePopper.newScene())}))
     }
 
     func makeButton(at pos: CGPoint, color: SKColor, title: String, action: (()->Void)? = nil) -> SKNode {

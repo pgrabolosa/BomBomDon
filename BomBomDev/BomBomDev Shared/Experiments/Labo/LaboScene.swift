@@ -10,20 +10,6 @@ import SpriteKit
 import Carbon.HIToolbox
 #endif
 
-enum ShoppingProduct: CaseIterable {
-    //TODO
-}
-
-class Shop {
-    /// L'élément de la boutique sélectionné (TODO: pour Aurélien)
-    var selectedShoppingItem: ShoppingProduct? = nil
-    
-    /// Confirme la volonté d'acheter l'élément sélectionné
-    func purchase() {  }
-}
-
-
-
 class LaboScene : SKScene {
     
     // MARK: - Constructeurs
