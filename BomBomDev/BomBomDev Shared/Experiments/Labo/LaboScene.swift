@@ -472,8 +472,13 @@ class LaboScene : SKScene {
             
             let loc = locationAfterLastCell(of: bloodType)
             let shape = HandleNode.newNode(for: bloodType) {
-                self.shop.purchase()
-                self.conveyorRunners[bloodType]?.append(ConveyorSegment(length: Int(shoppingItem.length), orientation: .up, bloodTypeMask: .all, speed: 1))
+                if let errorMessage = self.shop.purchase(using: self.resourceDisplay) {
+                    #warning("TODO: show text")
+                    print("ERROR", errorMessage)
+                } else {
+                    // success
+                    self.conveyorRunners[bloodType]?.append(ConveyorSegment(length: Int(shoppingItem.length), orientation: .up, bloodTypeMask: .all, speed: 1))
+                }
             }
             shape.position = loc
             placeholders.addChild(shape)

@@ -174,13 +174,28 @@ class Shop {
     }
     
     /// Confirme la volonté d'acheter l'élément sélectionné
-    func purchase() {
-        selectedShoppingItem?.removeFromParent()
-        selectedShoppingItem = nil
+    func purchase(using resource: ResourcesManagement? = nil) -> String? {
+        guard let selectedShoppingItem = selectedShoppingItem else {
+            return nil // ignore, as nothing is selected
+        }
         
+        defer {
+            _ = self.select(element: selectedShoppingItem)
+        }
+        
+        guard CGFloat(resource?.available() ?? 0) >= selectedShoppingItem.getPrice() else {
+            return "Fonds Insuffisants"
+        }
+        _ = resource?.withdraw(amount: Int(selectedShoppingItem.getPrice()))
+        
+        selectedShoppingItem.removeFromParent()
+        self.selectedShoppingItem = nil
+
         // remove it all
         self.elements.removeAll()
         self.baseNode.removeAllChildren()
+        
+        return nil
     }
 }
 
