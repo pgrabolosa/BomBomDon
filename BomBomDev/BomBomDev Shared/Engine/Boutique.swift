@@ -131,9 +131,8 @@ class Shop {
         self.baseNode.removeAllChildren()
         
         for (index, child) in self.elements.enumerated() {
-            let node = child as SKNode
-            node.position = CGPoint(x: 0, y: (self.height/3) * (CGFloat(index) + 0.5))
-            self.baseNode.addChild(node)
+            child.position = CGPoint(x: 0, y: (self.height/3) * (CGFloat(index) + 0.5))
+            self.baseNode.addChild(child)
         }
     }
     
@@ -145,7 +144,16 @@ class Shop {
         }
         
         guard let elt = ShoppingProduct.allCases.randomElement() else { return }
-        elements.append(elt.asElement())
+        let node = elt.asElement()
+        
+        let priceTag = SKLabelNode(text: "\(Int(node.getPrice()))")
+        priceTag.fontName = Constants.fontName
+        priceTag.fontSize = Constants.fontSize * 0.8
+        priceTag.fontColor = Constants.bleuChloe
+        priceTag.position = CGPoint(x: baseNode.frame.size.width*0.23, y: -height*0.08)
+        node.addChild(priceTag)
+        
+        elements.append(node)
         updateDiplay()
     }
     
