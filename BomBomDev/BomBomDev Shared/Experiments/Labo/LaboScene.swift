@@ -35,11 +35,20 @@ class LaboScene : SKScene {
     /// The nodes containing the conveyor cells
     var conveyorNodes: [BloodType:SKNode] = [:]
     
+    /// Les poches de sang
+    var bloodBags: [BloodType:SKSpriteNode] = [:]
+    
     /// HUD for resources (money)
     var resourceDisplay: ResourcesManagement?
     
     /// Afficheur du Score
     var score: Score?
+    
+    var bloodLevels: [BloodType:Int] = {
+        var result = [BloodType:Int]()
+        BloodType.allCases.forEach { result[$0] = 0 }
+        return result
+    }()
     
     /// Tokens d'observation du NotificationCenter
     var observers: [Any] = []
@@ -74,7 +83,7 @@ class LaboScene : SKScene {
         
         let conveyorBelt = SKNode()
         conveyorBelt.name = "conveyorBelt"
-        conveyorBelt.position.y =    0  // adjusted bc background arrow
+        conveyorBelt.position.y =  -50  // adjusted bc background arrow
         conveyorBelt.position.x = -100 // adjusted bc background arrow
         addChild(conveyorBelt)
         
@@ -86,15 +95,26 @@ class LaboScene : SKScene {
         
         let parcels = SKNode()
         parcels.name = "parcels"
-        parcels.position.y =    0 // adjusted bc background arrow
+        parcels.position.y =  -50 // adjusted bc background arrow
         parcels.position.x = -100 // adjusted bc background arrow
         addChild(parcels)
         
         let placeholders = SKNode() // pour indiquer où ajouter des éléments
         placeholders.name = "placeholders"
-        placeholders.position.y =    0 // adjusted bc background arrow
+        placeholders.position.y =  -50 // adjusted bc background arrow
         placeholders.position.x = -100 // adjusted bc background arrow
         addChild(placeholders)
+        
+        // init blog bags
+        bloodBags[ .O] = childNode(withName: "//blood_o") as! SKSpriteNode
+        bloodBags[ .A] = childNode(withName: "//blood_a") as! SKSpriteNode
+        bloodBags[ .B] = childNode(withName: "//blood_b") as! SKSpriteNode
+        bloodBags[.AB] = childNode(withName: "//blood_ab") as! SKSpriteNode
+        
+        BloodType.allCases.forEach {
+            self.setPercentage(of: $0, to: 0)
+        }
+        
         
         // MARK: Configuration du layout
         // Il faut tout d'abord créer les tapis roulants initiaux
@@ -104,7 +124,7 @@ class LaboScene : SKScene {
         // NB: la coordonnée X est dérivée de là où finit le tapis initial.
         
         let config: [(bloodType:BloodType, length:Int, x:Int, y:Int, targetPosition:CGPoint)] = [
-            (.AB, 2, 13, 4, CGPoint(x: 0, y: 1080-100)),
+            (.AB, 1, 13, 4, CGPoint(x: 0, y: 1080-100)),
             ( .B, 3, 13, 3, CGPoint(x: 0, y: 1080-100)),
             ( .A, 5, 13, 2, CGPoint(x: 0, y: 1080-100)),
             ( .O, 7, 13, 1, CGPoint(x: 0, y: 1080-100)),
@@ -244,6 +264,11 @@ class LaboScene : SKScene {
                 let success = (parcel.bloodType == node.bloodType)
                 if success {
                     NotificationCenter.default.post(name: .bagScored, object: nil, userInfo: ["BloodType" : node.bloodType])
+                    
+                    // adjust texture of bag -- TODO: move this in the node itself?
+                    self.bloodLevels[node.bloodType, default: 0] += 1
+                    self.bloodLevels[node.bloodType, default: 0] %= 4
+                    setPercentage(of: node.bloodType, to: CGFloat(self.bloodLevels[node.bloodType]!) * 25)
                 } else {
                     NotificationCenter.default.post(name: .badBag, object: nil, userInfo: ["BloodType" : node.bloodType])
                 }
@@ -283,12 +308,19 @@ class LaboScene : SKScene {
         } else if (event.keyCode == kVK_ANSI_Minus) {
             _ = peopleHandler.increaseMoneyRate()
         } else if (event.keyCode == kVK_ANSI_T) {
-            
             conveyorRunners[BloodType.allCases.randomElement()!]?.append(ConveyorSegment(length: 4, orientation: .up, bloodTypeMask: .all, speed: 1))
         } else if (event.keyCode == kVK_ANSI_V) {
             toggleHandles()
         } else if (event.keyCode == kVK_ANSI_S) {
             shop.newNode()
+        } else if (event.keyCode == kVK_ANSI_1) {
+            setPercentage(of: .O, to: 10)
+        } else if (event.keyCode == kVK_ANSI_2) {
+            setPercentage(of: .O, to: 30)
+        } else if (event.keyCode == kVK_ANSI_3) {
+            setPercentage(of: .O, to: 60)
+        } else if (event.keyCode == kVK_ANSI_4) {
+            setPercentage(of: .O, to: 90)
         }
     }
     #elseif os(iOS)
@@ -343,5 +375,35 @@ class LaboScene : SKScene {
         } else {
             hideHandles()
         }
+    }
+    
+    func setPercentage(of bloodType: BloodType, to percentage: CGFloat) {
+        let imageName: String
+        let node = bloodBags[bloodType]!
+        
+        switch bloodType {
+            case .O, .A:
+                if percentage <= 25 {
+                    imageName = "blood_gauche_25"
+                } else if percentage <= 50 {
+                    imageName = "blood_gauche_50"
+                } else if percentage <= 75 {
+                    imageName = "blood_gauche_75"
+                } else {
+                    imageName = "blood_gauche_100"
+                }
+            case .B, .AB:
+                if percentage <= 25 {
+                    imageName = "blood_droite_25"
+                } else if percentage <= 50 {
+                    imageName = "blood_droite_50"
+                } else if percentage <= 75 {
+                    imageName = "blood_droite_75"
+                } else {
+                    imageName = "blood_droite_100"
+                }
+        }
+        
+        node.texture = SKTexture(imageNamed: imageName)
     }
 }
