@@ -473,8 +473,7 @@ class LaboScene : SKScene {
             let loc = locationAfterLastCell(of: bloodType)
             let shape = HandleNode.newNode(for: bloodType) {
                 if let errorMessage = self.shop.purchase(using: self.resourceDisplay) {
-                    #warning("TODO: show text")
-                    print("ERROR", errorMessage)
+                    self.alert(errorMessage)
                 } else {
                     // success
                     self.conveyorRunners[bloodType]?.append(ConveyorSegment(length: Int(shoppingItem.length), orientation: .up, bloodTypeMask: .all, speed: 1))
@@ -527,5 +526,21 @@ class LaboScene : SKScene {
         }
         
         node.texture = SKTexture(imageNamed: imageName)
+    }
+    
+    func alert(_ message: String, for duration: TimeInterval = 2) {
+        guard let alertBox = childNode(withName: "//alertbox") else {
+            print("ERROR: alertbox not found")
+            return
+        }
+        
+        let label = alertBox.childNode(withName: "//label") as! SKLabelNode
+        label.text = message
+                
+        alertBox.run(SKAction.sequence([
+            .move(by: CGVector(dx: 0, dy: alertBox.frame.height), duration: 1),
+            .wait(forDuration: duration),
+            .move(by: CGVector(dx: 0, dy: -alertBox.frame.height), duration: 1),
+        ]))
     }
 }

@@ -31,6 +31,5 @@ class GameViewController: NSViewController {
             self.skView.presentScene(GameOverScene.newScene())
         }
     }
-
 }
 
