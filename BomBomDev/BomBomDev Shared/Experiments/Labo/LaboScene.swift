@@ -10,6 +10,20 @@ import SpriteKit
 import Carbon.HIToolbox
 #endif
 
+class HandleNode: SKSpriteNode {
+    var action: (()->Void)? = nil
+    var bloodType: BloodType = .O
+    
+    class func newNode(for bloodType: BloodType, _ action: @escaping ()->Void) -> HandleNode {
+        let sz = GridConfiguration.default.itemSize
+        let node = HandleNode(texture: SKTexture(imageNamed: "croix_rose"), size: CGSize(width: 0.8 * sz.width, height: 0.8 * sz.height))
+        node.bloodType = bloodType
+        node.action = action
+        return node
+    }
+}
+
+
 class LaboScene : SKScene {
     
     // MARK: - Constructeurs
@@ -192,6 +206,21 @@ class LaboScene : SKScene {
             self.hideHandles()
         }))
         
+        // MARK: Notification : Bag received blood 🩸
+        observers.append(NotificationCenter.default.addObserver(forName: .bagScored, object: nil, queue: .main, using: { (notification) in
+            // adjust texture of bag -- TODO: move this in the node itself?
+            if let bloodType = notification.userInfo?["BloodType"] as? BloodType {
+                self.bloodLevels[bloodType, default: 0] += 1
+                self.bloodLevels[bloodType, default: 0] %= 8
+                self.setPercentage(of: bloodType, to: CGFloat(self.bloodLevels[bloodType]!) * 13)
+                
+                if self.bloodLevels[bloodType, default: 0] == 0 {
+                    #warning("TODO: Dindon ou pas dindon ?")
+                    self.run(SKAction.playSoundFileNamed("dindon", waitForCompletion: false))
+                }
+            }
+        }))
+        
         // MARK: Notification : Gives Money 💰
         observers.append(NotificationCenter.default.addObserver(forName: .givesMoney, object: nil, queue: .main) { (notification) in
             moneyEmitter.particleBirthRate += 0.5
@@ -242,8 +271,24 @@ class LaboScene : SKScene {
                 if self.selectedParcel === parcelNode {
                     self.selectedParcel = nil
                 }
-                NotificationCenter.default.post(name: .bagDropped, object: nil)
-                parcelNode.explode(success: false)
+                
+                // was it dropped on the letter?
+                let height =
+                    config.filter { $0.bloodType == parcel!.bloodType }.first!.y +
+                    parcel!.runner.conveyor.segments.reduce(0) { (value:Int, segment:ConveyorSegment) in
+                        return value + segment.length * segment.orientation.integerOffset.dy
+                    }
+                
+                if height > 7 {
+                    // it was!!! dropped on the letter
+                    #warning("TODO - increase points for automatic")
+                    NotificationCenter.default.post(name: .bagScored, object: nil, userInfo: ["BloodType" : parcel!.bloodType])
+                    parcelNode.explode(success: true)
+                } else {
+                    // if not… fail!
+                    NotificationCenter.default.post(name: .bagDropped, object: nil)
+                    parcelNode.explode(success: false)
+                }
             }
         })
     }
@@ -263,8 +308,8 @@ class LaboScene : SKScene {
     func tapped(at location: CGPoint) {
         // deal with handles for the shop
         if let node = nodes(at: location).filter({ $0.parent?.name == "handles" }).first {
-            print("TODO: Proceed with purchase!")
-            #warning("TODO")
+            (node as! HandleNode).action?()
+            hideHandles()
         }
         
         
@@ -287,11 +332,6 @@ class LaboScene : SKScene {
                 let success = (parcel.bloodType == node.bloodType)
                 if success {
                     NotificationCenter.default.post(name: .bagScored, object: nil, userInfo: ["BloodType" : node.bloodType])
-                    
-                    // adjust texture of bag -- TODO: move this in the node itself?
-                    self.bloodLevels[node.bloodType, default: 0] += 1
-                    self.bloodLevels[node.bloodType, default: 0] %= 4
-                    setPercentage(of: node.bloodType, to: CGFloat(self.bloodLevels[node.bloodType]!) * 26)
                 } else {
                     NotificationCenter.default.post(name: .badBag, object: nil, userInfo: ["BloodType" : node.bloodType])
                 }
@@ -382,10 +422,11 @@ class LaboScene : SKScene {
         
         BloodType.allCases.forEach { bloodType in
             let loc = locationAfterLastCell(of: bloodType)
-            let shape = SKShapeNode(ellipseOf: CGSize(width: 65, height: 65))
-            shape.fillColor = .green
-            shape.position = loc
             
+            let shape = HandleNode.newNode(for: bloodType) {
+                self.conveyorRunners[bloodType]?.append(ConveyorSegment(length: 1, orientation: .up, bloodTypeMask: .all, speed: 1))
+            }
+            shape.position = loc
             placeholders.addChild(shape)
         }
     }

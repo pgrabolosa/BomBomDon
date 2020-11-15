@@ -84,6 +84,8 @@
 		8FCF705B2560C2DC0075EE68 /* pause-convoyeur.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8FCF70592560C2DC0075EE68 /* pause-convoyeur.wav */; };
 		8FCF705F2560C3500075EE68 /* bood fall 2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8FCF705E2560C3500075EE68 /* bood fall 2.wav */; };
 		8FCF70602560C3500075EE68 /* bood fall 2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8FCF705E2560C3500075EE68 /* bood fall 2.wav */; };
+		8FCF70842560EADB0075EE68 /* dindon.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8FCF70832560EADB0075EE68 /* dindon.mp3 */; };
+		8FCF70852560EADB0075EE68 /* dindon.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8FCF70832560EADB0075EE68 /* dindon.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -134,6 +136,7 @@
 		8FCF70542560C1870075EE68 /* bag fall 1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "bag fall 1.wav"; sourceTree = "<group>"; };
 		8FCF70592560C2DC0075EE68 /* pause-convoyeur.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "pause-convoyeur.wav"; sourceTree = "<group>"; };
 		8FCF705E2560C3500075EE68 /* bood fall 2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "bood fall 2.wav"; sourceTree = "<group>"; };
+		8FCF70832560EADB0075EE68 /* dindon.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = dindon.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -299,6 +302,7 @@
 				8FCF70482560BA880075EE68 /* piano-1.mp3 */,
 				8F522C6F25601C1B00C58B5E /* street_sounds.wav */,
 				8FCF705E2560C3500075EE68 /* bood fall 2.wav */,
+				8FCF70832560EADB0075EE68 /* dindon.mp3 */,
 			);
 			path = Sounds;
 			sourceTree = "<group>";
@@ -385,6 +389,7 @@
 				8F522C8625601DC300C58B5E /* rue paris.wav in Resources */,
 				8F8494F0256021BF004E579C /* MoneyParticle.sks in Resources */,
 				8FCF70492560BA880075EE68 /* piano-1.mp3 in Resources */,
+				8FCF70842560EADB0075EE68 /* dindon.mp3 in Resources */,
 				8FCF70552560C1870075EE68 /* bag fall 1.wav in Resources */,
 				8F522C4F25600C7D00C58B5E /* MagicParticle.sks in Resources */,
 				0CD6ACBE2560824A000AC3B8 /* Texts.strings in Resources */,
@@ -412,6 +417,7 @@
 			files = (
 				8F522BCA255F234000C58B5E /* Main.storyboard in Resources */,
 				8F522BD0255F234000C58B5E /* SplashScreenScene.sks in Resources */,
+				8FCF70852560EADB0075EE68 /* dindon.mp3 in Resources */,
 				8F8494FC2560250D004E579C /* BloodParticle.sks in Resources */,
 				8F522C7325601C1B00C58B5E /* street_sounds.wav in Resources */,
 				8FCF70452560BA810075EE68 /* piano-2.mp3 in Resources */,
@@ -640,14 +646,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = AKUPQLPX29;
+				DEVELOPMENT_TEAM = 7NV48259TL;
 				INFOPLIST_FILE = "BomBomDev iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.BomBomDev;
+				PRODUCT_BUNDLE_IDENTIFIER = fr.grabolosa.BomBomDev;
 				PRODUCT_NAME = BomBomDev;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
@@ -661,14 +667,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = AKUPQLPX29;
+				DEVELOPMENT_TEAM = 7NV48259TL;
 				INFOPLIST_FILE = "BomBomDev iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.BomBomDev;
+				PRODUCT_BUNDLE_IDENTIFIER = fr.grabolosa.BomBomDev;
 				PRODUCT_NAME = BomBomDev;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
