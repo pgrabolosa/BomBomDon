@@ -285,6 +285,10 @@ class LaboScene : SKScene {
                 ]))
             }
         }
+        
+        if let node = nodes(at: location).filter({ $0.parent?.name == "Shop" }).first as? ShoppingElement {
+            _ = shop.select(element: node)
+        }
     }
     
     #if os(OSX)
