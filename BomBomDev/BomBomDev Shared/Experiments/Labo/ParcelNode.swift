@@ -45,7 +45,7 @@ class ParcelNode : SKSpriteNode {
         fatalError("Actions are now built live through notifications…")
     }
     
-    func explode(success: Bool, texture: SKTexture? = nil) {
+    func explode(success: Bool, texture: SKTexture? = nil, sound: String = "bag fall 1") {
         
         if success == false { // splash it down
             let emitter = SKEmitterNode(fileNamed: "MagicParticle")!
@@ -54,7 +54,7 @@ class ParcelNode : SKSpriteNode {
                 emitter.particleScale = 0.2 // HACK
             }
             emitter.run(SKAction.sequence([
-                SKAction.playSoundFileNamed("broken gasss", waitForCompletion: false),
+                SKAction.playSoundFileNamed(sound, waitForCompletion: false),
                 SKAction.wait(forDuration: 0.5),
                 SKAction.run { emitter.particleBirthRate = 0 },
                 SKAction.wait(forDuration: 1),
