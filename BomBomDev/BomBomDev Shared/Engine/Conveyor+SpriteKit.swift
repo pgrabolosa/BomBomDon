@@ -27,20 +27,33 @@ struct GridConfiguration {
 extension Conveyor {
     static let defaultTexture = SKTexture(imageNamed: "conveyor_left")
     
-    func makeSprites(with prefix: String, startingAtX x: Int, y: Int) -> SKNode {
-        let gridConfiguration = GridConfiguration.default // TODO: move into args
-        
-        let makeCell = {(i:Int, x:Int, y:Int, orientation:Orientation) -> SKNode in            
-            let spriteNode = SKSpriteNode(texture: Conveyor.defaultTexture, size: gridConfiguration.itemSize)
-            spriteNode.name = "\(prefix)-\(i)"
-            spriteNode.zRotation = orientation.rotation
-            
-            spriteNode.position.x = (CGFloat(x) + 0.5) * spriteNode.frame.width
-            spriteNode.position.y = (CGFloat(y) + 0.5) * spriteNode.frame.height
-            
-            return spriteNode
+    static let horizontalTexture = SKTexture(imageNamed: "tapis-h")
+    static let verticalTexture = SKTexture(imageNamed: "tapis-v")
+    static let bentTexture = SKTexture(imageNamed: "tapis-c")
+    
+    func makeCell(prefix: String, i:Int, x:Int, y:Int, orientation:Orientation, bendIt: Bool) -> SKNode {
+        var texture: SKTexture
+        switch orientation {
+            case .up, .down:
+                texture = Conveyor.verticalTexture
+            case .left, .right:
+                texture = Conveyor.horizontalTexture
         }
+        if bendIt { texture = Conveyor.bentTexture }
         
+        let gridConfiguration = GridConfiguration.default // TODO: move into args
+        let spriteNode = SKSpriteNode(texture: texture, size: gridConfiguration.itemSize)
+        spriteNode.name = "\(prefix)-\(i)"
+        
+        spriteNode.position.x = (CGFloat(x) + 0.5) * spriteNode.frame.width
+        spriteNode.position.y = (CGFloat(y) + 0.5) * spriteNode.frame.height
+        
+        spriteNode.zRotation = CGFloat.random(in: -1...1) * .pi/32
+        
+        return spriteNode
+    }
+    
+    func makeSprites(with prefix: String, startingAtX x: Int, y: Int) -> SKNode {
         // build the scene grid
         let gridNode = SKNode()
         
@@ -48,49 +61,42 @@ extension Conveyor {
         var loc = (x: x, y: y)
         var cellIndex = 0
         
+        var previousOrientation: Orientation? = nil
+        
         for segment in segments {
             let orientation = segment.orientation.integerOffset
             
-            for _ in 0..<segment.length {
-                gridNode.addChild(makeCell(cellIndex, loc.x, loc.y, segment.orientation))
+            let changeInDir = previousOrientation != nil && previousOrientation != segment.orientation
+            
+            for i in 0..<segment.length {
+                gridNode.addChild(makeCell(prefix: prefix, i: cellIndex, x: loc.x, y: loc.y, orientation: segment.orientation, bendIt: i == 0 && changeInDir))
                 
                 cellIndex += 1
                 loc.x += orientation.dx
                 loc.y += orientation.dy
             }
+            
+            previousOrientation = segment.orientation
         }
         
         return gridNode
     }
     
     func makeSpritesForSegment(with prefix: String, havingStartedAtX x: Int, y: Int, segment: ConveyorSegment) -> [SKNode] {
-        let gridConfiguration = GridConfiguration.default // TODO: move into args
-        
         var loc: (x:Int, y:Int) = (x,y)
         for segment in segments.dropLast() {
             loc.x += segment.length * segment.orientation.integerOffset.dx
             loc.y += segment.length * segment.orientation.integerOffset.dy
         }
-        //loc.x += segments.dropLast().last?.orientation.integerOffset.dx ?? 0
-        //loc.y += segments.dropLast().last?.orientation.integerOffset.dy ?? 0
+        
+        let bendIt = segments.dropLast().last?.orientation != segment.orientation
         
         var cellIndex = segments.reduce(0) { $0 + $1.length }
         
-        let makeCell = {(i:Int, x:Int, y:Int, orientation:Orientation) -> SKNode in
-            let spriteNode = SKSpriteNode(texture: Conveyor.defaultTexture, size: gridConfiguration.itemSize)
-            spriteNode.name = "\(prefix)-\(i)"
-            spriteNode.zRotation = orientation.rotation
-            
-            spriteNode.position.x = (CGFloat(x) + 0.5) * spriteNode.frame.width
-            spriteNode.position.y = (CGFloat(y) + 0.5) * spriteNode.frame.height
-            
-            return spriteNode
-        }
-        
         // build the nodes
         var nodes = [SKNode]()
-        (0..<segment.length).forEach { _ in
-            nodes.append(makeCell(cellIndex, loc.x, loc.y, segment.orientation))
+        (0..<segment.length).forEach { i in
+            nodes.append(makeCell(prefix: prefix, i: cellIndex, x: loc.x, y: loc.y, orientation: segment.orientation, bendIt: i == 0 && bendIt))
             
             cellIndex += 1
             loc.x += segment.orientation.integerOffset.dx

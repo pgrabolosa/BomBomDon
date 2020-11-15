@@ -9,9 +9,7 @@ import SpriteKit
 
 
 extension SKScene {
-    
     func load(_ scene: SKScene) {
         view?.presentScene(scene)
     }
-    
 }

@@ -166,7 +166,7 @@ class PeopleHandler {
     init(parent: SKScene, x: CGFloat, w: CGFloat) {
         masterNode = SKShapeNode(rect: CGRect(x: 0, y: parent.frame.minY, width: w, height: parent.size.height))
         masterNode.lineWidth = 0
-        masterNode.fillColor = .gray
+        masterNode.fillColor = .clear
         masterNode.position.x = x - (w/2)
         let height = parent.size.height
         
@@ -280,6 +280,7 @@ class Person {
         
         sprite = SKSpriteNode(texture: gender.sprite)
         sprite.position = CGPoint(x:x, y:height)
+        sprite.setScale(1.5)
                 
         bloodType = BloodType.random()
         sprite.run(SKAction.repeatForever(SKAction.animate(with:gender.walkingSprites, timePerFrame: 0.2)), withKey: "walking")

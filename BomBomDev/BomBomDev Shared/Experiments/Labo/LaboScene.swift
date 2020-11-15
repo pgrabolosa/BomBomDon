@@ -68,6 +68,17 @@ class LaboScene : SKScene {
     
     override func didMove(to view: SKView) {
         
+//        let overlay = SKShapeNode(rectOf: frame.size)
+//        overlay.fillColor = .black
+//        overlay.alpha = 0.5
+//        overlay.run(SKAction.sequence([
+//            SKAction.wait(forDuration: 1),
+//            SKAction.fadeOut(withDuration: 1)
+//        ]))
+//        overlay.position = CGPoint(x: frame.midX, y: frame.midY)
+//        overlay.zPosition = 1000
+//        addChild(overlay)
+        
         // Ces noeuds servent à encapsuler les cibles et les poches de sang.
         // Ainsi lors d'un clic/toucher on peut traverser la hiérarchie et vérifier
         // s'il s'agit d'un target ou d'un parcel. ==> TODO: Utiliser des types de nœuds ≠
@@ -119,7 +130,7 @@ class LaboScene : SKScene {
         // MARK: Configuration des éléments
         // Initialisation des éléments auxiliaires
         
-        peopleHandler = PeopleHandler(parent: self, x: 1620, w: 200)
+        peopleHandler = PeopleHandler(parent: self, x: 1750, w: 380)
         peopleHandler.masterNode.zPosition = 5
         
         score = Score(parent: self, x: 50, y: 950, w: 200, h: 70)
@@ -226,10 +237,9 @@ class LaboScene : SKScene {
                 selectedParcel = nil
                 
                 if (parcel.bloodType == node.bloodType) {
-                    print("TODO: Success! :-)")
                     NotificationCenter.default.post(name: .bagScored, object: nil, userInfo: ["BloodType" : node.bloodType])
                 } else {
-                    print("TODO: Failed! :-)")
+                    NotificationCenter.default.post(name: .badBag, object: nil, userInfo: ["BloodType" : node.bloodType])
                 }
                 
                 parcelNode.removeAllActions()
@@ -261,18 +271,10 @@ class LaboScene : SKScene {
             _ = peopleHandler.increaseBloodRate()
         } else if (event.keyCode == kVK_ANSI_Minus) {
             _ = peopleHandler.increaseMoneyRate()
+        } else if (event.keyCode == kVK_ANSI_T) {
+            conveyorRunners[.O]?.append(ConveyorSegment(length: 4, orientation: .up, bloodTypeMask: .all, speed: 1))
         } else if (event.keyCode == kVK_ANSI_V) {
-            // test to append a segment to the O conveyor
-            //conveyorRunners[.O]!.append(ConveyorSegment(length: 2, orientation: .up, bloodTypeMask: .all, speed: 1))
-            
-            BloodType.allCases.forEach { bloodType in
-                let loc = locationAfterLastCell(of: bloodType)
-                let shape = SKShapeNode(ellipseOf: CGSize(width: 65, height: 65))
-                shape.fillColor = .green
-                shape.position = loc
-                
-                addChild(shape)
-            }
+            generateHandles()
         }
     }
     #elseif os(iOS)
@@ -299,6 +301,18 @@ class LaboScene : SKScene {
         position.y += CGFloat(orientation.integerOffset.dy) * itemSize.height
         
         return position
+    }
+    
+    /// Ajoute des éléments en fin des tapis/convoyeurs afin de faciliter l'ajout d'éléments
+    func generateHandles() {
+        BloodType.allCases.forEach { bloodType in
+            let loc = locationAfterLastCell(of: bloodType)
+            let shape = SKShapeNode(ellipseOf: CGSize(width: 65, height: 65))
+            shape.fillColor = .green
+            shape.position = loc
+            
+            addChild(shape)
+        }
     }
     
 }
