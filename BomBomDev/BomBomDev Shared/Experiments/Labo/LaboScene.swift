@@ -104,6 +104,47 @@ class LaboScene : SKScene {
     /// Le gestionnaire des piétons
     var peopleHandler: PeopleHandler!
     
+    var config: [(bloodType:BloodType, length:Int, x:Int, y:Int, targetPosition:CGPoint)] = [
+        (.AB, 1, 13, 4, CGPoint(x: 0, y: 1080)),
+        ( .B, 3, 13, 3, CGPoint(x: 0, y: 1080)),
+        ( .A, 5, 13, 2, CGPoint(x: 0, y: 1080)),
+        ( .O, 7, 13, 1, CGPoint(x: 0, y: 1080)),
+    ]
+    
+    func resetConveyors() {
+        let conveyorBelt = childNode(withName: "conveyorBelt")!
+        let targets = childNode(withName: "targets")!
+        
+        conveyorBelt.removeAllActions()
+        conveyorBelt.removeAllChildren()
+        
+        targets.removeAllActions()
+        targets.removeAllChildren()
+        
+        config.forEach { (blood, length, x, y, targetPosition) in
+            var conveyor = Conveyor()
+            conveyor.segments.append(ConveyorSegment(length: length, orientation: .left, bloodTypeMask: .all))
+            let node = conveyor.makeSprites(with: "\(blood)", startingAtX: x, y: y)
+            node.name = "conveyor-\(blood)"
+            conveyorBelt.addChild(node)
+            
+            self.conveyorNodes[blood] = node
+            
+            conveyorRunners[blood]?.conveyor = conveyor
+            conveyorRunners[blood]?.name = "\(blood)"
+            
+            // one target per blood type
+            let fr = self.bloodBags[blood]!.frame
+            let p = CGPoint(x: node.children.last!.position.x - GridConfiguration.default.itemSize.width, y: targetPosition.y - fr.height)
+            
+            let target = TargetNode.newInstance(at: p, with: fr.size, for: blood)
+            target.name = "target-\(blood)"
+            
+            targets.addChild(target)
+        }
+
+    }
+    
     
     // MARK: - Évènementiel
     
@@ -169,34 +210,8 @@ class LaboScene : SKScene {
         
         // NB: la coordonnée X est dérivée de là où finit le tapis initial.
         
-        let config: [(bloodType:BloodType, length:Int, x:Int, y:Int, targetPosition:CGPoint)] = [
-            (.AB, 1, 13, 4, CGPoint(x: 0, y: 1080)),
-            ( .B, 3, 13, 3, CGPoint(x: 0, y: 1080)),
-            ( .A, 5, 13, 2, CGPoint(x: 0, y: 1080)),
-            ( .O, 7, 13, 1, CGPoint(x: 0, y: 1080)),
-        ]
+        resetConveyors()
         
-        config.forEach { (blood, length, x, y, targetPosition) in
-            var conveyor = Conveyor()
-            conveyor.segments.append(ConveyorSegment(length: length, orientation: .left, bloodTypeMask: .all))
-            let node = conveyor.makeSprites(with: "\(blood)", startingAtX: x, y: y)
-            node.name = "conveyor-\(blood)"
-            conveyorBelt.addChild(node)
-            
-            self.conveyorNodes[blood] = node
-            
-            conveyorRunners[blood]?.conveyor = conveyor
-            conveyorRunners[blood]?.name = "\(blood)"
-            
-            // one target per blood type
-            let fr = self.bloodBags[blood]!.frame
-            let p = CGPoint(x: node.children.last!.position.x - GridConfiguration.default.itemSize.width, y: targetPosition.y - fr.height)
-            
-            let target = TargetNode.newInstance(at: p, with: fr.size, for: blood)
-            target.name = "target-\(blood)"
-            
-            targets.addChild(target)
-        }
         
         // MARK: Configuration des éléments
         // Initialisation des éléments auxiliaires
@@ -305,7 +320,7 @@ class LaboScene : SKScene {
             let latestSegment = runner.conveyor.segments.last!
             
             // must generate the nodes
-            let configInit = config.first(where: { "\($0.bloodType)" == runner.name })!
+            let configInit = self.config.first(where: { "\($0.bloodType)" == runner.name })!
             let nodes = runner.conveyor.makeSpritesForSegment(with: "\(runner.name)", havingStartedAtX: configInit.x, y: configInit.y, segment: latestSegment)
             
             self.run(SKAction.playSoundFileNamed("pause-convoyeur", waitForCompletion: false))
@@ -482,6 +497,8 @@ class LaboScene : SKScene {
             setPercentage(of: .O, to: 60)
         } else if (event.keyCode == kVK_ANSI_4) {
             setPercentage(of: .O, to: 90)
+        } else if (event.keyCode == kVK_ANSI_X) {
+            resetConveyors()
         }
     }
     #elseif os(iOS)
