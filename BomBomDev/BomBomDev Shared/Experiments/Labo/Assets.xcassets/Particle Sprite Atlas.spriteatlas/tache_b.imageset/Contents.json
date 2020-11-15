@@ -1,11 +1,11 @@
 {
   "images" : [
     {
-      "filename" : "tache_b.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "tache_b.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
