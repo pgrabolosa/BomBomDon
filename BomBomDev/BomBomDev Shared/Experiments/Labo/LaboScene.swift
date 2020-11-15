@@ -47,6 +47,7 @@ class LaboScene : SKScene {
         self.peopleHandler = nil
         self.removeAllActions()
         self.removeAllChildren()
+        self.childNode(withName: "//music")?.removeFromParent()
     }
 
     
