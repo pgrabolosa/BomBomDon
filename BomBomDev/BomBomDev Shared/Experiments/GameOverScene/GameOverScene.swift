@@ -14,7 +14,7 @@ class GameOverScene : SKScene {
             fatalError("Failed to find GameOverScene")
         }
         scene.scaleMode = .aspectFit
-        if let sLabel = scene.childNode(withName: "score") as? SKLabelNode {
+        if let sLabel = scene.childNode(withName: "//score") as? SKLabelNode {
             sLabel.text = "\(score)"
         }
         return scene

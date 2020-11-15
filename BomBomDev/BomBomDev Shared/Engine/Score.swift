@@ -16,14 +16,14 @@ class Score {
             // if the score falls bellow this limit => Game Over
             if score <= configuration.gameOverLimit {
                 // Causes the GameViewController to display the end game title
-                NotificationCenter.default.post(name: .gameOver, object: self)
+                NotificationCenter.default.post(name: .gameOver, object: self, userInfo: ["score" : globalScore])
             }
         }
     }
     
     private let scoreLabel: SKLabelNode
     private let baseNode: SKShapeNode
-    
+    private var globalScore : Int;
     private var configuration = ScoreConfiguration.default
     
     struct ScoreConfiguration /*TODO: Codable*/ {
@@ -47,6 +47,7 @@ class Score {
         scoreLabel.fontColor = .black
         scoreLabel.horizontalAlignmentMode = .left
         scoreLabel.position = CGPoint(x:w, y:0)
+        globalScore = 0
         
         baseNode = SKShapeNode(rect: CGRect(x:0.0, y:0.0, width:w, height:h))
         baseNode.position = CGPoint(x:x-100, y:y)
@@ -83,6 +84,7 @@ class Score {
     }
     
     func reset() {
+        globalScore += score;
         self.score = 0
         self.scoreLabel.text = "0"
     }
