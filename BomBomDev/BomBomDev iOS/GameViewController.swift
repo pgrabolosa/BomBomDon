@@ -26,7 +26,7 @@ class GameViewController: UIViewController {
         //skView.showsFPS = true
         //skView.showsNodeCount = true
         
-        gameOverObservation = NotificationCenter.default.addObserver(forName: .gameOver, object: nil, queue: .main) { _ in
+        gameOverObservation = NotificationCenter.default.addObserver(forName: .gameOver, object: nil, queue: .main) { [unowned skView] _ in
             skView.presentScene(GameOverScene.newScene())
         }
     }

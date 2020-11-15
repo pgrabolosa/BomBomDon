@@ -176,7 +176,8 @@ class PeopleHandler {
         bloodPosition = CGPoint(x:-300, y:0.45 * height + parent.frame.minY)
         moneyPosition = CGPoint(x:0, y: 0.113 * height + parent.frame.minY)
         
-        personRemover = NotificationCenter.default.addObserver(forName: .personAsksToBeRemoved, object: nil, queue: .main) { (notification) in
+        personRemover = NotificationCenter.default.addObserver(forName: .personAsksToBeRemoved, object: nil, queue: .main) { [weak self] (notification) in
+            guard let self = self else { return }
             if let person = self.people.firstIndex(where: { (person) -> Bool in
                 return person === notification.object as? Person
             })
@@ -184,46 +185,6 @@ class PeopleHandler {
                 self.people.remove(at: person)
             }
         }
-//
-//        NotificationCenter.default.addObserver(forName: .givesBlood, object: nil, queue: .main) { (notification) in
-//            guard let type = notification.userInfo?["Type"] else { return }
-//            let label = SKLabelNode(text: "\(type)")
-//            label.fontSize = Constants.fontSize
-//            label.fontColor = .red
-//            label.fontName = Constants.fontName
-//            self.masterNode.addChild(label)
-//
-//            label.position = self.bloodPosition
-//
-//            let duration = Double.random(in: 1...2)
-//
-//            label.run(SKAction.sequence([SKAction.move(by: CGVector(dx:0, dy: 300), duration: duration),
-//                                         SKAction.run({
-//                                            label.removeFromParent()
-//                                         })]))
-//            label.run(SKAction.sequence([SKAction.wait(forDuration: duration * 0.7),
-//            SKAction.fadeOut(withDuration: duration * 0.3),]))
-//        }
-//
-//        NotificationCenter.default.addObserver(forName: .givesMoney, object: nil, queue: .main) { (notification) in
-//            guard let amount = notification.userInfo?["Amount"] else { return }
-//            let label = SKLabelNode(text: "\(amount)")
-//            label.fontSize = Constants.fontSize
-//            label.fontColor = .green
-//            label.fontName = Constants.fontName
-//            self.masterNode.addChild(label)
-//
-//            label.position = self.moneyPosition
-//
-//            let duration = Double.random(in: 1...2)
-//
-//            label.run(SKAction.sequence([SKAction.move(by: CGVector(dx:0, dy: 300), duration: duration),
-//                                         SKAction.run({
-//                                            label.removeFromParent()
-//                                         })]))
-//            label.run(SKAction.sequence([SKAction.wait(forDuration: duration * 0.7),
-//            SKAction.fadeOut(withDuration: duration * 0.3),]))
-//        }
        
         popper = SKAction.repeatForever(SKAction.sequence([
             SKAction.run {

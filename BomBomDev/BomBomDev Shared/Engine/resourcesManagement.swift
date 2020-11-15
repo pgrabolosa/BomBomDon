@@ -26,7 +26,8 @@ class ResourcesManagement {
         baseNode.lineWidth = 0
         baseNode.addChild(moneyLabel)
         
-        NotificationCenter.default.addObserver(forName: .givesMoney, object: nil, queue: .main) { (notification) in
+        NotificationCenter.default.addObserver(forName: .givesMoney, object: nil, queue: .main) { [weak self] (notification) in
+            guard let self = self else { return }
             guard let amount = notification.userInfo?["Amount"] as? Int else { return }
             
             self.moneyCount += amount
