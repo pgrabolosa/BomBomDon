@@ -82,6 +82,11 @@ class Score {
         })
     }
     
+    func reset() {
+        self.score = 0
+        self.scoreLabel.text = "0"
+    }
+    
     func getScore() -> Int {
         return self.score
     }

@@ -273,7 +273,15 @@ class LaboScene : SKScene {
         // MARK: Notification : Timer end ⏰
         observers.append(NotificationCenter.default.addObserver(forName: .timerFinished, object: nil, queue: .main, using: { [weak self] _ in
             #warning("TODO: Level transition screen")
-            self?.view?.presentScene(LaboScene.newScene(initialMoney: self!.resourceDisplay!.available(), prevScore: self!.previousScore + self!.score!.getScore(), difficulty: self!.difficultyClass+1))
+            self?.resetConveyors()
+            self!.previousScore += self!.score!.getScore()
+            self?.score?.reset()
+            
+            self!.difficultyClass += 1
+            if self!.difficultyClass >= 5 {
+                NotificationCenter.default.post(name: .gameOver, object: nil, userInfo: ["score" : self?.previousScore, "level" : self?.difficultyClass])
+            }
+//            self?.view?.presentScene(LaboScene.newScene(initialMoney: self!.resourceDisplay!.available(), prevScore: self!.previousScore + self!.score!.getScore(), difficulty: self!.difficultyClass+1))
         }))
         
         // MARK: Notification : Bag received blood 🩸
