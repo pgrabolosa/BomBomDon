@@ -636,7 +636,7 @@ class LaboScene : SKScene {
             return
         }
         
-        let label = alertBox.childNode(withName: "//label") as! SKLabelNode
+        let label = alertBox.childNode(withName: "label") as! SKLabelNode
         label.text = message
                 
         alertBox.run(SKAction.sequence([
@@ -652,7 +652,7 @@ class LaboScene : SKScene {
             return
         }
         
-        let label = alertBox.childNode(withName: "//label") as! SKLabelNode
+        let label = alertBox.childNode(withName: "label") as! SKLabelNode
         label.text = "\(value)"
                 
         alertBox.run(SKAction.sequence([
