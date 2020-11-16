@@ -58,7 +58,6 @@ class Tapis : SKNode, ShoppingElement {
     }
     
     func getPrice() -> CGFloat {
-        #warning("TODO: Price depends on length?")
         return 50.0 * (0.5 + CGFloat(length)*0.5)
     }
 }
