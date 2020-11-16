@@ -11,13 +11,13 @@ Welcome to the repository of BOAB, [an entry/submission](https://wolvi-lataniere
 
 ## Future
 
-None.
+None…
 
  
  
   
 
-For now…
+… for now.
 
 
 ## License
