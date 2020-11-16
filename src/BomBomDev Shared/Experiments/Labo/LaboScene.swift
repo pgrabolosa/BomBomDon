@@ -313,7 +313,6 @@ class LaboScene : SKScene {
                 self.setPercentage(of: bloodType, to: CGFloat(self.bloodLevels[bloodType]!) * 13)
                 
                 if self.bloodLevels[bloodType, default: 0] == 0 {
-                    #warning("TODO: Dindon ou pas dindon ?")
                     self.run(SKAction.playSoundFileNamed("dindon", waitForCompletion: false))
                 }
             }
