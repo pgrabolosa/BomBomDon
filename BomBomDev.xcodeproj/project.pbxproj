@@ -28,8 +28,6 @@
 		8F30C47E25610C0200994057 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F30C47C25610C0200994057 /* GameOverScene.swift */; };
 		8F30C48425610C0F00994057 /* GameOverScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8F30C48325610C0F00994057 /* GameOverScene.sks */; };
 		8F30C48525610C0F00994057 /* GameOverScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8F30C48325610C0F00994057 /* GameOverScene.sks */; };
-		8F30C4992561202200994057 /* DISPLAY FREE TFB.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F30C4982561202200994057 /* DISPLAY FREE TFB.ttf */; };
-		8F30C49A2561202200994057 /* DISPLAY FREE TFB.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F30C4982561202200994057 /* DISPLAY FREE TFB.ttf */; };
 		8F522BB4255F234000C58B5E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F522BB3255F234000C58B5E /* AppDelegate.swift */; };
 		8F522BB6255F234000C58B5E /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F522BB5255F234000C58B5E /* GameViewController.swift */; };
 		8F522BB9255F234000C58B5E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F522BB7255F234000C58B5E /* Main.storyboard */; };
@@ -65,8 +63,6 @@
 		8F522C4A2560016600C58B5E /* ParcelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F522C482560016600C58B5E /* ParcelNode.swift */; };
 		8F522C4F25600C7D00C58B5E /* MagicParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8F522C4D25600C7D00C58B5E /* MagicParticle.sks */; };
 		8F522C5025600C7D00C58B5E /* MagicParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8F522C4D25600C7D00C58B5E /* MagicParticle.sks */; };
-		8F522C5125600C7D00C58B5E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F522C4E25600C7D00C58B5E /* Assets.xcassets */; };
-		8F522C5225600C7D00C58B5E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F522C4E25600C7D00C58B5E /* Assets.xcassets */; };
 		8F522C5625600EEF00C58B5E /* TargetMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F522C5525600EEF00C58B5E /* TargetMode.swift */; };
 		8F522C5725600EEF00C58B5E /* TargetMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F522C5525600EEF00C58B5E /* TargetMode.swift */; };
 		8F522C6825601ABE00C58B5E /* PeoplePopper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C187675255F63E400C4AC1F /* PeoplePopper.swift */; };
@@ -78,6 +74,8 @@
 		8F8494F1256021BF004E579C /* MoneyParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8F8494EF256021BF004E579C /* MoneyParticle.sks */; };
 		8F8494FB2560250D004E579C /* BloodParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8F8494FA2560250C004E579C /* BloodParticle.sks */; };
 		8F8494FC2560250D004E579C /* BloodParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8F8494FA2560250C004E579C /* BloodParticle.sks */; };
+		8FC2BFBB256342EB00F66D1B /* DISPLAY FREE TFB.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F30C4982561202200994057 /* DISPLAY FREE TFB.ttf */; };
+		8FC2BFBE256342F700F66D1B /* DISPLAY FREE TFB.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F30C4982561202200994057 /* DISPLAY FREE TFB.ttf */; };
 		8FCF702B2560A0540075EE68 /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCF702A2560A0540075EE68 /* Score.swift */; };
 		8FCF702C2560A0540075EE68 /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCF702A2560A0540075EE68 /* Score.swift */; };
 		8FCF70442560BA810075EE68 /* piano-2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8FCF70432560BA810075EE68 /* piano-2.mp3 */; };
@@ -111,7 +109,7 @@
 		8F30C4982561202200994057 /* DISPLAY FREE TFB.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DISPLAY FREE TFB.ttf"; sourceTree = "<group>"; };
 		8F522BA9255F233F00C58B5E /* SplashScreenScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SplashScreenScene.sks; sourceTree = "<group>"; };
 		8F522BAA255F233F00C58B5E /* SplashScreenScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenScene.swift; sourceTree = "<group>"; };
-		8F522BAB255F234000C58B5E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8F522BAB255F234000C58B5E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../Assets.xcassets; sourceTree = "<group>"; };
 		8F522BB0255F234000C58B5E /* BomBomDev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BomBomDev.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F522BB3255F234000C58B5E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8F522BB5255F234000C58B5E /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -135,7 +133,6 @@
 		8F522C3F255FC84600C58B5E /* Conveyor+SpriteKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Conveyor+SpriteKit.swift"; sourceTree = "<group>"; };
 		8F522C482560016600C58B5E /* ParcelNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParcelNode.swift; sourceTree = "<group>"; };
 		8F522C4D25600C7D00C58B5E /* MagicParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MagicParticle.sks; sourceTree = "<group>"; };
-		8F522C4E25600C7D00C58B5E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8F522C5525600EEF00C58B5E /* TargetMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetMode.swift; sourceTree = "<group>"; };
 		8F522C6F25601C1B00C58B5E /* street_sounds.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = street_sounds.wav; sourceTree = "<group>"; };
 		8F522C8525601DC300C58B5E /* rue paris.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "rue paris.wav"; sourceTree = "<group>"; };
@@ -209,15 +206,12 @@
 		8F522BA7255F233F00C58B5E /* BomBomDev Shared */ = {
 			isa = PBXGroup;
 			children = (
-				8F522C6D25601C1000C58B5E /* Sounds */,
+				8FC2BFB42563426E00F66D1B /* Resources */,
 				8F522C35255FC51C00C58B5E /* Engine */,
 				8F522BDF255F239500C58B5E /* Experiments */,
 				8F522BA9255F233F00C58B5E /* SplashScreenScene.sks */,
 				8F522BAA255F233F00C58B5E /* SplashScreenScene.swift */,
-				8F522BAB255F234000C58B5E /* Assets.xcassets */,
-				8F30C4982561202200994057 /* DISPLAY FREE TFB.ttf */,
 				8F522BEF255F2A4100C58B5E /* SKScene+Extensions.swift */,
-				0CD6ACC12560824A000AC3B8 /* Texts.strings */,
 				0C486C102560AF9B00A5597F /* Constants.swift */,
 			);
 			name = "BomBomDev Shared";
@@ -297,7 +291,6 @@
 				8F522C26255FC0D100C58B5E /* LaboScene.swift */,
 				8F522C482560016600C58B5E /* ParcelNode.swift */,
 				8F522C4D25600C7D00C58B5E /* MagicParticle.sks */,
-				8F522C4E25600C7D00C58B5E /* Assets.xcassets */,
 				8F522C5525600EEF00C58B5E /* TargetMode.swift */,
 				8F8494FA2560250C004E579C /* BloodParticle.sks */,
 				8F8494EF256021BF004E579C /* MoneyParticle.sks */,
@@ -332,6 +325,17 @@
 				8FCF70832560EADB0075EE68 /* dindon.mp3 */,
 			);
 			path = Sounds;
+			sourceTree = "<group>";
+		};
+		8FC2BFB42563426E00F66D1B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0CD6ACC12560824A000AC3B8 /* Texts.strings */,
+				8F30C4982561202200994057 /* DISPLAY FREE TFB.ttf */,
+				8F522BAB255F234000C58B5E /* Assets.xcassets */,
+				8F522C6D25601C1000C58B5E /* Sounds */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -418,17 +422,16 @@
 				8FCF70492560BA880075EE68 /* piano-1.mp3 in Resources */,
 				8F30C48425610C0F00994057 /* GameOverScene.sks in Resources */,
 				8FCF70842560EADB0075EE68 /* dindon.mp3 in Resources */,
-				8F30C4992561202200994057 /* DISPLAY FREE TFB.ttf in Resources */,
 				8FCF70552560C1870075EE68 /* bag fall 1.wav in Resources */,
 				8F522C4F25600C7D00C58B5E /* MagicParticle.sks in Resources */,
 				0CD6ACBE2560824A000AC3B8 /* Texts.strings in Resources */,
 				8F522BE9255F23F000C58B5E /* ExpBoutiqueScene.sks in Resources */,
 				8F8494FB2560250D004E579C /* BloodParticle.sks in Resources */,
 				8F522C7225601C1B00C58B5E /* street_sounds.wav in Resources */,
+				8FC2BFBB256342EB00F66D1B /* DISPLAY FREE TFB.ttf in Resources */,
 				8FCF705A2560C2DC0075EE68 /* pause-convoyeur.wav in Resources */,
 				8F522BCF255F234000C58B5E /* SplashScreenScene.sks in Resources */,
 				8FCF70502560C0400075EE68 /* broken gasss.wav in Resources */,
-				8F522C5125600C7D00C58B5E /* Assets.xcassets in Resources */,
 				8F522BB9255F234000C58B5E /* Main.storyboard in Resources */,
 				0CD6ACB02560630C000AC3B8 /* MissionSheet.sks in Resources */,
 				8F522BF6255F36DD00C58B5E /* CreditsScene.sks in Resources */,
@@ -450,13 +453,13 @@
 				8F8494FC2560250D004E579C /* BloodParticle.sks in Resources */,
 				8F522C7325601C1B00C58B5E /* street_sounds.wav in Resources */,
 				8FCF70452560BA810075EE68 /* piano-2.mp3 in Resources */,
+				8FC2BFBE256342F700F66D1B /* DISPLAY FREE TFB.ttf in Resources */,
 				8F522BD4255F234000C58B5E /* Assets.xcassets in Resources */,
 				8FCF70562560C1870075EE68 /* bag fall 1.wav in Resources */,
 				8F522BEA255F23F000C58B5E /* ExpBoutiqueScene.sks in Resources */,
 				8F522C23255FC0C600C58B5E /* LaboScene.sks in Resources */,
 				8F522C5025600C7D00C58B5E /* MagicParticle.sks in Resources */,
 				0CD6ACB12560630C000AC3B8 /* MissionSheet.sks in Resources */,
-				8F30C49A2561202200994057 /* DISPLAY FREE TFB.ttf in Resources */,
 				8F8494F1256021BF004E579C /* MoneyParticle.sks in Resources */,
 				8FCF705B2560C2DC0075EE68 /* pause-convoyeur.wav in Resources */,
 				8F30C48525610C0F00994057 /* GameOverScene.sks in Resources */,
@@ -466,7 +469,6 @@
 				0CD6ACBF2560824A000AC3B8 /* Texts.strings in Resources */,
 				8FCF70512560C0400075EE68 /* broken gasss.wav in Resources */,
 				8FCF704A2560BA880075EE68 /* piano-1.mp3 in Resources */,
-				8F522C5225600C7D00C58B5E /* Assets.xcassets in Resources */,
 				8F522BF7255F36DD00C58B5E /* CreditsScene.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

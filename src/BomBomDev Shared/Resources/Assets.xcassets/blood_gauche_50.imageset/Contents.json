@@ -1,11 +1,12 @@
 {
   "images" : [
     {
-      "filename" : "Artboard.png",
+      "filename" : "gauche_50.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "gauche_50@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
