@@ -375,9 +375,8 @@ class LaboScene : SKScene {
                 
                 // was it dropped on the letter?
                 let height = self.computeDiscreteHeight(for: parcel!.bloodType)
-                if height > 7 {
+                if height > GridConfiguration.default.itemsHeight {
                     // it was!!! dropped on the letter
-                    #warning("TODO – déplacer ce 7 dans la configuration de grille `maxHeight`")
                     NotificationCenter.default.post(name: .bagScored, object: nil, userInfo: ["BloodType" : parcel!.bloodType, "isAutomatic":true])
                     parcelNode.explode(success: true)
                 } else {
@@ -512,6 +511,7 @@ class LaboScene : SKScene {
         } else if (event.keyCode == kVK_ANSI_T) {
             conveyorRunners[BloodType.allCases.randomElement()!]?.append(ConveyorSegment(length: 4, orientation: .up, bloodTypeMask: .all, speed: 1))
         } else if (event.keyCode == kVK_ANSI_V) {
+            NotificationCenter.default.post(name: .givesMoney, object: nil, userInfo: ["Amount":500])
             toggleHandles()
         } else if (event.keyCode == kVK_ANSI_S) {
             shop.newNode()

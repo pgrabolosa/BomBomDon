@@ -9,7 +9,7 @@ import SpriteKit
 
 struct GridConfiguration {
     let itemsWidth = 15
-    let itemsHeight = 6
+    let itemsHeight = 7
     
     let itemSize = CGSize(width: 100, height: 100)
     var size: CGSize {
