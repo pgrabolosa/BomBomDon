@@ -12,7 +12,7 @@ class ParcelNode : SKSpriteNode {
     var observation: Any?
     
     /// Les textures pour les globules
-    static let globulesAtlas = SKTextureAtlas(named: "globules")
+    static let globulesAtlas = SKTextureAtlas(named: "bloodDrops")
     
     class func newInstance(with parcel: Parcel?, at position: CGPoint) -> ParcelNode {
         let shape = ParcelNode(texture: nil, size: CGSize(width: 50, height: 50))

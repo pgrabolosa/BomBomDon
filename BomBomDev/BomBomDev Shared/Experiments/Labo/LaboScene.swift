@@ -287,7 +287,7 @@ class LaboScene : SKScene {
             
             self.difficultyClass += 1
             if self.difficultyClass >= 5 {
-                NotificationCenter.default.post(name: .gameOver, object: nil, userInfo: ["score" : self.previousScore, "level" : self.difficultyClass])
+                NotificationCenter.default.post(name: .gameOver, object: nil, userInfo: ["score" : self.previousScore ?? 0, "level" : self.difficultyClass ?? 0])
             } else {
                 self.alertNiveau(self.difficultyClass + 1)
             }
