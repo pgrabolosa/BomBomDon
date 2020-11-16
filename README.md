@@ -34,7 +34,7 @@ This project was made for fun and should remain fun. Hence our granting public a
 
 The code is mostly 💩 (Pierre's expert opinion as an instructor of Object Oriented Design & Analysis) and should not be seen/used as an example of good practices.
 
-We started this GameJam (design  builandd a game … in 48h 🤯) without any prior knowledge or experience with [SpriteKit](https://developer.apple.com/spritekit/), and more generally in game building (different mechanics, interaction, and requirements than what we've done until now). This explains why we did not use GameplayKit and why ended up doing some horrible things that rightfully deserve the term *poop* emoji.
+We started this GameJam (design  and build a game … in 48h 🤯) without any prior knowledge or experience with [SpriteKit](https://developer.apple.com/spritekit/), and more generally in game building (different mechanics, interaction, and requirements than what we've done until now). This explains why we did not use GameplayKit and why ended up doing some horrible things that rightfully deserve the term *poop* emoji.
 
 But such is the cost of starting from nothing and shipping under 48h with an unknonw/unmastered framework and with no help (pride is just as bad as stress ; not sure which of the two to blame for not relying on some tutorials or any kind of help).
 
