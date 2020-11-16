@@ -42,7 +42,7 @@ class GameOverScene : SKScene {
         doContinue()
     }
     #elseif os(iOS)
-    override func touchesEnded(with event: NSEvent) {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         doContinue()
     }
     #endif

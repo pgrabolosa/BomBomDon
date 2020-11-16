@@ -220,7 +220,8 @@
 				0CD6ACC12560824A000AC3B8 /* Texts.strings */,
 				0C486C102560AF9B00A5597F /* Constants.swift */,
 			);
-			path = "BomBomDev Shared";
+			name = "BomBomDev Shared";
+			path = "src/BomBomDev Shared";
 			sourceTree = "<group>";
 		};
 		8F522BB1255F234000C58B5E /* Products */ = {
@@ -241,7 +242,8 @@
 				8F522BBA255F234000C58B5E /* LaunchScreen.storyboard */,
 				8F522BBD255F234000C58B5E /* Info.plist */,
 			);
-			path = "BomBomDev iOS";
+			name = "BomBomDev iOS";
+			path = "src/BomBomDev iOS";
 			sourceTree = "<group>";
 		};
 		8F522BC3255F234000C58B5E /* BomBomDev macOS */ = {
@@ -253,7 +255,8 @@
 				8F522BCB255F234000C58B5E /* Info.plist */,
 				8F522BCC255F234000C58B5E /* BomBomDev_macOS.entitlements */,
 			);
-			path = "BomBomDev macOS";
+			name = "BomBomDev macOS";
+			path = "src/BomBomDev macOS";
 			sourceTree = "<group>";
 		};
 		8F522BDF255F239500C58B5E /* Experiments */ = {
@@ -678,8 +681,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7NV48259TL;
-				INFOPLIST_FILE = "BomBomDev iOS/Info.plist";
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = "src/BomBomDev iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -699,8 +702,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7NV48259TL;
-				INFOPLIST_FILE = "BomBomDev iOS/Info.plist";
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = "src/BomBomDev iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -720,12 +723,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "BomBomDev macOS/BomBomDev_macOS.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_ENTITLEMENTS = "src/BomBomDev macOS/BomBomDev_macOS.entitlements";
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = AKUPQLPX29;
-				INFOPLIST_FILE = "BomBomDev macOS/Info.plist";
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = "src/BomBomDev macOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -744,12 +747,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "BomBomDev macOS/BomBomDev_macOS.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_ENTITLEMENTS = "src/BomBomDev macOS/BomBomDev_macOS.entitlements";
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = AKUPQLPX29;
-				INFOPLIST_FILE = "BomBomDev macOS/Info.plist";
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = "src/BomBomDev macOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
