@@ -9,13 +9,17 @@ Welcome to the repository of BOAB, [an entry/submission](https://wolvi-lataniere
 
 [YouTube Vidéo](https://youtu.be/0oyVBfFdkdU) | [Itch.io page](https://wolvi-lataniere.itch.io/boab)
 
+## About the game
+
+This is a strategy game for Mac & iPad. The player must sort blood donations which arrive in conveyor belts (one belt per group: A, B, AB, O). Through donations the player can invest in conveyor belt extensions so the blood gets sorted automatically.
+
+Partially implemented and envioned: different kinds of extensions of varying speeds and orientations, converyors limited to some blood types (think Ticket to Ride), and infected blood (which could spoil a batch and should be discarded), making the game more challenging.
+
 ## Future
 
 None…
 
  
- 
-  
 
 … for now.
 
