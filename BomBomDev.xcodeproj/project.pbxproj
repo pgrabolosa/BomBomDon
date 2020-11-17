@@ -119,7 +119,7 @@
 		8F522BC6255F234000C58B5E /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		8F522BC9255F234000C58B5E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8F522BCB255F234000C58B5E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8F522BCC255F234000C58B5E /* BomBomDev_macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BomBomDev_macOS.entitlements; sourceTree = "<group>"; };
+		8F522BCC255F234000C58B5E /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
 		8F522BE1255F23C000C58B5E /* ExpBoutiqueScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpBoutiqueScene.swift; sourceTree = "<group>"; };
 		8F522BE8255F23F000C58B5E /* ExpBoutiqueScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ExpBoutiqueScene.sks; sourceTree = "<group>"; };
 		8F522BF5255F36DD00C58B5E /* CreditsScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CreditsScene.sks; sourceTree = "<group>"; };
@@ -193,14 +193,14 @@
 		8F522BA2255F233F00C58B5E = {
 			isa = PBXGroup;
 			children = (
-				8F522BA7255F233F00C58B5E /* BomBomDev Shared */,
-				8F522BB2255F234000C58B5E /* BomBomDev iOS */,
-				8F522BC3255F234000C58B5E /* BomBomDev macOS */,
+				8F522BA7255F233F00C58B5E /* Shared */,
+				8F522BB2255F234000C58B5E /* iOS */,
+				8F522BC3255F234000C58B5E /* macOS */,
 				8F522BB1255F234000C58B5E /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		8F522BA7255F233F00C58B5E /* BomBomDev Shared */ = {
+		8F522BA7255F233F00C58B5E /* Shared */ = {
 			isa = PBXGroup;
 			children = (
 				8FC2BFB42563426E00F66D1B /* Resources */,
@@ -208,8 +208,8 @@
 				8F522BDF255F239500C58B5E /* Scenes */,
 				0C486C102560AF9B00A5597F /* Constants.swift */,
 			);
-			name = "BomBomDev Shared";
-			path = "src/BomBomDev Shared";
+			name = Shared;
+			path = src/Shared;
 			sourceTree = "<group>";
 		};
 		8F522BB1255F234000C58B5E /* Products */ = {
@@ -221,7 +221,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		8F522BB2255F234000C58B5E /* BomBomDev iOS */ = {
+		8F522BB2255F234000C58B5E /* iOS */ = {
 			isa = PBXGroup;
 			children = (
 				8F522BB3255F234000C58B5E /* AppDelegate.swift */,
@@ -230,21 +230,21 @@
 				8F522BBA255F234000C58B5E /* LaunchScreen.storyboard */,
 				8F522BBD255F234000C58B5E /* Info.plist */,
 			);
-			name = "BomBomDev iOS";
-			path = "src/BomBomDev iOS";
+			name = iOS;
+			path = src/iOS;
 			sourceTree = "<group>";
 		};
-		8F522BC3255F234000C58B5E /* BomBomDev macOS */ = {
+		8F522BC3255F234000C58B5E /* macOS */ = {
 			isa = PBXGroup;
 			children = (
 				8F522BC4255F234000C58B5E /* AppDelegate.swift */,
 				8F522BC6255F234000C58B5E /* GameViewController.swift */,
 				8F522BC8255F234000C58B5E /* Main.storyboard */,
 				8F522BCB255F234000C58B5E /* Info.plist */,
-				8F522BCC255F234000C58B5E /* BomBomDev_macOS.entitlements */,
+				8F522BCC255F234000C58B5E /* macOS.entitlements */,
 			);
-			name = "BomBomDev macOS";
-			path = "src/BomBomDev macOS";
+			name = macOS;
+			path = src/macOS;
 			sourceTree = "<group>";
 		};
 		8F522BDF255F239500C58B5E /* Scenes */ = {
@@ -686,7 +686,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = "src/BomBomDev iOS/Info.plist";
+				INFOPLIST_FILE = src/iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -707,7 +707,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = "src/BomBomDev iOS/Info.plist";
+				INFOPLIST_FILE = src/iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -727,12 +727,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "src/BomBomDev macOS/BomBomDev_macOS.entitlements";
+				CODE_SIGN_ENTITLEMENTS = src/macOS/macOS.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = "src/BomBomDev macOS/Info.plist";
+				INFOPLIST_FILE = src/macOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -751,12 +751,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "src/BomBomDev macOS/BomBomDev_macOS.entitlements";
+				CODE_SIGN_ENTITLEMENTS = src/macOS/macOS.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = "src/BomBomDev macOS/Info.plist";
+				INFOPLIST_FILE = src/macOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
