@@ -63,8 +63,8 @@
 		8F522C4A2560016600C58B5E /* ParcelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F522C482560016600C58B5E /* ParcelNode.swift */; };
 		8F522C4F25600C7D00C58B5E /* MagicParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8F522C4D25600C7D00C58B5E /* MagicParticle.sks */; };
 		8F522C5025600C7D00C58B5E /* MagicParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8F522C4D25600C7D00C58B5E /* MagicParticle.sks */; };
-		8F522C5625600EEF00C58B5E /* TargetMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F522C5525600EEF00C58B5E /* TargetMode.swift */; };
-		8F522C5725600EEF00C58B5E /* TargetMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F522C5525600EEF00C58B5E /* TargetMode.swift */; };
+		8F522C5625600EEF00C58B5E /* TargetNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F522C5525600EEF00C58B5E /* TargetNode.swift */; };
+		8F522C5725600EEF00C58B5E /* TargetNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F522C5525600EEF00C58B5E /* TargetNode.swift */; };
 		8F522C6825601ABE00C58B5E /* PeoplePopper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C187675255F63E400C4AC1F /* PeoplePopper.swift */; };
 		8F522C7225601C1B00C58B5E /* street_sounds.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8F522C6F25601C1B00C58B5E /* street_sounds.wav */; };
 		8F522C7325601C1B00C58B5E /* street_sounds.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8F522C6F25601C1B00C58B5E /* street_sounds.wav */; };
@@ -133,7 +133,7 @@
 		8F522C3F255FC84600C58B5E /* Conveyor+SpriteKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Conveyor+SpriteKit.swift"; sourceTree = "<group>"; };
 		8F522C482560016600C58B5E /* ParcelNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParcelNode.swift; sourceTree = "<group>"; };
 		8F522C4D25600C7D00C58B5E /* MagicParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MagicParticle.sks; sourceTree = "<group>"; };
-		8F522C5525600EEF00C58B5E /* TargetMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetMode.swift; sourceTree = "<group>"; };
+		8F522C5525600EEF00C58B5E /* TargetNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetNode.swift; sourceTree = "<group>"; };
 		8F522C6F25601C1B00C58B5E /* street_sounds.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = street_sounds.wav; sourceTree = "<group>"; };
 		8F522C8525601DC300C58B5E /* rue paris.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "rue paris.wav"; sourceTree = "<group>"; };
 		8F8494EF256021BF004E579C /* MoneyParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MoneyParticle.sks; sourceTree = "<group>"; };
@@ -291,7 +291,7 @@
 				8F522C26255FC0D100C58B5E /* LaboScene.swift */,
 				8F522C482560016600C58B5E /* ParcelNode.swift */,
 				8F522C4D25600C7D00C58B5E /* MagicParticle.sks */,
-				8F522C5525600EEF00C58B5E /* TargetMode.swift */,
+				8F522C5525600EEF00C58B5E /* TargetNode.swift */,
 				8F8494FA2560250C004E579C /* BloodParticle.sks */,
 				8F8494EF256021BF004E579C /* MoneyParticle.sks */,
 			);
@@ -492,7 +492,7 @@
 				8F522C40255FC84600C58B5E /* Conveyor+SpriteKit.swift in Sources */,
 				8F522C37255FC54000C58B5E /* Conveyor.swift in Sources */,
 				0C486C2E256110CF00A5597F /* GameTimer.swift in Sources */,
-				8F522C5625600EEF00C58B5E /* TargetMode.swift in Sources */,
+				8F522C5625600EEF00C58B5E /* TargetNode.swift in Sources */,
 				0C187677255F63E400C4AC1F /* PeoplePopper.swift in Sources */,
 				8F522BB4255F234000C58B5E /* AppDelegate.swift in Sources */,
 				8F522C27255FC0D100C58B5E /* LaboScene.swift in Sources */,
@@ -519,7 +519,7 @@
 				8F522C41255FC84600C58B5E /* Conveyor+SpriteKit.swift in Sources */,
 				0C486C2F256110CF00A5597F /* GameTimer.swift in Sources */,
 				8F522C38255FC54000C58B5E /* Conveyor.swift in Sources */,
-				8F522C5725600EEF00C58B5E /* TargetMode.swift in Sources */,
+				8F522C5725600EEF00C58B5E /* TargetNode.swift in Sources */,
 				8F522BC5255F234000C58B5E /* AppDelegate.swift in Sources */,
 				8F522C28255FC0D100C58B5E /* LaboScene.swift in Sources */,
 				8F522BFC255F36E700C58B5E /* CreditsScene.swift in Sources */,
