@@ -16,8 +16,8 @@ class MissionSheet: SKScene {
         let titleLabel = scene.childNode(withName: "//MissionTitle") as? SKLabelNode
         let descLabel = scene.childNode(withName: "//MissionDescription") as? SKLabelNode
        
-        titleLabel?.text = Bundle.main.localizedString(forKey: "MissionTitle\(number)", value: nil, table: "Texts")
-        descLabel?.text = Bundle.main.localizedString(forKey: "MissionDescription\(number)", value: nil, table: "Texts")
+        titleLabel?.text = "MissionTitle\(number)".localized
+        descLabel?.text = "MissionDescription\(number)".localized
         
         return scene
     }
