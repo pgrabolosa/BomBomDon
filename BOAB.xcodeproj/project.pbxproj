@@ -92,6 +92,8 @@
 		8FCF70852560EADB0075EE68 /* dindon.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8FCF70832560EADB0075EE68 /* dindon.mp3 */; };
 		8FF8D85D256AAD43009A33FD /* String+Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF8D85C256AAD43009A33FD /* String+Localized.swift */; };
 		8FF8D85E256AAD43009A33FD /* String+Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF8D85C256AAD43009A33FD /* String+Localized.swift */; };
+		8FF8D864256AAEAB009A33FD /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF8D863256AAEAB009A33FD /* Color+Hex.swift */; };
+		8FF8D865256AAEAB009A33FD /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF8D863256AAEAB009A33FD /* Color+Hex.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -146,6 +148,7 @@
 		8FCF705E2560C3500075EE68 /* bood fall 2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "bood fall 2.wav"; sourceTree = "<group>"; };
 		8FCF70832560EADB0075EE68 /* dindon.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = dindon.mp3; sourceTree = "<group>"; };
 		8FF8D85C256AAD43009A33FD /* String+Localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localized.swift"; sourceTree = "<group>"; };
+		8FF8D863256AAEAB009A33FD /* Color+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Hex.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,6 +214,7 @@
 				8F522BDF255F239500C58B5E /* Scenes */,
 				0C486C102560AF9B00A5597F /* Constants.swift */,
 				8FF8D85C256AAD43009A33FD /* String+Localized.swift */,
+				8FF8D863256AAEAB009A33FD /* Color+Hex.swift */,
 			);
 			name = Shared;
 			path = src/Shared;
@@ -493,6 +497,7 @@
 				8F522BD1255F234000C58B5E /* SplashScreenScene.swift in Sources */,
 				8F522BB6255F234000C58B5E /* GameViewController.swift in Sources */,
 				8F522C492560016600C58B5E /* ParcelNode.swift in Sources */,
+				8FF8D864256AAEAB009A33FD /* Color+Hex.swift in Sources */,
 				0CD6ACD125608929000AC3B8 /* Boutique.swift in Sources */,
 				0CD6ACB52560634D000AC3B8 /* MissionSheet.swift in Sources */,
 				8F522BE2255F23C000C58B5E /* ExpBoutiqueScene.swift in Sources */,
@@ -519,6 +524,7 @@
 				8F522BD2255F234000C58B5E /* SplashScreenScene.swift in Sources */,
 				8F522BC7255F234000C58B5E /* GameViewController.swift in Sources */,
 				8F522C4A2560016600C58B5E /* ParcelNode.swift in Sources */,
+				8FF8D865256AAEAB009A33FD /* Color+Hex.swift in Sources */,
 				0CD6ACD225608929000AC3B8 /* Boutique.swift in Sources */,
 				0CD6ACB62560634D000AC3B8 /* MissionSheet.swift in Sources */,
 				8F522C6825601ABE00C58B5E /* PeoplePopper.swift in Sources */,
