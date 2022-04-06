@@ -68,6 +68,7 @@
 		8F522C7325601C1B00C58B5E /* street_sounds.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8F522C6F25601C1B00C58B5E /* street_sounds.wav */; };
 		8F522C8625601DC300C58B5E /* rue paris.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8F522C8525601DC300C58B5E /* rue paris.wav */; };
 		8F522C8725601DC300C58B5E /* rue paris.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8F522C8525601DC300C58B5E /* rue paris.wav */; };
+		8F64B7B027FE251A00F24C29 /* DebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F64B7AF27FE251A00F24C29 /* DebugViewController.swift */; };
 		8F8494F0256021BF004E579C /* MoneyParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8F8494EF256021BF004E579C /* MoneyParticle.sks */; };
 		8F8494F1256021BF004E579C /* MoneyParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8F8494EF256021BF004E579C /* MoneyParticle.sks */; };
 		8F8494FB2560250D004E579C /* BloodParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8F8494FA2560250C004E579C /* BloodParticle.sks */; };
@@ -137,6 +138,7 @@
 		8F522C5525600EEF00C58B5E /* TargetNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetNode.swift; sourceTree = "<group>"; };
 		8F522C6F25601C1B00C58B5E /* street_sounds.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = street_sounds.wav; sourceTree = "<group>"; };
 		8F522C8525601DC300C58B5E /* rue paris.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "rue paris.wav"; sourceTree = "<group>"; };
+		8F64B7AF27FE251A00F24C29 /* DebugViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugViewController.swift; sourceTree = "<group>"; };
 		8F8494EF256021BF004E579C /* MoneyParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MoneyParticle.sks; sourceTree = "<group>"; };
 		8F8494FA2560250C004E579C /* BloodParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BloodParticle.sks; sourceTree = "<group>"; };
 		8FCF702A2560A0540075EE68 /* Score.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
@@ -247,6 +249,7 @@
 			children = (
 				8F522BC4255F234000C58B5E /* AppDelegate.swift */,
 				8F522BC6255F234000C58B5E /* GameViewController.swift */,
+				8F64B7AF27FE251A00F24C29 /* DebugViewController.swift */,
 				8F522BC8255F234000C58B5E /* Main.storyboard */,
 				8F522BCB255F234000C58B5E /* Info.plist */,
 				8F522BCC255F234000C58B5E /* macOS.entitlements */,
@@ -534,6 +537,7 @@
 				8F522C38255FC54000C58B5E /* Conveyor.swift in Sources */,
 				8F522C5725600EEF00C58B5E /* TargetNode.swift in Sources */,
 				8F522BC5255F234000C58B5E /* AppDelegate.swift in Sources */,
+				8F64B7B027FE251A00F24C29 /* DebugViewController.swift in Sources */,
 				8F522C28255FC0D100C58B5E /* LaboScene.swift in Sources */,
 				8F522BFC255F36E700C58B5E /* CreditsScene.swift in Sources */,
 				8F30C47E25610C0200994057 /* GameOverScene.swift in Sources */,

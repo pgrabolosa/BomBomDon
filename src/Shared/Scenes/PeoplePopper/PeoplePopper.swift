@@ -57,6 +57,21 @@ enum BloodType : CaseIterable {
     }
 }
 
+extension String {
+    init(_ bloodType: BloodType) {
+        switch bloodType {
+        case .O:
+            self = "O"
+        case .A:
+            self = "A"
+        case .B:
+            self = "B"
+        case .AB:
+            self = "AB"
+        }
+    }
+}
+
 extension BloodType {
     /// Generate random activity with weighted probabilities
     /// Args:
@@ -152,7 +167,7 @@ extension Activity {
     }
 }
 
-class PeopleHandler {
+class PeopleHandler: ObservableObject {
     let masterNode: SKShapeNode
     private var people : [Person] = []
     private var popper : SKAction?
@@ -160,8 +175,8 @@ class PeopleHandler {
     
     let bloodPosition : CGPoint
     let moneyPosition : CGPoint
-    private var bloodRate: CGFloat
-    private var moneyRate: CGFloat
+    @Published var bloodRate: CGFloat
+    @Published var moneyRate: CGFloat
     
     init(parent: SKScene, x: CGFloat, w: CGFloat) {
         masterNode = SKShapeNode(rect: CGRect(x: 0, y: parent.frame.minY, width: w, height: parent.size.height))

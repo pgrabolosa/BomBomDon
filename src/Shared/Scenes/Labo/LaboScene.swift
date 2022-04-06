@@ -24,7 +24,7 @@ class HandleNode: SKSpriteNode {
 }
 
 
-class LaboScene : SKScene {
+class LaboScene : SKScene, ObservableObject {
     
     // MARK: - Constructeurs
     
@@ -105,7 +105,9 @@ class LaboScene : SKScene {
     /// Le gestionnaire des piétons
     var peopleHandler: PeopleHandler!
     
-    var config: [(bloodType:BloodType, length:Int, x:Int, y:Int, targetPosition:CGPoint)] = [
+    typealias Config = [(bloodType:BloodType, length:Int, x:Int, y:Int, targetPosition:CGPoint)]
+    
+    @Published var config: Config = [
         (.AB, 1, 13, 4, CGPoint(x: 0, y: 1080)),
         ( .B, 3, 13, 3, CGPoint(x: 0, y: 1080)),
         ( .A, 5, 13, 2, CGPoint(x: 0, y: 1080)),
@@ -670,4 +672,12 @@ class LaboScene : SKScene {
             .move(by: CGVector(dx: 0, dy: -alertBox.frame.height), duration: 1),
         ]))
     }
+    
+    #if os(macOS)
+    override func keyDown(with event: NSEvent) {
+        if event.characters == "d" {
+            NotificationCenter.default.post(name: .showDebugWindow, object: self, userInfo: [:])
+        }
+    }
+    #endif
 }

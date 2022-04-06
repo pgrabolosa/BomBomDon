@@ -99,4 +99,5 @@ extension Notification.Name {
     static let bagScored = Notification.Name(rawValue: "BagScored")
     static let badBag = Notification.Name(rawValue: "BadBag")
     static let gameOver = Notification.Name(rawValue: "GameOver")
+    static let showDebugWindow = Notification.Name(rawValue: "ShowDebugWindow")
 }
